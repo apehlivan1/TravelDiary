@@ -9,14 +9,14 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
+<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ba.unsa.etf.rpr.controllers.WelcomePage">
   <columnConstraints>
     <ColumnConstraints maxWidth="36.80001902580261" minWidth="4.800018072128296" prefWidth="36.80001902580261" />
       <ColumnConstraints maxWidth="79.20000915527362" minWidth="4.800018119812194" prefWidth="37.39998779296875" />
     <ColumnConstraints hgrow="SOMETIMES" maxWidth="153.4000160217285" minWidth="5.800018310546875" prefWidth="78.40001220703125" />
       <ColumnConstraints hgrow="SOMETIMES" maxWidth="302.5999755859375" minWidth="10.0" prefWidth="68.79998779296875" />
-      <ColumnConstraints hgrow="NEVER" maxWidth="302.5999755859375" minWidth="10.0" prefWidth="77.59999999999997" />
-      <ColumnConstraints hgrow="SOMETIMES" maxWidth="351.6000122070312" minWidth="10.0" prefWidth="82.39999999999998" />
+      <ColumnConstraints hgrow="NEVER" maxWidth="302.5999755859375" minWidth="10.0" prefWidth="79.59996337890624" />
+      <ColumnConstraints hgrow="SOMETIMES" maxWidth="351.6000122070312" minWidth="10.0" prefWidth="74.20003662109372" />
       <ColumnConstraints hgrow="SOMETIMES" maxWidth="302.5999755859375" minWidth="10.0" prefWidth="70.20001220703125" />
       <ColumnConstraints hgrow="SOMETIMES" maxWidth="302.5999755859375" minWidth="10.0" prefWidth="75.20000000000005" />
       <ColumnConstraints hgrow="SOMETIMES" maxWidth="302.5999755859375" minWidth="10.0" prefWidth="78.39999999999998" />
@@ -34,7 +34,7 @@
       <RowConstraints maxHeight="169.60001525878909" minHeight="10.0" prefHeight="61.99998779296874" vgrow="SOMETIMES" />
   </rowConstraints>
    <children>
-      <ImageView fitHeight="302.0" fitWidth="489.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.columnSpan="2" GridPane.rowIndex="5">
+      <ImageView fitHeight="302.0" fitWidth="448.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.columnSpan="2" GridPane.rowIndex="5">
          <image>
             <Image url="@../images/welcomeTo.jpg" />
          </image>
@@ -48,7 +48,10 @@
          </GridPane.margin>
       </ImageView>
       <Button mnemonicParsing="false" onAction="#btnLogInClicked" prefHeight="26.0" prefWidth="129.0" text="Log in" GridPane.columnIndex="5" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.rowIndex="9" GridPane.valignment="CENTER" />
-      <Button mnemonicParsing="false" onAction="#btnGuestClicked" prefHeight="26.0" prefWidth="129.0" text="Continue as a guest" GridPane.columnIndex="7" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.rowIndex="9" GridPane.valignment="CENTER" />
+      <Button mnemonicParsing="false" onAction="#btnGuestClicked" prefHeight="26.0" prefWidth="129.0" text="Continue as a guest" GridPane.columnIndex="7" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.rowIndex="9" GridPane.valignment="CENTER">
+         <opaqueInsets>
+            <Insets />
+         </opaqueInsets></Button>
       <Label text="or " GridPane.columnIndex="6" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.rowIndex="9" />
       <ImageView fitHeight="90.0" fitWidth="119.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="7" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.hgrow="NEVER" GridPane.rowIndex="1" GridPane.valignment="BOTTOM">
          <image>
@@ -56,4 +59,10 @@
          </image>
       </ImageView>
    </children>
+   <opaqueInsets>
+      <Insets right="10.0" />
+   </opaqueInsets>
+   <padding>
+      <Insets left="5.0" right="5.0" />
+   </padding>
 </GridPane>
