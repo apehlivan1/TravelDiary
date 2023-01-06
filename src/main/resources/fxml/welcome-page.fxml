@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+
+<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
+  <columnConstraints>
+    <ColumnConstraints maxWidth="36.80001902580261" minWidth="4.800018072128296" prefWidth="36.80001902580261" />
+      <ColumnConstraints maxWidth="79.20000915527362" minWidth="4.800018119812194" prefWidth="37.39998779296875" />
+    <ColumnConstraints hgrow="SOMETIMES" maxWidth="153.4000160217285" minWidth="5.800018310546875" prefWidth="78.40001220703125" />
+      <ColumnConstraints hgrow="SOMETIMES" maxWidth="302.5999755859375" minWidth="10.0" prefWidth="68.79998779296875" />
+      <ColumnConstraints hgrow="NEVER" maxWidth="302.5999755859375" minWidth="10.0" prefWidth="77.59999999999997" />
+      <ColumnConstraints hgrow="SOMETIMES" maxWidth="351.6000122070312" minWidth="10.0" prefWidth="82.39999999999998" />
+      <ColumnConstraints hgrow="SOMETIMES" maxWidth="302.5999755859375" minWidth="10.0" prefWidth="70.20001220703125" />
+      <ColumnConstraints hgrow="SOMETIMES" maxWidth="302.5999755859375" minWidth="10.0" prefWidth="75.20000000000005" />
+      <ColumnConstraints hgrow="SOMETIMES" maxWidth="302.5999755859375" minWidth="10.0" prefWidth="78.39999999999998" />
+  </columnConstraints>
+  <rowConstraints>
+    <RowConstraints maxHeight="106.39999713897706" minHeight="10.0" prefHeight="80.6" vgrow="NEVER" />
+    <RowConstraints maxHeight="323.1999908447266" minHeight="31.999993896484384" prefHeight="31.999993896484384" vgrow="SOMETIMES" />
+    <RowConstraints maxHeight="161.59998474121096" minHeight="0.0" prefHeight="31.799993896484366" vgrow="SOMETIMES" />
+      <RowConstraints maxHeight="169.60001525878909" minHeight="10.0" prefHeight="43.800006103515614" vgrow="SOMETIMES" />
+      <RowConstraints maxHeight="169.60001525878909" minHeight="10.0" prefHeight="31.00000610351563" vgrow="SOMETIMES" />
+      <RowConstraints maxHeight="169.60001525878909" minHeight="10.0" prefHeight="36.600012207031256" vgrow="SOMETIMES" />
+      <RowConstraints maxHeight="169.60001525878909" minHeight="10.0" prefHeight="40.5999725341797" vgrow="SOMETIMES" />
+      <RowConstraints maxHeight="169.60001525878909" minHeight="10.0" prefHeight="45.19998779296873" vgrow="SOMETIMES" />
+      <RowConstraints maxHeight="169.60001525878909" minHeight="10.0" prefHeight="61.99998779296874" vgrow="SOMETIMES" />
+      <RowConstraints maxHeight="169.60001525878909" minHeight="10.0" prefHeight="61.99998779296874" vgrow="SOMETIMES" />
+  </rowConstraints>
+   <children>
+      <ImageView fitHeight="302.0" fitWidth="489.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.columnSpan="2" GridPane.rowIndex="5">
+         <image>
+            <Image url="@../images/welcomeTo.jpg" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="90.0" fitWidth="187.0" pickOnBounds="true" preserveRatio="true" GridPane.columnSpan="3" GridPane.hgrow="NEVER">
+         <image>
+            <Image url="@../images/logo.png" />
+         </image>
+         <GridPane.margin>
+            <Insets />
+         </GridPane.margin>
+      </ImageView>
+      <Button mnemonicParsing="false" onAction="#btnLogInClicked" prefHeight="26.0" prefWidth="129.0" text="Log in" GridPane.columnIndex="5" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.rowIndex="9" GridPane.valignment="CENTER" />
+      <Button mnemonicParsing="false" onAction="#btnGuestClicked" prefHeight="26.0" prefWidth="129.0" text="Continue as a guest" GridPane.columnIndex="7" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.rowIndex="9" GridPane.valignment="CENTER" />
+      <Label text="or " GridPane.columnIndex="6" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.rowIndex="9" />
+      <ImageView fitHeight="90.0" fitWidth="119.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="7" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.hgrow="NEVER" GridPane.rowIndex="1" GridPane.valignment="BOTTOM">
+         <image>
+            <Image url="@../images/butterflies.png" />
+         </image>
+      </ImageView>
+   </children>
+</GridPane>
