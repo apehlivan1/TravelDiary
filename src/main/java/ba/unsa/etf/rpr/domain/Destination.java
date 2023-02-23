@@ -1,4 +1,4 @@
 package ba.unsa.etf.rpr.domain;
 
-public class Trips {
+public class Destination {
 }
