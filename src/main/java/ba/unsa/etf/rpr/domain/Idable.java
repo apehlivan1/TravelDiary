@@ -9,6 +9,4 @@ public interface Idable {
 
     void setId(int value);
 
-    boolean isSetId();
-
 }
