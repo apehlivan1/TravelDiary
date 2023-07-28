@@ -5,9 +5,9 @@ import java.util.List;
 
 public interface Dao<T> {
 
-    void add(T item) throws AppException;
+    T add(T item) throws AppException;
 
-    void update(T item) throws AppException;
+    T update(T item) throws AppException;
 
     T getById(int id) throws AppException;
 
