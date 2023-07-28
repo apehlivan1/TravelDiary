@@ -1,11 +1,16 @@
 package ba.unsa.etf.rpr.domain;
 
-//associative table
+/**
+ * A record of a past travel experience or destination visited by the user.
+ * Class keeps track of users travel history and store their impressions.
+ *
+ * @author Almedina Pehlivan
+ */
 public class Trip implements Idable {
 
     private int id;
     private int userId;
-    private int destinationId;
+    private int destinationId; //try with: private Destination destination;
     private int rating;
     private String review;
 
@@ -56,5 +61,14 @@ public class Trip implements Idable {
 
     public void setReview(String review) {
         this.review = review;
+    }
+
+    @Override
+    public String toString() {
+        return "Trip{" +
+                "destinationId:" + destinationId +
+                ", rating=" + rating +
+                ", review='" + review + '\'' +
+                '}';
     }
 }
