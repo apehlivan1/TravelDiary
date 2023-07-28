@@ -47,14 +47,14 @@
             <Insets />
          </GridPane.margin>
       </ImageView>
-      <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#btnLogInClicked" prefHeight="26.0" prefWidth="129.0" text="Log in" GridPane.columnIndex="5" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.rowIndex="9" GridPane.valignment="CENTER">
+      <Button mnemonicParsing="false" onAction="#btnLogInClicked" prefHeight="26.0" prefWidth="117.0" style="-fx-background-color: transparent;" text="Log in" textAlignment="CENTER" textFill="#0d0d98" underline="true" GridPane.columnIndex="6" GridPane.columnSpan="2" GridPane.halignment="LEFT" GridPane.rowIndex="9" GridPane.valignment="CENTER">
          <font>
             <Font name="Bookman Old Style Italic" size="12.0" />
          </font>
          <GridPane.margin>
             <Insets left="5.0" right="5.0" />
          </GridPane.margin></Button>
-      <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#btnGuestClicked" prefHeight="26.0" prefWidth="129.0" text="Continue as a guest" GridPane.columnIndex="7" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.rowIndex="9" GridPane.valignment="CENTER">
+      <Button mnemonicParsing="false" onAction="#btnGuestClicked" prefHeight="26.0" prefWidth="129.0" style="-fx-background-color: transparent;" text="Continue as a guest" textFill="#0d0d98" underline="true" GridPane.columnIndex="7" GridPane.columnSpan="2" GridPane.halignment="RIGHT" GridPane.rowIndex="9" GridPane.valignment="CENTER">
          <opaqueInsets>
             <Insets />
          </opaqueInsets>
