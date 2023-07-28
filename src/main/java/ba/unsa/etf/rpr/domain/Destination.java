@@ -1,17 +1,25 @@
 package ba.unsa.etf.rpr.domain;
 
+/**
+ * Collection of travel destinations and travel ideas.
+ *
+ * @author Almedina Pehlivan
+ */
 public class Destination implements Idable {
-    int id;
-    String name;
-    String location;
-    String description;
-    int rating;
 
-    public Destination(int id, String name, String location, String description, int rating) {
+    private int id;
+    private String name;
+    private String location;
+    private String description;
+    private int categoryId; //private Category category;
+    private int rating;
+
+    public Destination(int id, String name, String location, String description, int categoryId, int rating) {
         this.id = id;
         this.name = name;
         this.location = location;
         this.description = description;
+        this.categoryId = categoryId;
         this.rating = rating;
     }
 
@@ -50,6 +58,14 @@ public class Destination implements Idable {
         this.description = description;
     }
 
+    public int getCategoryId() {
+        return categoryId;
+    }
+
+    public void setCategoryId(int categoryId) {
+        this.categoryId = categoryId;
+    }
+
     public int getRating() {
         return rating;
     }
@@ -58,4 +74,11 @@ public class Destination implements Idable {
         this.rating = rating;
     }
 
+    @Override
+    public String toString() {
+        return "Destination{" +
+                '\'' + name + '\'' +
+                " (location: '" + location + '\'' +
+                ") }";
+    }
 }
