@@ -3,10 +3,7 @@ package ba.unsa.etf.rpr.dao;
 import ba.unsa.etf.rpr.domain.Idable;
 import ba.unsa.etf.rpr.exceptions.AppException;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.List;
 import java.util.Map;
 import java.util.Properties;
@@ -59,7 +56,14 @@ public abstract class AbstractDao<T extends Idable> implements Dao<T> {
     }
 
     public void delete(int id) throws AppException {
-
+        String sql = "DELETE FROM " + tableName + " WHERE id = ?";
+        try {
+            PreparedStatement stmt = getConnection().prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+            stmt.setObject(1, id);
+            stmt.executeUpdate();
+        } catch (SQLException e) {
+            throw new AppException(e.getMessage(), e);
+        }
     }
 
     public List<T> getAll() throws AppException {
