@@ -4,6 +4,7 @@ import ba.unsa.etf.rpr.domain.Idable;
 import ba.unsa.etf.rpr.exceptions.AppException;
 
 import java.sql.*;
+import java.util.AbstractMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Properties;
@@ -44,7 +45,34 @@ public abstract class AbstractDao<T extends Idable> implements Dao<T> {
 
 
     public T add(T item) throws AppException {
-        return null;
+        Map<String, Object> row = object2row(item);
+        Map.Entry<String, String> columns = prepareInsertParts(row);
+
+        StringBuilder builder = new StringBuilder();
+        builder.append("INSERT INTO ").append(tableName);
+        builder.append(" (").append(columns.getKey()).append(") ");
+        builder.append("VALUES (").append(columns.getValue()).append(")");
+
+        try {
+            PreparedStatement stmt = getConnection().prepareStatement(builder.toString(), Statement.RETURN_GENERATED_KEYS);
+            // bind params. IMPORTANT treeMap is used to keep columns sorted so params are bind correctly
+            int counter = 1;
+            for (Map.Entry<String, Object> entry: row.entrySet()) {
+                if (entry.getKey().equals("id")) continue; // skip ID
+                stmt.setObject(counter, entry.getValue());
+                counter++;
+            }
+            stmt.executeUpdate();
+
+            ResultSet rs = stmt.getGeneratedKeys();
+            rs.next(); // we know that there is one key
+            item.setId(rs.getInt(1)); //set id to return it back */
+
+            return item;
+
+        } catch (SQLException e){
+            throw new AppException(e.getMessage(), e);
+        }
     }
 
     public T update(T item) throws AppException {
@@ -68,6 +96,24 @@ public abstract class AbstractDao<T extends Idable> implements Dao<T> {
 
     public List<T> getAll() throws AppException {
         return null;
+    }
+
+    private Map.Entry<String, String> prepareInsertParts(Map<String, Object> row) {
+        StringBuilder columns = new StringBuilder();
+        StringBuilder questions = new StringBuilder();
+
+        int counter = 0;
+        for (Map.Entry<String, Object> entry: row.entrySet()) {
+            counter++;
+            if (entry.getKey().equals("id")) continue; //skip insertion of id due autoincrement
+            columns.append(entry.getKey());
+            questions.append("?");
+            if (row.size() != counter) {
+                columns.append(",");
+                questions.append(",");
+            }
+        }
+        return new AbstractMap.SimpleEntry<>(columns.toString(), questions.toString());
     }
 
 
