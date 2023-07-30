@@ -6,6 +6,11 @@ import ba.unsa.etf.rpr.exceptions.AppException;
 import java.sql.*;
 import java.util.*;
 
+/**
+ * Abstract class that implements core DAO CRUD methods for every entity
+ *
+ * @author Almedina Pehlivan
+ */
 public abstract class AbstractDao<T extends Idable> implements Dao<T> {
     private static Connection connection = null;
     private String tableName;
@@ -36,8 +41,19 @@ public abstract class AbstractDao<T extends Idable> implements Dao<T> {
         return AbstractDao.connection;
     }
 
+    /**
+     * Method for mapping ResultSet into Object
+     * @param rs - result set from database
+     * @return a bean object for specific table
+     * @throws AppException in case of error with database
+     */
     public abstract T row2object(ResultSet rs) throws AppException;
 
+    /**
+     * Method for mapping Object into Map
+     * @param object - a bean object for specific table
+     * @return key, value sorted map of object
+     */
     public abstract Map<String, Object> object2row(T object);
 
 
@@ -116,6 +132,10 @@ public abstract class AbstractDao<T extends Idable> implements Dao<T> {
         return executeQuery("SELECT * FROM "+ tableName, null);
     }
 
+    /**
+     * Accepts KV storage of column names and return CSV of columns and question marks for insert statement
+     * Example: (id, name, date) ?,?,?
+     */
     private Map.Entry<String, String> prepareInsertParts(Map<String, Object> row) {
         StringBuilder columns = new StringBuilder();
         StringBuilder questions = new StringBuilder();
@@ -134,6 +154,11 @@ public abstract class AbstractDao<T extends Idable> implements Dao<T> {
         return new AbstractMap.SimpleEntry<>(columns.toString(), questions.toString());
     }
 
+    /**
+     * Prepare columns for update statement id=?, name=?, ...
+     * @param row - row to be converted intro string
+     * @return String for update statement
+     */
     private String prepareUpdateParts(Map<String, Object> row) {
         StringBuilder columns = new StringBuilder();
         int counter = 0;
@@ -148,6 +173,13 @@ public abstract class AbstractDao<T extends Idable> implements Dao<T> {
         return columns.toString();
     }
 
+    /**
+     * Utility method for executing any kind of query
+     * @param query - SQL query
+     * @param params - params for query
+     * @return List of objects from database
+     * @throws AppException in case of error with database
+     */
     public List<T> executeQuery(String query, Object[] params) throws AppException {
         try {
             PreparedStatement stmt = getConnection().prepareStatement(query);
@@ -167,6 +199,13 @@ public abstract class AbstractDao<T extends Idable> implements Dao<T> {
         }
     }
 
+    /**
+     * Utility for query execution that always return single record
+     * @param query - query that returns single record
+     * @param params - list of params for sql query
+     * @return Object
+     * @throws AppException in case when object is not found
+     */
     public T executeQueryUnique(String query, Object[] params) throws AppException {
         List<T> result = executeQuery(query, params);
         if (result != null && result.size() == 1){
