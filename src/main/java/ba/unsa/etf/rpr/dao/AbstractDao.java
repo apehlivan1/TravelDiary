@@ -98,7 +98,7 @@ public abstract class AbstractDao<T extends Idable> implements Dao<T> {
     }
 
     public T getById(int id) throws AppException {
-        return null;
+        return executeQueryUnique("SELECT * FROM "+this.tableName+" WHERE id = ?", new Object[]{id});
     }
 
     public void delete(int id) throws AppException {
@@ -167,5 +167,13 @@ public abstract class AbstractDao<T extends Idable> implements Dao<T> {
         }
     }
 
+    public T executeQueryUnique(String query, Object[] params) throws AppException {
+        List<T> result = executeQuery(query, params);
+        if (result != null && result.size() == 1){
+            return result.get(0);
+        } else {
+            throw new AppException("Object not found");
+        }
+    }
 
 }
