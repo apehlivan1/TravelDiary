@@ -4,10 +4,7 @@ import ba.unsa.etf.rpr.domain.Idable;
 import ba.unsa.etf.rpr.exceptions.AppException;
 
 import java.sql.*;
-import java.util.AbstractMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Properties;
+import java.util.*;
 
 public abstract class AbstractDao<T extends Idable> implements Dao<T> {
     private static Connection connection = null;
@@ -116,7 +113,7 @@ public abstract class AbstractDao<T extends Idable> implements Dao<T> {
     }
 
     public List<T> getAll() throws AppException {
-        return null;
+        return executeQuery("SELECT * FROM "+ tableName, null);
     }
 
     private Map.Entry<String, String> prepareInsertParts(Map<String, Object> row) {
@@ -137,7 +134,7 @@ public abstract class AbstractDao<T extends Idable> implements Dao<T> {
         return new AbstractMap.SimpleEntry<>(columns.toString(), questions.toString());
     }
 
-    private String prepareUpdateParts(Map<String, Object> row){
+    private String prepareUpdateParts(Map<String, Object> row) {
         StringBuilder columns = new StringBuilder();
         int counter = 0;
         for (Map.Entry<String, Object> entry: row.entrySet()) {
@@ -150,5 +147,25 @@ public abstract class AbstractDao<T extends Idable> implements Dao<T> {
         }
         return columns.toString();
     }
+
+    public List<T> executeQuery(String query, Object[] params) throws AppException {
+        try {
+            PreparedStatement stmt = getConnection().prepareStatement(query);
+            if (params != null){
+                for(int i = 1; i <= params.length; i++){
+                    stmt.setObject(i, params[i-1]);
+                }
+            }
+            ResultSet rs = stmt.executeQuery();
+            ArrayList<T> resultList = new ArrayList<>();
+            while (rs.next()) {
+                resultList.add(row2object(rs));
+            }
+            return resultList;
+        } catch (SQLException e) {
+            throw new AppException(e.getMessage(), e);
+        }
+    }
+
 
 }
