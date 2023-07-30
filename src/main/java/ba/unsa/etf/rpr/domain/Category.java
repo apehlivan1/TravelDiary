@@ -2,6 +2,11 @@ package ba.unsa.etf.rpr.domain;
 
 import java.util.Objects;
 
+/**
+ * Represents the different types of trips or tourist destinations
+ *
+ * @author Almedina Pehlivan
+ */
 public class Category implements Idable {
 
     private int id;
