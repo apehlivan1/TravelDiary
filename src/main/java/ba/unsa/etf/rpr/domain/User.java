@@ -1,6 +1,11 @@
 package ba.unsa.etf.rpr.domain;
 
-public class User implements Idable{
+/**
+ * List of users from database
+ *
+ * @author Almedina Pehlivan
+ */
+public class User implements Idable {
 
     private int id;
     private String username;
@@ -76,5 +81,10 @@ public class User implements Idable{
 
     public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
+    }
+
+    @Override
+    public String toString() {
+        return firstName + " " + lastName;
     }
 }
