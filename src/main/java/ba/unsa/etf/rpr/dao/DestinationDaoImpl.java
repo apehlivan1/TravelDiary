@@ -10,8 +10,21 @@ import java.util.TreeMap;
 
 public class DestinationDaoImpl extends AbstractDao<Destination> implements DestinationDao {
 
+    private static DestinationDaoImpl instance = null;
+
     private DestinationDaoImpl() {
         super("destinations");
+    }
+
+    public static DestinationDaoImpl getInstance() {
+        if (instance == null)
+            instance = new DestinationDaoImpl();
+        return instance;
+    }
+
+    public static void removeInstance() {
+        if (instance != null)
+            instance = null;
     }
 
     @Override

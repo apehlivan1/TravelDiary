@@ -24,7 +24,7 @@ public class TripDaoImpl extends AbstractDao<Trip> implements TripDao {
 
     public static void removeInstance() {
         if (instance != null)
-            instance == null;
+            instance = null;
     }
 
     @Override
