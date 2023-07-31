@@ -1,4 +1,46 @@
 package ba.unsa.etf.rpr.dao;
 
-public class UserDaoImpl {
+import ba.unsa.etf.rpr.domain.User;
+import ba.unsa.etf.rpr.exceptions.AppException;
+
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.Map;
+import java.util.TreeMap;
+
+public class UserDaoImpl extends AbstractDao<User> implements UserDao {
+
+    private UserDaoImpl() {
+        super("users");
+    }
+
+    @Override
+    public User row2object(ResultSet rs) throws AppException {
+        try {
+            User user = new User(
+                rs.getInt("id"),
+                rs.getString("username"),
+                rs.getString("password"),
+                rs.getString("firstName"),
+                rs.getString("lastName"),
+                rs.getString("email"),
+                rs.getString("phoneNumber"));
+            return user;
+        } catch (SQLException e) {
+            throw new AppException(e.getMessage(), e);
+        }
+    }
+
+    @Override
+    public Map<String, Object> object2row(User object) {
+        Map<String, Object> row = new TreeMap<String, Object>();
+        row.put("id", object.getId());
+        row.put("username", object.getUsername());
+        row.put("password", object.getPassword());
+        row.put("firstName", object.getFirstName());
+        row.put("lastName", object.getLastName());
+        row.put("email", object.getEmail());
+        row.put("phoneNumber", object.getPhoneNumber());
+        return row;
+    }
 }
