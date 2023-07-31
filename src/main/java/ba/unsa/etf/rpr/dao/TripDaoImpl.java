@@ -10,8 +10,21 @@ import java.util.TreeMap;
 
 public class TripDaoImpl extends AbstractDao<Trip> implements TripDao {
 
+    private static TripDaoImpl instance = null;
+
     private TripDaoImpl() {
         super("trips");
+    }
+
+    public static TripDaoImpl getInstance() {
+        if (instance == null)
+            instance = new TripDaoImpl();
+        return instance;
+    }
+
+    public static void removeInstance() {
+        if (instance != null)
+            instance == null;
     }
 
     @Override
