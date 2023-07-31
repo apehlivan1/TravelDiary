@@ -1,4 +1,6 @@
 package ba.unsa.etf.rpr.dao;
 
-public interface CategoryDao {
+import ba.unsa.etf.rpr.domain.Category;
+
+public interface CategoryDao extends Dao<Category> {
 }
