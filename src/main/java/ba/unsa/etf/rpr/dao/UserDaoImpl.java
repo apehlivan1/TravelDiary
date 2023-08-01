@@ -57,4 +57,9 @@ public class UserDaoImpl extends AbstractDao<User> implements UserDao {
         row.put("phoneNumber", object.getPhoneNumber());
         return row;
     }
+
+    @Override
+    public User searchByUsername(String username) throws AppException {
+        return executeQueryUnique("SELECT * FROM users WHERE username = ?", new Object[]{username});
+    }
 }

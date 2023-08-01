@@ -14,8 +14,8 @@ public class DaoFactory {
 
     private DaoFactory() {}
 
-    private static CategoryDao getCategoryDao() { return categoryDao; }
-    private static DestinationDao getDestinationDao() { return destinationDao; }
-    private static TripDao getTripDao() { return tripDao; }
-    private static UserDao getUserDao() { return userDao; }
+    public static CategoryDao getCategoryDao() { return categoryDao; }
+    public static DestinationDao getDestinationDao() { return destinationDao; }
+    public static TripDao getTripDao() { return tripDao; }
+    public static UserDao getUserDao() { return userDao; }
 }
