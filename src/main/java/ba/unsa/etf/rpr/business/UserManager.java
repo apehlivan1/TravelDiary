@@ -19,4 +19,8 @@ public class UserManager {
             throw new RuntimeException(e);
         }
     }
+
+    public void add(User user) throws AppException {
+        DaoFactory.getUserDao().add(user);
+    }
 }

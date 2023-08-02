@@ -91,7 +91,7 @@
                         <Font name="Bookman Old Style Italic" size="13.0" />
                     </font>
                 </Label>
-                <TextField fx:id="usernameTextField" onAction="#usernameOnAction" promptText="Username" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="6" GridPane.valignment="TOP">
+                <TextField fx:id="usernameTextField" promptText="Username" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="6" GridPane.valignment="TOP">
                     <font>
                         <Font name="Bookman Old Style Italic" size="11.0" />
                     </font>
@@ -99,7 +99,7 @@
                   <Insets top="-5.0" />
                </GridPane.margin>
                 </TextField>
-                <PasswordField fx:id="passwordPasswordField" onAction="#passwordOnAction" promptText="Password" GridPane.columnIndex="4" GridPane.columnSpan="2" GridPane.rowIndex="6" GridPane.valignment="TOP">
+                <PasswordField fx:id="passwordPasswordField" promptText="Password" GridPane.columnIndex="4" GridPane.columnSpan="2" GridPane.rowIndex="6" GridPane.valignment="TOP">
                     <font>
                         <Font name="Bookman Old Style Italic" size="11.0" />
                     </font>
@@ -120,17 +120,17 @@
                   <Insets bottom="-10.0" />
                </GridPane.margin>
                 </Button>
-                <Label fx:id="redMessageLabel" alignment="CENTER" contentDisplay="CENTER" maxWidth="1.7976931348623157E308" prefHeight="18.0" prefWidth="89.0" textFill="RED" GridPane.columnIndex="3" GridPane.columnSpan="3" GridPane.rowIndex="1" GridPane.valignment="BOTTOM">
+                <Label fx:id="redMessageLabel" alignment="CENTER" contentDisplay="CENTER" maxWidth="1.7976931348623157E308" prefHeight="18.0" prefWidth="89.0" textFill="RED" GridPane.columnIndex="2" GridPane.columnSpan="3" GridPane.rowIndex="1" GridPane.valignment="CENTER">
                     <font>
                         <Font name="Bookman Old Style" size="12.0" />
                     </font>
                 </Label>
-                <Label fx:id="greenMessageLabel" alignment="CENTER" contentDisplay="CENTER" maxWidth="1.7976931348623157E308" prefHeight="18.0" prefWidth="89.0" textFill="#1dc707" GridPane.columnIndex="3" GridPane.columnSpan="3" GridPane.rowIndex="1" GridPane.valignment="BOTTOM">
+                <Label fx:id="greenMessageLabel" alignment="CENTER" contentDisplay="CENTER" maxWidth="1.7976931348623157E308" prefHeight="18.0" prefWidth="89.0" textFill="#1dc707" GridPane.columnIndex="2" GridPane.columnSpan="3" GridPane.rowIndex="1" GridPane.valignment="CENTER">
                     <font>
                         <Font name="Bookman Old Style" size="12.0" />
                     </font>
                 </Label>
-                <Label fx:id="blackMessageLabel" alignment="CENTER" contentDisplay="CENTER" maxWidth="1.7976931348623157E308" prefHeight="18.0" prefWidth="89.0" GridPane.columnIndex="3" GridPane.columnSpan="3" GridPane.rowIndex="1" GridPane.valignment="BOTTOM">
+                <Label fx:id="blackMessageLabel" alignment="CENTER" contentDisplay="CENTER" maxWidth="1.7976931348623157E308" prefHeight="18.0" prefWidth="89.0" GridPane.columnIndex="2" GridPane.columnSpan="3" GridPane.rowIndex="1" GridPane.valignment="CENTER">
                     <font>
                         <Font name="Bookman Old Style" size="12.0" />
                     </font>
@@ -148,7 +148,7 @@
                   <Font name="Bookman Old Style Italic" size="13.0" />
                </font>
             </Label>
-            <TextField fx:id="usernameTextField1" layoutX="162.0" layoutY="176.0" onAction="#usernameOnAction" promptText="First name" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="2" GridPane.valignment="TOP">
+            <TextField fx:id="firstNameField" layoutX="162.0" layoutY="176.0" promptText="First name" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="2" GridPane.valignment="TOP">
                <font>
                   <Font name="Bookman Old Style Italic" size="11.0" />
                </font>
@@ -156,7 +156,7 @@
                   <Insets top="10.0" />
                </GridPane.margin>
             </TextField>
-            <TextField fx:id="usernameTextField11" layoutX="20.0" layoutY="121.0" onAction="#usernameOnAction" promptText="Last name" GridPane.columnIndex="4" GridPane.columnSpan="2" GridPane.rowIndex="2" GridPane.valignment="TOP">
+            <TextField fx:id="lastNameField" layoutX="20.0" layoutY="121.0" promptText="Last name" GridPane.columnIndex="4" GridPane.columnSpan="2" GridPane.rowIndex="2" GridPane.valignment="TOP">
                <font>
                   <Font name="Bookman Old Style Italic" size="11.0" />
                </font>
@@ -172,7 +172,7 @@
                   <Insets bottom="10.0" />
                </GridPane.margin>
             </Label>
-            <TextField fx:id="usernameTextField12" layoutX="20.0" layoutY="109.0" onAction="#usernameOnAction" promptText="example@email.com" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="4" GridPane.valignment="TOP">
+            <TextField fx:id="emailField" layoutX="20.0" layoutY="109.0" promptText="example@email.com" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="4" GridPane.valignment="TOP">
                <font>
                   <Font name="Bookman Old Style Italic" size="11.0" />
                </font>
@@ -188,7 +188,7 @@
                   <Insets bottom="10.0" />
                </GridPane.margin>
             </Label>
-            <TextField fx:id="usernameTextField121" layoutX="20.0" layoutY="198.0" onAction="#usernameOnAction" promptText="Phone number" GridPane.columnIndex="4" GridPane.columnSpan="2" GridPane.rowIndex="4" GridPane.valignment="TOP">
+            <TextField fx:id="phoneField" layoutX="20.0" layoutY="198.0" promptText="Phone number" GridPane.columnIndex="4" GridPane.columnSpan="2" GridPane.rowIndex="4" GridPane.valignment="TOP">
                <font>
                   <Font name="Bookman Old Style Italic" size="11.0" />
                </font>
