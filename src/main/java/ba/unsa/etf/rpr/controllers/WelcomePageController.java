@@ -13,7 +13,7 @@ import javafx.stage.StageStyle;
 
 import static javafx.scene.layout.Region.USE_COMPUTED_SIZE;
 
-public class WelcomePage {
+public class WelcomePageController {
 
     @FXML
     private ResourceBundle resources;
@@ -21,9 +21,15 @@ public class WelcomePage {
     @FXML
     private URL location;
 
-    @FXML
-    void btnGuestClicked(ActionEvent event) {
 
+    @FXML
+    void btnRegisterClicked(ActionEvent event) throws IOException {
+        Stage stage = new Stage();
+        Parent root = FXMLLoader.load(getClass().getResource("/fxml/register.fxml"));
+        stage.setScene(new Scene(root, USE_COMPUTED_SIZE, USE_COMPUTED_SIZE));
+        stage.setResizable(false);
+        stage.initStyle(StageStyle.UNDECORATED);
+        stage.show();
     }
 
     @FXML
