@@ -71,14 +71,19 @@ public class RegisterController {
             User user = new User(0, usernameTextField.getText(), passwordPasswordField.getText(),
                     firstNameField.getText(), lastNameField.getText(), emailField.getText(), phoneField.getText());
             UserManager userManager = new UserManager();
-            userManager.add(user);
+            user = userManager.add(user);
+            HomeController homeController = new HomeController(user.getId());
 
             Stage stage = new Stage();
-            Parent root = FXMLLoader.load(getClass().getResource("/fxml/home.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/home.fxml"));
+            fxmlLoader.setController(homeController);
+            Parent root = fxmlLoader.load();
             stage.setScene(new Scene(root, USE_COMPUTED_SIZE, USE_COMPUTED_SIZE));
             ((Stage) registerButton.getScene().getWindow()).close();
+
             WelcomePageController welcomePageController = new WelcomePageController();
             welcomePageController.close();
+
             stage.show();
         }
     }
