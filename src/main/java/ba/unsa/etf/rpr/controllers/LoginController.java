@@ -1,6 +1,8 @@
 package ba.unsa.etf.rpr.controllers;
 
 import ba.unsa.etf.rpr.business.UserManager;
+import ba.unsa.etf.rpr.domain.User;
+import ba.unsa.etf.rpr.exceptions.AppException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -48,7 +50,7 @@ public class LoginController {
     }
 
     @FXML
-    void loginClicked(ActionEvent event) throws IOException {
+    void loginClicked(ActionEvent event) throws IOException, AppException {
         if (usernameTextField.getText().isBlank()|| passwordPasswordField.getText().isBlank()) {
             redMessageLabel.setText("Please enter username and password!");
         }
@@ -56,13 +58,19 @@ public class LoginController {
         if (!labelText.equals("Login successful"))
             redMessageLabel.setText(labelText);
         else {
+            //try using stage.setUserData(user);
+            User user = userManager.searchByUsername(usernameTextField.getText());
+            HomeController homeController = new HomeController(user.getId());
+
             Stage stage = new Stage();
-            Parent root = FXMLLoader.load(getClass().getResource("/fxml/home.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/home.fxml"));
+            fxmlLoader.setController(homeController);
+            Parent root = fxmlLoader.load();
             stage.setScene(new Scene(root, USE_COMPUTED_SIZE, USE_COMPUTED_SIZE));
-            //stage.setResizable(false);
-            //dont forget to add controller here or in fxml for  home page
+
             WelcomePageController welcomePageController = new WelcomePageController();
             welcomePageController.close();
+
             stage.show();
         }
     }
