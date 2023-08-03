@@ -23,7 +23,7 @@
     <RowConstraints maxHeight="296.79999389648435" minHeight="10.0" prefHeight="296.79999389648435" vgrow="SOMETIMES" />
   </rowConstraints>
    <children>
-      <ListView prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="2">
+      <ListView fx:id="destinationsList" prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="2">
          <GridPane.margin>
             <Insets bottom="50.0" left="20.0" />
          </GridPane.margin>
