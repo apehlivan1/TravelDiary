@@ -41,7 +41,7 @@
       </Label>
       <ImageView fitHeight="54.0" fitWidth="47.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.valignment="TOP">
          <image>
-            <Image url="@../../../../../../Documents/ETF/2.%20godina/3.%20semestar/RPR/Slike%20za%20projekat/logoSymbol.png" />
+            <Image url="@../images/logoSymbol.png" />
          </image>
       </ImageView>
       <Button fx:id="exploreBtn" mnemonicParsing="false" onAction="#exploreBtnClicked" text="Explore new destinations" GridPane.columnSpan="2" GridPane.halignment="RIGHT" GridPane.rowIndex="2" GridPane.valignment="BOTTOM">
