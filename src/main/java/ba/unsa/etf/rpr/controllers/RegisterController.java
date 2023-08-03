@@ -5,11 +5,18 @@ import ba.unsa.etf.rpr.domain.User;
 import ba.unsa.etf.rpr.exceptions.AppException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+
+import java.io.IOException;
+
+import static javafx.scene.layout.Region.USE_COMPUTED_SIZE;
 
 public class RegisterController {
 
@@ -53,7 +60,7 @@ public class RegisterController {
     }
 
     @FXML
-    void registerClicked(ActionEvent event) throws AppException {
+    void registerClicked(ActionEvent event) throws AppException, IOException {
         if (usernameTextField.getText().isBlank() || passwordPasswordField.getText().isBlank()
                 || firstNameField.getText().isBlank() || lastNameField.getText().isBlank()
                 || phoneField.getText().isBlank() || emailField.getText().isBlank()) {
@@ -65,6 +72,14 @@ public class RegisterController {
                     firstNameField.getText(), lastNameField.getText(), emailField.getText(), phoneField.getText());
             UserManager userManager = new UserManager();
             userManager.add(user);
+
+            Stage stage = new Stage();
+            Parent root = FXMLLoader.load(getClass().getResource("/fxml/home.fxml"));
+            stage.setScene(new Scene(root, USE_COMPUTED_SIZE, USE_COMPUTED_SIZE));
+            ((Stage) registerButton.getScene().getWindow()).close();
+            WelcomePageController welcomePageController = new WelcomePageController();
+            welcomePageController.close();
+            stage.show();
         }
     }
 

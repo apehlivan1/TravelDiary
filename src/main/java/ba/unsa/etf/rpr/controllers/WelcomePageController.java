@@ -8,6 +8,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
@@ -20,6 +21,12 @@ public class WelcomePageController {
 
     @FXML
     private URL location;
+
+    @FXML
+    private Button logInBtn;
+
+    @FXML
+    private Button registerBtn;
 
 
     @FXML
@@ -45,6 +52,10 @@ public class WelcomePageController {
     @FXML
     void initialize() {
 
+    }
+
+    void close() {
+        ((Stage) registerBtn.getScene().getWindow()).close();
     }
 
 }

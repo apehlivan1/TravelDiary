@@ -61,6 +61,8 @@ public class LoginController {
             stage.setScene(new Scene(root, USE_COMPUTED_SIZE, USE_COMPUTED_SIZE));
             //stage.setResizable(false);
             //dont forget to add controller here or in fxml for  home page
+            WelcomePageController welcomePageController = new WelcomePageController();
+            welcomePageController.close();
             stage.show();
         }
     }

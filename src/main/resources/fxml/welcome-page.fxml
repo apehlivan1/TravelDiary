@@ -47,14 +47,14 @@
             <Insets />
          </GridPane.margin>
       </ImageView>
-      <Button alignment="CENTER_RIGHT" contentDisplay="RIGHT" mnemonicParsing="false" onAction="#btnLogInClicked" prefHeight="26.0" prefWidth="117.0" style="-fx-background-color: transparent;" text="Log in" textAlignment="CENTER" textFill="#0d0d98" underline="true" GridPane.columnIndex="7" GridPane.halignment="LEFT" GridPane.rowIndex="9" GridPane.valignment="CENTER">
+      <Button fx:id="logInBtn" alignment="CENTER_RIGHT" contentDisplay="RIGHT" mnemonicParsing="false" onAction="#btnLogInClicked" prefHeight="26.0" prefWidth="117.0" style="-fx-background-color: transparent;" text="Log in" textAlignment="CENTER" textFill="#0d0d98" underline="true" GridPane.columnIndex="7" GridPane.halignment="LEFT" GridPane.rowIndex="9" GridPane.valignment="CENTER">
          <font>
             <Font name="Bookman Old Style Italic" size="12.0" />
          </font>
          <GridPane.margin>
             <Insets left="5.0" right="5.0" />
          </GridPane.margin></Button>
-      <Button mnemonicParsing="false" onAction="#btnRegisterClicked" prefHeight="26.0" prefWidth="129.0" style="-fx-background-color: transparent;" text="Register" textFill="#0d0d98" underline="true" GridPane.columnIndex="8" GridPane.halignment="LEFT" GridPane.rowIndex="9" GridPane.valignment="CENTER">
+      <Button fx:id="registerBtn" mnemonicParsing="false" onAction="#btnRegisterClicked" prefHeight="26.0" prefWidth="129.0" style="-fx-background-color: transparent;" text="Register" textFill="#0d0d98" underline="true" GridPane.columnIndex="8" GridPane.halignment="LEFT" GridPane.rowIndex="9" GridPane.valignment="CENTER">
          <opaqueInsets>
             <Insets />
          </opaqueInsets>
