@@ -1,8 +1,11 @@
 package ba.unsa.etf.rpr.business;
 
+import ba.unsa.etf.rpr.App;
 import ba.unsa.etf.rpr.dao.DaoFactory;
 import ba.unsa.etf.rpr.domain.Trip;
+import ba.unsa.etf.rpr.domain.User;
 import ba.unsa.etf.rpr.exceptions.AppException;
+import javafx.collections.ObservableList;
 
 import java.util.List;
 
@@ -26,6 +29,10 @@ public class TripManager {
 
     public List<Trip> getAll() throws AppException {
         return DaoFactory.getTripDao().getAll();
+    }
+
+    public List<Trip> searchByUser(int userId) throws AppException {
+        return DaoFactory.getTripDao().searchByUser(userId);
     }
 
 }
