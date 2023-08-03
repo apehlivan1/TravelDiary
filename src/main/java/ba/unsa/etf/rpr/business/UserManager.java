@@ -4,7 +4,29 @@ import ba.unsa.etf.rpr.dao.DaoFactory;
 import ba.unsa.etf.rpr.domain.User;
 import ba.unsa.etf.rpr.exceptions.AppException;
 
+import java.util.List;
+
 public class UserManager {
+
+    public User add(User user) throws AppException {
+        return DaoFactory.getUserDao().add(user);
+    }
+
+    public User update(User user) throws AppException {
+        return DaoFactory.getUserDao().update(user);
+    }
+
+    public User getById(int id) throws AppException {
+        return DaoFactory.getUserDao().getById(id);
+    }
+
+    public void delete(int id) throws AppException {
+        DaoFactory.getUserDao().delete(id);
+    }
+
+    public List<User> getAll() throws AppException {
+        return DaoFactory.getUserDao().getAll();
+    }
 
     public User searchByUsername(String username) throws AppException {
         return DaoFactory.getUserDao().searchByUsername(username);
@@ -18,9 +40,5 @@ public class UserManager {
         } catch (AppException e) {
             throw new RuntimeException(e);
         }
-    }
-
-    public void add(User user) throws AppException {
-        DaoFactory.getUserDao().add(user);
     }
 }
