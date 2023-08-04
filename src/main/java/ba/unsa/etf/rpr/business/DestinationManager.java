@@ -28,4 +28,8 @@ public class DestinationManager {
     public List<Destination> getAll() throws AppException {
         return DaoFactory.getDestinationDao().getAll();
     }
+
+    public List<Destination> search(String text) throws AppException {
+        return DaoFactory.getDestinationDao().search(text);
+    }
 }
