@@ -5,6 +5,7 @@ import ba.unsa.etf.rpr.exceptions.AppException;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
@@ -54,5 +55,10 @@ public class DestinationDaoImpl extends AbstractDao<Destination> implements Dest
         row.put("categoryId", object.getCategoryId());
         row.put("rating", object.getRating());
         return row;
+    }
+
+    @Override
+    public List<Destination> search(String text) throws AppException {
+        return executeQuery("SELECT * FROM destinations WHERE name LIKE concat('%', ?, '%')", new Object[]{text});
     }
 }
