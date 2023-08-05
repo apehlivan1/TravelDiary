@@ -3,8 +3,16 @@ package ba.unsa.etf.rpr.controllers;
 
         import javafx.event.ActionEvent;
         import javafx.fxml.FXML;
+        import javafx.fxml.FXMLLoader;
+        import javafx.scene.Parent;
+        import javafx.scene.Scene;
         import javafx.scene.control.Button;
         import javafx.scene.control.ListView;
+        import javafx.stage.Stage;
+
+        import java.io.IOException;
+
+        import static javafx.scene.layout.Region.USE_COMPUTED_SIZE;
 
 public class ExplorePageController {
 
@@ -21,8 +29,11 @@ public class ExplorePageController {
     private ListView<?> destinationsList;
 
     @FXML
-    void addCategoryClicked(ActionEvent event) {
-
+    void addCategoryClicked(ActionEvent event) throws IOException {
+        Stage stage = new Stage();
+        Parent root = FXMLLoader.load(getClass().getResource("/fxml/add category.fxml"));
+        stage.setScene(new Scene(root, USE_COMPUTED_SIZE, USE_COMPUTED_SIZE));
+        stage.show();
     }
 
     @FXML
