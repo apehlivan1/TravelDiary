@@ -42,11 +42,6 @@ public class AddDestinationController {
     private Button saveButton;
 
     @FXML
-    void cancelClicked(ActionEvent event) {
-
-    }
-
-    @FXML
     void newCategoryClicked(ActionEvent event) throws IOException {
         Stage stage = (Stage) newCategoryBtn.getScene().getWindow();
         stage.close();
@@ -60,6 +55,12 @@ public class AddDestinationController {
     @FXML
     void saveClicked(ActionEvent event) {
 
+    }
+
+    @FXML
+    void cancelClicked(ActionEvent event) {
+        Stage stage = (Stage) cancelButton.getScene().getWindow();
+        stage.close();
     }
 
     @FXML
