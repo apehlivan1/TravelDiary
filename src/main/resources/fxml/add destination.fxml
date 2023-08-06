@@ -1,14 +1,91 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="ba.unsa.etf.rpr.controllers.AddDestinationController"
-            prefHeight="400.0" prefWidth="600.0">
-
-</AnchorPane>
+<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/19" fx:controller="ba.unsa.etf.rpr.controllers.AddDestinationController">
+  <columnConstraints>
+      <ColumnConstraints hgrow="SOMETIMES" maxWidth="100.0" minWidth="10.0" prefWidth="100.0" />
+    <ColumnConstraints hgrow="SOMETIMES" maxWidth="295.20001220703125" minWidth="10.0" prefWidth="118.20002441406251" />
+    <ColumnConstraints hgrow="SOMETIMES" maxWidth="391.199951171875" minWidth="10.0" prefWidth="334.1999755859376" />
+      <ColumnConstraints hgrow="SOMETIMES" maxWidth="100.0" minWidth="10.0" prefWidth="100.0" />
+  </columnConstraints>
+  <rowConstraints>
+      <RowConstraints maxHeight="95.0" minHeight="10.0" prefHeight="95.0" vgrow="SOMETIMES" />
+    <RowConstraints maxHeight="115.0" minHeight="10.0" prefHeight="115.0" vgrow="SOMETIMES" />
+    <RowConstraints maxHeight="115.0" minHeight="10.0" prefHeight="115.0" vgrow="SOMETIMES" />
+    <RowConstraints maxHeight="136.79999389648435" minHeight="10.0" prefHeight="136.79999389648435" vgrow="SOMETIMES" />
+  </rowConstraints>
+   <children>
+      <Label text="Name" GridPane.columnIndex="1" GridPane.rowIndex="1" GridPane.valignment="TOP">
+         <GridPane.margin>
+            <Insets top="-5.0" />
+         </GridPane.margin>
+      </Label>
+      <Label text="Location" GridPane.columnIndex="1" GridPane.rowIndex="1">
+         <GridPane.margin>
+            <Insets top="2.0" />
+         </GridPane.margin>
+      </Label>
+      <Label text="Description" GridPane.columnIndex="1" GridPane.rowIndex="2" GridPane.valignment="TOP">
+         <GridPane.margin>
+            <Insets top="-7.0" />
+         </GridPane.margin>
+      </Label>
+      <Label text="Rating" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+      <Label text="Category" GridPane.columnIndex="1" GridPane.rowIndex="3" GridPane.valignment="TOP">
+         <GridPane.margin>
+            <Insets top="-8.0" />
+         </GridPane.margin>
+      </Label>
+      <ComboBox fx:id="categoryChoice" prefHeight="26.0" prefWidth="344.0" GridPane.columnIndex="2" GridPane.rowIndex="3" GridPane.valignment="TOP">
+         <GridPane.margin>
+            <Insets top="-13.0" />
+         </GridPane.margin>
+      </ComboBox>
+      <TextField fx:id="nameTextField" GridPane.columnIndex="2" GridPane.rowIndex="1" GridPane.valignment="TOP">
+         <GridPane.margin>
+            <Insets top="-8.0" />
+         </GridPane.margin>
+      </TextField>
+      <TextField fx:id="locationTextField" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+      <TextField fx:id="descriptionTextField" GridPane.columnIndex="2" GridPane.rowIndex="2" GridPane.valignment="TOP">
+         <GridPane.margin>
+            <Insets top="-11.0" />
+         </GridPane.margin>
+      </TextField>
+      <TextField fx:id="ratingTextField" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+      <Button fx:id="saveButton" mnemonicParsing="false" onAction="#saveClicked" text="Save" GridPane.columnIndex="1" GridPane.rowIndex="3">
+         <GridPane.margin>
+            <Insets top="5.0" />
+         </GridPane.margin>
+      </Button>
+      <Button fx:id="cancelButton" mnemonicParsing="false" onAction="#cancelClicked" text="Cancel" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="3">
+         <GridPane.margin>
+            <Insets top="5.0" />
+         </GridPane.margin>
+      </Button>
+      <Button fx:id="newCategoryBtn" mnemonicParsing="false" onAction="#newCategoryClicked" text="Add new category" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.rowIndex="3">
+         <GridPane.margin>
+            <Insets top="5.0" />
+         </GridPane.margin>
+      </Button>
+      <Label text="Share your favourite destination with us!" GridPane.columnSpan="4" GridPane.halignment="CENTER">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Label>
+      <Label text="There is no your preferred category?" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.rowIndex="3">
+         <GridPane.margin>
+            <Insets top="-45.0" />
+         </GridPane.margin>
+      </Label>
+   </children>
+</GridPane>
