@@ -3,6 +3,13 @@ package ba.unsa.etf.rpr.controllers;
         import java.io.IOException;
         import java.net.URL;
         import java.util.ResourceBundle;
+
+        import ba.unsa.etf.rpr.business.CategoryManager;
+        import ba.unsa.etf.rpr.business.DestinationManager;
+        import ba.unsa.etf.rpr.domain.Category;
+        import ba.unsa.etf.rpr.domain.Destination;
+        import ba.unsa.etf.rpr.exceptions.AppException;
+        import javafx.collections.FXCollections;
         import javafx.event.ActionEvent;
         import javafx.fxml.FXML;
         import javafx.fxml.FXMLLoader;
@@ -21,7 +28,7 @@ public class AddDestinationController {
     private Button cancelButton;
 
     @FXML
-    private ComboBox<?> categoryChoice;
+    private ComboBox<Category> categoryChoice; //try with <String>
 
     @FXML
     private TextField descriptionTextField;
@@ -41,6 +48,8 @@ public class AddDestinationController {
     @FXML
     private Button saveButton;
 
+    CategoryManager categoryManager = new CategoryManager();
+
     @FXML
     void newCategoryClicked(ActionEvent event) throws IOException {
         Stage stage = (Stage) newCategoryBtn.getScene().getWindow();
@@ -53,8 +62,15 @@ public class AddDestinationController {
     }
 
     @FXML
-    void saveClicked(ActionEvent event) {
-
+    void saveClicked(ActionEvent event) throws AppException {
+        DestinationManager manager = new DestinationManager();
+        Destination destination = new Destination(
+                0, nameTextField.getText(), locationTextField.getText(),
+                descriptionTextField.getText(), categoryChoice.getValue().getId(), Integer.parseInt(ratingTextField.getText())
+        );
+        destination = manager.add(destination);
+        Stage stage = (Stage) saveButton.getScene().getWindow();
+        stage.close();
     }
 
     @FXML
@@ -65,15 +81,11 @@ public class AddDestinationController {
 
     @FXML
     void initialize() {
-        assert cancelButton != null : "fx:id=\"cancelButton\" was not injected: check your FXML file 'add destination.fxml'.";
-        assert categoryChoice != null : "fx:id=\"categoryChoice\" was not injected: check your FXML file 'add destination.fxml'.";
-        assert descriptionTextField != null : "fx:id=\"descriptionTextField\" was not injected: check your FXML file 'add destination.fxml'.";
-        assert locationTextField != null : "fx:id=\"locationTextField\" was not injected: check your FXML file 'add destination.fxml'.";
-        assert nameTextField != null : "fx:id=\"nameTextField\" was not injected: check your FXML file 'add destination.fxml'.";
-        assert newCategoryBtn != null : "fx:id=\"newCategoryBtn\" was not injected: check your FXML file 'add destination.fxml'.";
-        assert ratingTextField != null : "fx:id=\"ratingTextField\" was not injected: check your FXML file 'add destination.fxml'.";
-        assert saveButton != null : "fx:id=\"saveButton\" was not injected: check your FXML file 'add destination.fxml'.";
-
+        try {
+            categoryChoice.setItems(FXCollections.observableList(categoryManager.getAll()));
+        } catch (AppException e) {
+            throw new RuntimeException(e);
+        }
     }
 
 }
