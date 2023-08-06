@@ -1,11 +1,16 @@
 package ba.unsa.etf.rpr.controllers;
 
+import ba.unsa.etf.rpr.business.CategoryManager;
+import ba.unsa.etf.rpr.domain.Category;
+import ba.unsa.etf.rpr.exceptions.AppException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
@@ -27,7 +32,16 @@ public class AddCategoryController {
 
     @FXML
     void addClicked(ActionEvent event) {
+        try {
+            Category c = new Category();
+            c.setName(categoryNameTextField.getText());
 
+            CategoryManager manager = new CategoryManager();
+            c = manager.add(c);
+            categoryNameTextField.setText("");
+        } catch (AppException e) {
+            new Alert(Alert.AlertType.NONE, e.getMessage(), ButtonType.OK).show();
+        }
     }
 
     @FXML
