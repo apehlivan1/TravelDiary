@@ -39,6 +39,9 @@ public class HomeController {
     private Label note;
 
     @FXML
+    private Button editButton;
+
+    @FXML
     private Button exploreBtn;
 
     @FXML
@@ -68,6 +71,11 @@ public class HomeController {
         DestinationManager destinationManager = new DestinationManager();
         List<Destination> destinations = destinationManager.search(searchTextField.getText());
         destinationsList.getItems().addAll(destinations);
+    }
+
+    @FXML
+    void editButtonClicked(ActionEvent event) {
+
     }
 
     @FXML
