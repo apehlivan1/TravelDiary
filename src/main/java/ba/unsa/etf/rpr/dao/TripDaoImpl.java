@@ -1,9 +1,7 @@
 package ba.unsa.etf.rpr.dao;
 
 import ba.unsa.etf.rpr.domain.Trip;
-import ba.unsa.etf.rpr.domain.User;
 import ba.unsa.etf.rpr.exceptions.AppException;
-import javafx.collections.ObservableList;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -38,7 +36,7 @@ public class TripDaoImpl extends AbstractDao<Trip> implements TripDao {
                     rs.getInt("userId"),
                     rs.getInt("destinationId"),
                     rs.getInt("rating"),
-                    rs.getString("review"));
+                    rs.getString("note"));
             return trip;
         } catch (SQLException e) {
             throw new AppException(e.getMessage(), e);
@@ -52,7 +50,7 @@ public class TripDaoImpl extends AbstractDao<Trip> implements TripDao {
         row.put("userId", object.getUserId());
         row.put("destinationId", object.getDestinationId());
         row.put("rating", object.getRating());
-        row.put("review", object.getReview());
+        row.put("note", object.getNote());
         return row;
     }
 

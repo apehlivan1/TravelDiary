@@ -12,14 +12,14 @@ public class Trip implements Idable {
     private int userId;
     private int destinationId; //try with: private Destination destination;
     private int rating;
-    private String review;
+    private String note;
 
-    public Trip(int id, int userId, int destinationId, int rating, String review) {
+    public Trip(int id, int userId, int destinationId, int rating, String note) {
         this.id = id;
         this.userId = userId;
         this.destinationId = destinationId;
         this.rating = rating;
-        this.review = review;
+        this.note = note;
     }
 
     @Override
@@ -56,20 +56,16 @@ public class Trip implements Idable {
         this.rating = rating;
     }
 
-    public String getReview() {
-        return review;
+    public String getNote() {
+        return note;
     }
 
-    public void setReview(String review) {
-        this.review = review;
+    public void setNote(String note) {
+        this.note = note;
     }
 
     @Override
     public String toString() {
-        return "Trip{" +
-                "destinationId:" + destinationId +
-                ", rating=" + rating +
-                ", review='" + review + '\'' +
-                '}';
+        return note;
     }
 }
