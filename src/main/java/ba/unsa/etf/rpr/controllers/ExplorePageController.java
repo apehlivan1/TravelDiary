@@ -1,6 +1,12 @@
 package ba.unsa.etf.rpr.controllers;
 
 
+        import ba.unsa.etf.rpr.business.CategoryManager;
+        import ba.unsa.etf.rpr.business.DestinationManager;
+        import ba.unsa.etf.rpr.domain.Category;
+        import ba.unsa.etf.rpr.domain.Destination;
+        import ba.unsa.etf.rpr.exceptions.AppException;
+        import javafx.collections.FXCollections;
         import javafx.event.ActionEvent;
         import javafx.fxml.FXML;
         import javafx.fxml.FXMLLoader;
@@ -11,6 +17,7 @@ package ba.unsa.etf.rpr.controllers;
         import javafx.stage.Stage;
 
         import java.io.IOException;
+        import java.util.List;
 
         import static javafx.scene.layout.Region.USE_COMPUTED_SIZE;
 
@@ -23,10 +30,13 @@ public class ExplorePageController {
     private Button addDestinationBtn;
 
     @FXML
-    private ListView<?> categoriesList;
+    private ListView<Category> categoriesList;
 
     @FXML
-    private ListView<?> destinationsList;
+    private ListView<Destination> destinationsList;
+
+    private CategoryManager categoryManager = new CategoryManager();
+    private DestinationManager destinationManager = new DestinationManager();
 
     @FXML
     void addCategoryClicked(ActionEvent event) throws IOException {
@@ -49,11 +59,18 @@ public class ExplorePageController {
 
     @FXML
     void initialize() {
-        assert addCategoryBtn != null : "fx:id=\"addCategoryBtn\" was not injected: check your FXML file 'explore page.fxml'.";
-        assert addDestinationBtn != null : "fx:id=\"addDestinationBtn\" was not injected: check your FXML file 'explore page.fxml'.";
-        assert categoriesList != null : "fx:id=\"categoriesList\" was not injected: check your FXML file 'explore page.fxml'.";
-        assert destinationsList != null : "fx:id=\"destinationsList\" was not injected: check your FXML file 'explore page.fxml'.";
+        try {
+            refreshCategories();
+            Category category = categoriesList.getSelectionModel().getSelectedItem();
+            List<Destination> resultList = destinationManager.searchByCategory(category.getId());
+;           destinationsList.setItems(FXCollections.observableList(resultList));
+        } catch (AppException e) {
+            throw new RuntimeException(e);
+        }
+    }
 
+    private void refreshCategories() throws AppException {
+        categoriesList.setItems(FXCollections.observableList(categoryManager.getAll()));
     }
 
 }
