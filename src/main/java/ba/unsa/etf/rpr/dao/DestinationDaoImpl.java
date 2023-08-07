@@ -61,4 +61,10 @@ public class DestinationDaoImpl extends AbstractDao<Destination> implements Dest
     public List<Destination> search(String text) throws AppException {
         return executeQuery("SELECT * FROM destinations WHERE name LIKE concat('%', ?, '%')", new Object[]{text});
     }
+
+    @Override
+    public List<Destination> searchByCategory(int id) throws AppException {
+        return executeQuery("SELECT * FROM destinations WHERE categoryId = ", new Object[]{id});
+    }
+
 }

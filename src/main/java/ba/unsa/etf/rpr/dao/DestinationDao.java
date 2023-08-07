@@ -8,4 +8,7 @@ import java.util.List;
 public interface DestinationDao extends Dao<Destination> {
 
     List<Destination> search(String text) throws AppException;
+
+    List<Destination> searchByCategory(int id) throws AppException;
+
 }
