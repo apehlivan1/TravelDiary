@@ -76,13 +76,20 @@ public class HomeController {
     }
 
     @FXML
-    void editButtonClicked(ActionEvent event) {
+    void editButtonClicked(ActionEvent event) throws IOException {
+        Stage stage = (Stage) editButton.getScene().getWindow();
+        stage.close();
 
+        stage = new Stage();
+        Parent root = FXMLLoader.load(getClass().getResource("/fxml/edit.fxml"));
+        stage.setScene(new Scene(root, USE_COMPUTED_SIZE, USE_COMPUTED_SIZE));
+        stage.show();
     }
 
     @FXML
     void initialize() {
         try{
+            editButton.setVisible(false);
             TripManager tripManager = new TripManager();
             List<Trip> tripsList = tripManager.searchByUser(userId);
 
@@ -98,6 +105,7 @@ public class HomeController {
                 public void changed(ObservableValue<? extends Destination> observableValue, Destination destination, Destination t1) {
                     Destination chosenDestination = destinationsList.getSelectionModel().getSelectedItem();
                     note.setText(chosenDestination.toString());
+                    editButton.setVisible(true);
                 }
             });
             //destinationsList.getItems().addAll()
