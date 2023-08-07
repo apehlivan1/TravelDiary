@@ -36,6 +36,9 @@ public class HomeController {
     private URL location;
 
     @FXML
+    private Label note;
+
+    @FXML
     private Button exploreBtn;
 
     @FXML
