@@ -10,6 +10,8 @@ package ba.unsa.etf.rpr.controllers;
         import ba.unsa.etf.rpr.domain.Destination;
         import ba.unsa.etf.rpr.domain.Trip;
         import ba.unsa.etf.rpr.exceptions.AppException;
+        import javafx.beans.value.ChangeListener;
+        import javafx.beans.value.ObservableValue;
         import javafx.event.ActionEvent;
         import javafx.fxml.FXML;
         import javafx.fxml.FXMLLoader;
@@ -91,7 +93,13 @@ public class HomeController {
                 destinationsList.getItems().add(destination);
             }
 
-            //destinationsList.getSelectionModel().selectedItemProperty().addListener();
+            destinationsList.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Destination>() {
+                @Override
+                public void changed(ObservableValue<? extends Destination> observableValue, Destination destination, Destination t1) {
+                    Destination chosenDestination = destinationsList.getSelectionModel().getSelectedItem();
+                    note.setText(chosenDestination.toString());
+                }
+            });
             //destinationsList.getItems().addAll()
         } catch (AppException e) {
             new Alert(Alert.AlertType.NONE, e.getMessage(), ButtonType.OK).show();

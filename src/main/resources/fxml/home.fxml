@@ -14,8 +14,8 @@
 
 <GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ba.unsa.etf.rpr.controllers.HomeController">
   <columnConstraints>
-    <ColumnConstraints hgrow="SOMETIMES" maxWidth="484.79998779296875" minWidth="10.0" prefWidth="395.00001220703126" />
-    <ColumnConstraints hgrow="SOMETIMES" maxWidth="300.0" minWidth="10.0" prefWidth="204.59998779296876" />
+    <ColumnConstraints hgrow="SOMETIMES" maxWidth="484.79998779296875" minWidth="10.0" prefWidth="457.6000244140625" />
+    <ColumnConstraints hgrow="SOMETIMES" maxWidth="300.0" minWidth="10.0" prefWidth="142.3999755859375" />
   </columnConstraints>
   <rowConstraints>
     <RowConstraints minHeight="10.0" prefHeight="20.0" vgrow="SOMETIMES" />
@@ -33,7 +33,10 @@
             <Insets left="20.0" right="100.0" />
          </GridPane.margin>
       </TextField>
-      <Button fx:id="searchBtn" alignment="CENTER" mnemonicParsing="false" onAction="#searchClicked" prefHeight="26.0" prefWidth="94.0" text="Search" GridPane.halignment="RIGHT" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
+      <Button fx:id="searchBtn" alignment="CENTER" mnemonicParsing="false" onAction="#searchClicked" text="Search" GridPane.halignment="RIGHT" GridPane.rowIndex="1" GridPane.valignment="CENTER">
+         <GridPane.margin>
+            <Insets right="40.0" />
+         </GridPane.margin></Button>
       <Label contentDisplay="CENTER" text="Your saved trips:" GridPane.halignment="CENTER" GridPane.valignment="BOTTOM">
          <font>
             <Font name="Brush Script MT Italic" size="26.0" />
@@ -44,22 +47,22 @@
             <Image url="@../images/logoSymbol.png" />
          </image>
       </ImageView>
-      <Button fx:id="exploreBtn" mnemonicParsing="false" onAction="#exploreBtnClicked" text="Explore new destinations" GridPane.columnSpan="2" GridPane.halignment="RIGHT" GridPane.rowIndex="2" GridPane.valignment="BOTTOM">
+      <Button fx:id="exploreBtn" mnemonicParsing="false" onAction="#exploreBtnClicked" text="Explore new destinations" GridPane.columnSpan="2" GridPane.halignment="RIGHT" GridPane.rowIndex="1" GridPane.valignment="CENTER">
          <GridPane.margin>
-            <Insets bottom="15.0" right="10.0" />
+            <Insets right="10.0" />
          </GridPane.margin>
       </Button>
-      <Label fx:id="note" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="TOP">
+      <Label fx:id="note" text="Select one of your trips to view short note." GridPane.halignment="LEFT" GridPane.rowIndex="2" GridPane.valignment="BOTTOM">
          <GridPane.margin>
-            <Insets bottom="50.0" />
+            <Insets bottom="17.0" />
          </GridPane.margin>
          <padding>
-            <Insets left="20.0" right="10.0" top="10.0" />
+            <Insets left="25.0" right="10.0" />
          </padding>
       </Label>
-      <Button fx:id="editButton" mnemonicParsing="false" onAction="#editButtonClicked" text="Edit" GridPane.columnIndex="1" GridPane.rowIndex="2" GridPane.valignment="BOTTOM">
+      <Button fx:id="editButton" mnemonicParsing="false" onAction="#editButtonClicked" text="Edit" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="2" GridPane.valignment="BOTTOM">
          <GridPane.margin>
-            <Insets bottom="15.0" />
+            <Insets bottom="15.0" right="10.0" />
          </GridPane.margin>
       </Button>
    </children>
