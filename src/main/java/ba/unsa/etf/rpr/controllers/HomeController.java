@@ -19,7 +19,6 @@ package ba.unsa.etf.rpr.controllers;
         import javafx.scene.Scene;
         import javafx.scene.control.*;
         import javafx.stage.Stage;
-        import javafx.stage.StageStyle;
 
         import static javafx.scene.layout.Region.USE_COMPUTED_SIZE;
 
@@ -30,6 +29,7 @@ public class HomeController {
 
     private List<Trip> tripsList;
 
+    private Destination chosenDestination;
     private DestinationManager destinationManager = new DestinationManager();
 
 
@@ -110,12 +110,12 @@ public class HomeController {
     @FXML
     void initialize() {
         try {
-            editButton.setVisible(false);
+            nothingChosenState();
             refreshList();
             destinationsList.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Destination>() {
                 @Override
                 public void changed(ObservableValue<? extends Destination> observableValue, Destination destination, Destination t1) {
-                    Destination chosenDestination = destinationsList.getSelectionModel().getSelectedItem();
+                    chosenDestination = destinationsList.getSelectionModel().getSelectedItem();
                     for (Trip trip: tripsList) {
                         if (trip.getDestinationId() == chosenDestination.getId()) {
                             chosenTrip = trip;
@@ -124,6 +124,7 @@ public class HomeController {
                     }
                     note.setText(chosenTrip.toString());
                     editButton.setVisible(true);
+                    deleteButton.setVisible(true);
                 }
             });
             //destinationsList.getItems().addAll()
@@ -139,6 +140,13 @@ public class HomeController {
             Destination destination = destinationManager.getById(destinationId);
             destinationsList.getItems().add(destination);
         }
+    }
+
+    private void nothingChosenState() {
+        editButton.setVisible(false);
+        deleteButton.setVisible(false);
+        chosenDestination = null;
+        chosenTrip = null;
     }
 
 }
