@@ -4,7 +4,9 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 import ba.unsa.etf.rpr.business.DestinationManager;
+import ba.unsa.etf.rpr.business.TripManager;
 import ba.unsa.etf.rpr.domain.Destination;
+import ba.unsa.etf.rpr.domain.Trip;
 import ba.unsa.etf.rpr.exceptions.AppException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -13,7 +15,7 @@ import javafx.scene.control.TextArea;
 
 public class EditController {
 
-    private Destination destination;
+    private Trip trip;
 
     @FXML
     private TextArea note;
@@ -24,10 +26,10 @@ public class EditController {
     @FXML
     private Button saveButton;
 
-    public EditController(int destinationId) {
-        DestinationManager manager = new DestinationManager();
+    public EditController(int tripId) {
+        TripManager manager = new TripManager();
         try {
-            destination = manager.getById(destinationId);
+            trip = manager.getById(tripId);
         } catch (AppException e) {
             throw new RuntimeException(e);
         }
@@ -45,8 +47,6 @@ public class EditController {
 
     @FXML
     void initialize() {
-        assert cancelButton != null : "fx:id=\"cancelButton\" was not injected: check your FXML file 'edit.fxml'.";
-        assert saveButton != null : "fx:id=\"saveButton\" was not injected: check your FXML file 'edit.fxml'.";
 
     }
 
