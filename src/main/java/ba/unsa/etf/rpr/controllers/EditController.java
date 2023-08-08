@@ -1,5 +1,6 @@
 package ba.unsa.etf.rpr.controllers;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -10,8 +11,14 @@ import ba.unsa.etf.rpr.domain.Trip;
 import ba.unsa.etf.rpr.exceptions.AppException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
+import javafx.stage.Stage;
+
+import static javafx.scene.layout.Region.USE_COMPUTED_SIZE;
 
 public class EditController {
 
@@ -40,8 +47,14 @@ public class EditController {
     }
 
     @FXML
-    void cancelClicked(ActionEvent event) {
+    void cancelClicked(ActionEvent event) throws IOException {
+        Stage stage = (Stage) cancelButton.getScene().getWindow();
+        stage.close();
 
+        stage = new Stage();
+        Parent root = FXMLLoader.load(getClass().getResource("/fxml/home.fxml"));
+        stage.setScene(new Scene(root, USE_COMPUTED_SIZE, USE_COMPUTED_SIZE));
+        stage.show();
     }
 
     @FXML
