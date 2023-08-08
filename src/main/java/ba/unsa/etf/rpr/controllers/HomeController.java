@@ -25,6 +25,8 @@ package ba.unsa.etf.rpr.controllers;
 
 public class HomeController {
 
+    private Destination chosenDestination;
+
     @FXML
     private int userId;
 
@@ -80,15 +82,19 @@ public class HomeController {
         Stage stage = (Stage) editButton.getScene().getWindow();
         stage.close();
 
+        EditController editController = new EditController(chosenDestination.getId());
+
         stage = new Stage();
-        Parent root = FXMLLoader.load(getClass().getResource("/fxml/edit.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/edit.fxml"));
+        fxmlLoader.setController(editController);
+        Parent root = fxmlLoader.load();
         stage.setScene(new Scene(root, USE_COMPUTED_SIZE, USE_COMPUTED_SIZE));
         stage.show();
     }
 
     @FXML
     void initialize() {
-        try{
+        try {
             editButton.setVisible(false);
             TripManager tripManager = new TripManager();
             List<Trip> tripsList = tripManager.searchByUser(userId);
@@ -103,7 +109,7 @@ public class HomeController {
             destinationsList.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Destination>() {
                 @Override
                 public void changed(ObservableValue<? extends Destination> observableValue, Destination destination, Destination t1) {
-                    Destination chosenDestination = destinationsList.getSelectionModel().getSelectedItem();
+                    chosenDestination = destinationsList.getSelectionModel().getSelectedItem();
                     note.setText(chosenDestination.toString());
                     editButton.setVisible(true);
                 }
