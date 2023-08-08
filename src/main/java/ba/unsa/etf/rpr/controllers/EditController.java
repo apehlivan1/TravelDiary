@@ -1,12 +1,8 @@
 package ba.unsa.etf.rpr.controllers;
 
 import java.io.IOException;
-import java.net.URL;
-import java.util.ResourceBundle;
 
-import ba.unsa.etf.rpr.business.DestinationManager;
 import ba.unsa.etf.rpr.business.TripManager;
-import ba.unsa.etf.rpr.domain.Destination;
 import ba.unsa.etf.rpr.domain.Trip;
 import ba.unsa.etf.rpr.exceptions.AppException;
 import javafx.event.ActionEvent;
@@ -48,25 +44,29 @@ public class EditController {
 
     @FXML
     void cancelClicked(ActionEvent event) throws IOException {
-        Stage stage = (Stage) cancelButton.getScene().getWindow();
-        stage.close();
-
-        stage = new Stage();
-        Parent root = FXMLLoader.load(getClass().getResource("/fxml/home.fxml"));
-        stage.setScene(new Scene(root, USE_COMPUTED_SIZE, USE_COMPUTED_SIZE));
-        stage.show();
+        ((Stage) cancelButton.getScene().getWindow()).close();
+        openHome();
     }
 
     @FXML
-    void saveClicked(ActionEvent event) throws AppException {
+    void saveClicked(ActionEvent event) throws AppException, IOException {
         String updatedNote = note.getText();
         trip.setNote(updatedNote);
         manager.update(trip);
+        ((Stage) saveButton.getScene().getWindow()).close();
+        openHome();
     }
 
     @FXML
     void initialize() {
         note.setText(originalNote);
+    }
+
+    private void openHome() throws IOException {
+        Stage stage = new Stage();
+        Parent root = FXMLLoader.load(getClass().getResource("/fxml/home.fxml"));
+        stage.setScene(new Scene(root, USE_COMPUTED_SIZE, USE_COMPUTED_SIZE));
+        stage.show();
     }
 
 }
