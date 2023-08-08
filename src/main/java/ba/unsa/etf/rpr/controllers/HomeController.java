@@ -69,7 +69,13 @@ public class HomeController {
 
     @FXML
     void deleteClicked(ActionEvent event) {
-
+        try {
+            tripManager.delete(chosenTrip.getId());
+            note.setText(chosenDestination.getName() + " deleted.");
+            nothingChosenState();
+        } catch (AppException e) {
+            note.setText("The removal of the selected trip was unsuccessful.");
+        }
     }
 
     @FXML
