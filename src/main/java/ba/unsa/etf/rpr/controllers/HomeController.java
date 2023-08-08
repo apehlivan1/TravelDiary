@@ -1,49 +1,37 @@
 package ba.unsa.etf.rpr.controllers;
 
-        import java.io.IOException;
-        import java.net.URL;
-        import java.util.List;
-        import java.util.ResourceBundle;
+import ba.unsa.etf.rpr.business.DestinationManager;
+import ba.unsa.etf.rpr.business.TripManager;
+import ba.unsa.etf.rpr.domain.Destination;
+import ba.unsa.etf.rpr.domain.Trip;
+import ba.unsa.etf.rpr.exceptions.AppException;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.*;
+import javafx.stage.Stage;
 
-        import ba.unsa.etf.rpr.business.DestinationManager;
-        import ba.unsa.etf.rpr.business.TripManager;
-        import ba.unsa.etf.rpr.domain.Destination;
-        import ba.unsa.etf.rpr.domain.Trip;
-        import ba.unsa.etf.rpr.exceptions.AppException;
-        import javafx.beans.value.ChangeListener;
-        import javafx.beans.value.ObservableValue;
-        import javafx.event.ActionEvent;
-        import javafx.fxml.FXML;
-        import javafx.fxml.FXMLLoader;
-        import javafx.scene.Parent;
-        import javafx.scene.Scene;
-        import javafx.scene.control.*;
-        import javafx.stage.Stage;
+import java.io.IOException;
+import java.util.List;
 
-        import static javafx.scene.layout.Region.USE_COMPUTED_SIZE;
+import static javafx.scene.layout.Region.USE_COMPUTED_SIZE;
 
 public class HomeController {
 
     private Trip chosenTrip;
-    private TripManager tripManager = new TripManager();
-
     private List<Trip> tripsList;
-
+    private TripManager tripManager = new TripManager();
     private Destination chosenDestination;
     private DestinationManager destinationManager = new DestinationManager();
-
-
     @FXML
     private int userId;
 
     @FXML
     private ListView<Destination> destinationsList;
-
-    @FXML
-    private ResourceBundle resources;
-
-    @FXML
-    private URL location;
 
     @FXML
     private Label note;
@@ -133,7 +121,6 @@ public class HomeController {
                     deleteButton.setVisible(true);
                 }
             });
-            //destinationsList.getItems().addAll()
         } catch (AppException e) {
             new Alert(Alert.AlertType.NONE, e.getMessage(), ButtonType.OK).show();
         }
