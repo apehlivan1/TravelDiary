@@ -5,8 +5,6 @@ import ba.unsa.etf.rpr.business.TripManager;
 import ba.unsa.etf.rpr.domain.Destination;
 import ba.unsa.etf.rpr.domain.Trip;
 import ba.unsa.etf.rpr.exceptions.AppException;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -70,17 +68,11 @@ public class HomeController {
     void exploreBtnClicked(ActionEvent event) throws IOException {
         Stage stage = (Stage) exploreBtn.getScene().getWindow();
         stage.close();
-
-        stage = new Stage();
-        Parent root = FXMLLoader.load(getClass().getResource("/fxml/explore page.fxml"));
-        stage.setScene(new Scene(root, USE_COMPUTED_SIZE, USE_COMPUTED_SIZE));
-        stage.show();
-
+        newStage("/fxml/explore page.fxml", null);
     }
 
     @FXML
     void searchClicked(ActionEvent event) throws AppException {
-        DestinationManager destinationManager = new DestinationManager();
         List<Destination> destinations = destinationManager.search(searchTextField.getText());
         destinationsList.getItems().addAll(destinations);
     }
@@ -89,15 +81,7 @@ public class HomeController {
     void editButtonClicked(ActionEvent event) throws IOException {
         Stage stage = (Stage) editButton.getScene().getWindow();
         stage.close();
-
-        EditController editController = new EditController(chosenTrip.getId());
-
-        stage = new Stage();
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/edit.fxml"));
-        fxmlLoader.setController(editController);
-        Parent root = fxmlLoader.load();
-        stage.setScene(new Scene(root, USE_COMPUTED_SIZE, USE_COMPUTED_SIZE));
-        stage.show();
+        newStage("/fxml/edit.fxml", new EditController(chosenTrip.getId()));
     }
 
 
@@ -106,20 +90,17 @@ public class HomeController {
         try {
             nothingChosenState();
             refreshList();
-            destinationsList.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Destination>() {
-                @Override
-                public void changed(ObservableValue<? extends Destination> observableValue, Destination destination, Destination t1) {
-                    chosenDestination = destinationsList.getSelectionModel().getSelectedItem();
-                    for (Trip trip: tripsList) {
-                        if (trip.getDestinationId() == chosenDestination.getId()) {
-                            chosenTrip = trip;
-                            break;
-                        }
+            destinationsList.getSelectionModel().selectedItemProperty().addListener((observableValue, destination, t1) -> {
+                chosenDestination = destinationsList.getSelectionModel().getSelectedItem();
+                for (Trip trip: tripsList) {
+                    if (trip.getDestinationId() == chosenDestination.getId()) {
+                        chosenTrip = trip;
+                        break;
                     }
-                    note.setText(chosenTrip.toString());
-                    editButton.setVisible(true);
-                    deleteButton.setVisible(true);
                 }
+                note.setText(chosenTrip.toString());
+                editButton.setVisible(true);
+                deleteButton.setVisible(true);
             });
         } catch (AppException e) {
             new Alert(Alert.AlertType.NONE, e.getMessage(), ButtonType.OK).show();
@@ -142,5 +123,12 @@ public class HomeController {
         chosenTrip = null;
     }
 
+    private void newStage(String resource, Object controller) throws IOException {
+        Stage stage = new Stage();
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(resource));
+        if (controller != null) fxmlLoader.setController(controller);
+        Parent root = fxmlLoader.load();
+        stage.setScene(new Scene(root, USE_COMPUTED_SIZE, USE_COMPUTED_SIZE));
+        stage.show();
+    }
 }
-
