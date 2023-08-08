@@ -26,6 +26,12 @@ package ba.unsa.etf.rpr.controllers;
 public class HomeController {
 
     private Trip chosenTrip;
+    private TripManager tripManager = new TripManager();
+
+    private List<Trip> tripsList;
+
+    private DestinationManager destinationManager = new DestinationManager();
+
 
     @FXML
     private int userId;
@@ -43,6 +49,9 @@ public class HomeController {
     private Label note;
 
     @FXML
+    private Button deleteButton;
+
+    @FXML
     private Button editButton;
 
     @FXML
@@ -56,6 +65,11 @@ public class HomeController {
 
     public HomeController(int userId) {
         this.userId = userId;
+    }
+
+    @FXML
+    void deleteClicked(ActionEvent event) {
+
     }
 
     @FXML
@@ -92,20 +106,12 @@ public class HomeController {
         stage.show();
     }
 
+
     @FXML
     void initialize() {
         try {
             editButton.setVisible(false);
-            TripManager tripManager = new TripManager();
-            List<Trip> tripsList = tripManager.searchByUser(userId);
-
-            DestinationManager destinationManager = new DestinationManager();
-            for (Trip trip: tripsList) {
-                int destinationId = trip.getDestinationId();
-                Destination destination = destinationManager.getById(destinationId);
-                destinationsList.getItems().add(destination);
-            }
-
+            refreshList();
             destinationsList.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Destination>() {
                 @Override
                 public void changed(ObservableValue<? extends Destination> observableValue, Destination destination, Destination t1) {
@@ -123,6 +129,15 @@ public class HomeController {
             //destinationsList.getItems().addAll()
         } catch (AppException e) {
             new Alert(Alert.AlertType.NONE, e.getMessage(), ButtonType.OK).show();
+        }
+    }
+
+    private void refreshList() throws AppException {
+        tripsList = tripManager.searchByUser(userId);
+        for (Trip trip: tripsList) {
+            int destinationId = trip.getDestinationId();
+            Destination destination = destinationManager.getById(destinationId);
+            destinationsList.getItems().add(destination);
         }
     }
 
