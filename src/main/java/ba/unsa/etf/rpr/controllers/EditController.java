@@ -17,6 +17,10 @@ public class EditController {
 
     private Trip trip;
 
+    private TripManager manager = new TripManager();
+
+    private String originalNote;
+
     @FXML
     private TextArea note;
 
@@ -27,9 +31,9 @@ public class EditController {
     private Button saveButton;
 
     public EditController(int tripId) {
-        TripManager manager = new TripManager();
         try {
             trip = manager.getById(tripId);
+            originalNote = trip.getNote();
         } catch (AppException e) {
             throw new RuntimeException(e);
         }
@@ -41,13 +45,15 @@ public class EditController {
     }
 
     @FXML
-    void saveClicked(ActionEvent event) {
-
+    void saveClicked(ActionEvent event) throws AppException {
+        String updatedNote = note.getText();
+        trip.setNote(updatedNote);
+        manager.update(trip);
     }
 
     @FXML
     void initialize() {
-
+        note.setText(originalNote);
     }
 
 }
