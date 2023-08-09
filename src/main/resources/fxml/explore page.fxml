@@ -64,7 +64,7 @@
             <Image url="@../images/logoSymbol.png" />
          </image>
       </ImageView>
-      <Button mnemonicParsing="false" text="Note your new trip" GridPane.columnIndex="3" GridPane.halignment="RIGHT" GridPane.rowIndex="2" GridPane.valignment="BOTTOM">
+      <Button fx:id="addTripBtn" mnemonicParsing="false" onAction="#addTripClicked" text="Note your new trip" GridPane.columnIndex="3" GridPane.halignment="RIGHT" GridPane.rowIndex="2" GridPane.valignment="BOTTOM">
          <GridPane.margin>
             <Insets bottom="20.0" />
          </GridPane.margin>

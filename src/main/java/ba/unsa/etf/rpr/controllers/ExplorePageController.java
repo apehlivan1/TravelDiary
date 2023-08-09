@@ -30,6 +30,9 @@ public class ExplorePageController {
     private Button addDestinationBtn;
 
     @FXML
+    private Button addTripBtn;
+
+    @FXML
     private ListView<Category> categoriesList;
 
     @FXML
@@ -58,8 +61,20 @@ public class ExplorePageController {
     }
 
     @FXML
+    void addTripClicked(ActionEvent event) throws IOException {
+        Stage stage = (Stage) addTripBtn.getScene().getWindow();
+        stage.close();
+
+        stage = new Stage();
+        Parent root = FXMLLoader.load(getClass().getResource("/fxml/add trip.fxml"));
+        stage.setScene(new Scene(root, USE_COMPUTED_SIZE, USE_COMPUTED_SIZE));
+        stage.show();
+    }
+
+    @FXML
     void initialize() {
         try {
+            addTripBtn.setVisible(false);
             refreshCategories();
             Category category = categoriesList.getSelectionModel().getSelectedItem();
             List<Destination> resultList = destinationManager.searchByCategory(category.getId());
