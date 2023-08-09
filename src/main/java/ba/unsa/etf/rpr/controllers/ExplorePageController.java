@@ -43,32 +43,21 @@ public class ExplorePageController {
 
     @FXML
     void addCategoryClicked(ActionEvent event) throws IOException {
-        Stage stage = new Stage();
-        Parent root = FXMLLoader.load(getClass().getResource("/fxml/add category.fxml"));
-        stage.setScene(new Scene(root, USE_COMPUTED_SIZE, USE_COMPUTED_SIZE));
-        stage.show();
+        newStage("/fxml/add category.fxml",null);
     }
 
     @FXML
     void addDestinationClicked(ActionEvent event) throws IOException {
         Stage stage = (Stage) addDestinationBtn.getScene().getWindow();
         stage.close();
-
-        stage = new Stage();
-        Parent root = FXMLLoader.load(getClass().getResource("/fxml/add destination.fxml"));
-        stage.setScene(new Scene(root, USE_COMPUTED_SIZE, USE_COMPUTED_SIZE));
-        stage.show();
+        newStage("/fxml/add destination.fxml", null);
     }
 
     @FXML
     void addTripClicked(ActionEvent event) throws IOException {
         Stage stage = (Stage) addTripBtn.getScene().getWindow();
         stage.close();
-
-        stage = new Stage();
-        Parent root = FXMLLoader.load(getClass().getResource("/fxml/add trip.fxml"));
-        stage.setScene(new Scene(root, USE_COMPUTED_SIZE, USE_COMPUTED_SIZE));
-        stage.show();
+        newStage("/fxml/add trip.fxml", null);
     }
 
     @FXML
@@ -86,6 +75,16 @@ public class ExplorePageController {
 
     private void refreshCategories() throws AppException {
         categoriesList.setItems(FXCollections.observableList(categoryManager.getAll()));
+    }
+
+    private void newStage(String resource, Object controller) throws IOException {
+        Stage stage = new Stage();
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(resource));
+        if (controller != null)
+            fxmlLoader.setController(controller);
+        Parent root = fxmlLoader.load();
+        stage.setScene(new Scene(root, USE_COMPUTED_SIZE, USE_COMPUTED_SIZE));
+        stage.show();
     }
 
 }
