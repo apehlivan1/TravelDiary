@@ -12,15 +12,15 @@ public class Destination implements Idable {
     private String location;
     private String description;
     private int categoryId; //private Category category;
-    private int rating;
+    private double averageRating;
 
-    public Destination(int id, String name, String location, String description, int categoryId, int rating) {
+    public Destination(int id, String name, String location, String description, int categoryId, double averageRating) {
         this.id = id;
         this.name = name;
         this.location = location;
         this.description = description;
         this.categoryId = categoryId;
-        this.rating = rating;
+        this.averageRating = averageRating;
     }
 
     @Override
@@ -66,12 +66,12 @@ public class Destination implements Idable {
         this.categoryId = categoryId;
     }
 
-    public int getRating() {
-        return rating;
+    public double getAverageRating() {
+        return averageRating;
     }
 
-    public void setRating(int rating) {
-        this.rating = rating;
+    public void setAverageRating(double averageRating) {
+        this.averageRating = averageRating;
     }
 
     @Override
