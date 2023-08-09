@@ -37,7 +37,7 @@ public class DestinationDaoImpl extends AbstractDao<Destination> implements Dest
                     rs.getString("location"),
                     rs.getString("description"),
                     rs.getInt("categoryId"), //try using DaoFactory.categoryDao() method to get by id
-                    rs.getInt("rating")
+                    rs.getInt("averageRating")
             );
             return destination;
         } catch (SQLException e) {
@@ -53,7 +53,7 @@ public class DestinationDaoImpl extends AbstractDao<Destination> implements Dest
         row.put("location", object.getLocation());
         row.put("description", object.getDescription());
         row.put("categoryId", object.getCategoryId());
-        row.put("rating", object.getAverageRating());
+        row.put("averageRating", object.getAverageRating());
         return row;
     }
 

@@ -58,4 +58,9 @@ public class TripDaoImpl extends AbstractDao<Trip> implements TripDao {
     public List<Trip> searchByUser(int userId) throws AppException {
         return executeQuery("SELECT * FROM trips WHERE userId = ?", new Object[]{userId});
     }
+
+    @Override
+    public List<Double> getAllRatings(int destinationId) throws AppException {
+        return null;
+    }
 }
