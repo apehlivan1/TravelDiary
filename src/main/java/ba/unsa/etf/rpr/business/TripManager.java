@@ -35,4 +35,8 @@ public class TripManager {
         return DaoFactory.getTripDao().searchByUser(userId);
     }
 
+    public List<Double> getAllRatings(int destinationId) throws AppException {
+        return DaoFactory.getTripDao().getAllRatings(destinationId);
+    }
+
 }
