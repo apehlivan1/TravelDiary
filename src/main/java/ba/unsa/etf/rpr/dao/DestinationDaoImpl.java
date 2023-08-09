@@ -53,7 +53,7 @@ public class DestinationDaoImpl extends AbstractDao<Destination> implements Dest
         row.put("location", object.getLocation());
         row.put("description", object.getDescription());
         row.put("categoryId", object.getCategoryId());
-        row.put("rating", object.getRating());
+        row.put("rating", object.getAverageRating());
         return row;
     }
 
