@@ -23,6 +23,8 @@ package ba.unsa.etf.rpr.controllers;
 
 public class ExplorePageController {
 
+    private int userId;
+
     @FXML
     private Button addCategoryBtn;
 
@@ -40,6 +42,10 @@ public class ExplorePageController {
 
     private CategoryManager categoryManager = new CategoryManager();
     private DestinationManager destinationManager = new DestinationManager();
+
+    public ExplorePageController(int userId) {
+        this.userId = userId;
+    }
 
     @FXML
     void addCategoryClicked(ActionEvent event) throws IOException {

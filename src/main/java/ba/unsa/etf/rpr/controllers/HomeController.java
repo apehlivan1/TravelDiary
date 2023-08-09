@@ -68,7 +68,7 @@ public class HomeController {
     void exploreBtnClicked(ActionEvent event) throws IOException {
         Stage stage = (Stage) exploreBtn.getScene().getWindow();
         stage.close();
-        newStage("/fxml/explore page.fxml", null);
+        newStage("/fxml/explore page.fxml", new ExplorePageController(userId));
     }
 
     @FXML
