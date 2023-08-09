@@ -52,17 +52,11 @@ public class AddDestinationController {
 
     @FXML
     void newCategoryClicked(ActionEvent event) throws IOException {
-        Stage stage = (Stage) newCategoryBtn.getScene().getWindow();
-        stage.close();
-
-        stage = new Stage();
-        Parent root = FXMLLoader.load(getClass().getResource("/fxml/add category.fxml"));
-        stage.setScene(new Scene(root, USE_COMPUTED_SIZE, USE_COMPUTED_SIZE));
-        stage.show();
+        newStage("/fxml/add category.fxml");
     }
 
     @FXML
-    void saveClicked(ActionEvent event) throws AppException {
+    void saveClicked(ActionEvent event) throws AppException, IOException {
         DestinationManager manager = new DestinationManager();
         Destination destination = new Destination(
                 0, nameTextField.getText(), locationTextField.getText(),
@@ -71,12 +65,14 @@ public class AddDestinationController {
         destination = manager.add(destination);
         Stage stage = (Stage) saveButton.getScene().getWindow();
         stage.close();
+        newStage("/fxml/explore page.fxml");
     }
 
     @FXML
-    void cancelClicked(ActionEvent event) {
+    void cancelClicked(ActionEvent event) throws IOException {
         Stage stage = (Stage) cancelButton.getScene().getWindow();
         stage.close();
+        newStage("/fxml/explore page.fxml");
     }
 
     @FXML
@@ -86,6 +82,13 @@ public class AddDestinationController {
         } catch (AppException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    private void newStage(String resource) throws IOException {
+        Stage stage = new Stage();
+        Parent root = FXMLLoader.load(getClass().getResource(resource));
+        stage.setScene(new Scene(root, USE_COMPUTED_SIZE, USE_COMPUTED_SIZE));
+        stage.show();
     }
 
 }
