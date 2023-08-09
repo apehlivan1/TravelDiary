@@ -24,6 +24,7 @@ package ba.unsa.etf.rpr.controllers;
 public class ExplorePageController {
 
     private int userId;
+    private Destination chosenDestination;
 
     @FXML
     private Button addCategoryBtn;
@@ -63,7 +64,7 @@ public class ExplorePageController {
     void addTripClicked(ActionEvent event) throws IOException {
         Stage stage = (Stage) addTripBtn.getScene().getWindow();
         stage.close();
-        newStage("/fxml/add trip.fxml", null);
+        newStage("/fxml/add trip.fxml", new AddTripController(userId, chosenDestination));
     }
 
     @FXML
@@ -73,7 +74,13 @@ public class ExplorePageController {
             refreshCategories();
             Category category = categoriesList.getSelectionModel().getSelectedItem();
             List<Destination> resultList = destinationManager.searchByCategory(category.getId());
-;           destinationsList.setItems(FXCollections.observableList(resultList));
+            destinationsList.setItems(FXCollections.observableList(resultList));
+
+            destinationsList.getSelectionModel().selectedItemProperty().addListener((observableValue, destination, t1) -> {
+                chosenDestination = destinationsList.getSelectionModel().getSelectedItem();
+                addTripBtn.setVisible(true);
+            });
+
         } catch (AppException e) {
             throw new RuntimeException(e);
         }
