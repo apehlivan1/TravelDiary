@@ -11,6 +11,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextArea;
 import javafx.stage.Stage;
 
@@ -23,6 +24,11 @@ public class EditController {
     private TripManager manager = new TripManager();
 
     private String originalNote;
+
+    private int originalRating;
+
+    @FXML
+    private ChoiceBox<Integer> ratingChoiceBox;
 
     @FXML
     private TextArea note;
@@ -37,6 +43,7 @@ public class EditController {
         try {
             trip = manager.getById(tripId);
             originalNote = trip.getNote();
+            originalRating = trip.getRating();
         } catch (AppException e) {
             throw new RuntimeException(e);
         }
@@ -52,6 +59,7 @@ public class EditController {
     void saveClicked(ActionEvent event) throws AppException, IOException {
         String updatedNote = note.getText();
         trip.setNote(updatedNote);
+        trip.setRating(ratingChoiceBox.getValue());
         manager.update(trip);
         ((Stage) saveButton.getScene().getWindow()).close();
         openHome();
@@ -60,6 +68,8 @@ public class EditController {
     @FXML
     void initialize() {
         note.setText(originalNote);
+        ratingChoiceBox.setValue(originalRating);
+        ratingChoiceBox.getItems().addAll(1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
     }
 
     private void openHome() throws IOException {
