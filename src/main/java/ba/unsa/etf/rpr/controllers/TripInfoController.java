@@ -1,8 +1,11 @@
 package ba.unsa.etf.rpr.controllers;
 
 import java.io.IOException;
+import java.util.List;
 
+import ba.unsa.etf.rpr.business.DestinationManager;
 import ba.unsa.etf.rpr.business.TripManager;
+import ba.unsa.etf.rpr.domain.Destination;
 import ba.unsa.etf.rpr.domain.Trip;
 import ba.unsa.etf.rpr.exceptions.AppException;
 import javafx.event.ActionEvent;
@@ -22,7 +25,11 @@ public class TripInfoController {
 
     private Trip trip;
 
-    private TripManager manager = new TripManager();
+    private Destination destination;
+
+    private TripManager tripManager = new TripManager();
+
+    private DestinationManager destinationManagermanager = new DestinationManager();
 
     private String originalNote;
 
@@ -40,14 +47,11 @@ public class TripInfoController {
     @FXML
     private Button saveButton;
 
-    public TripInfoController(int tripId) {
-        try {
-            trip = manager.getById(tripId);
-            originalNote = trip.getNote();
-            originalRating = trip.getRating();
-        } catch (AppException e) {
-            throw new RuntimeException(e);
-        }
+    public TripInfoController(Trip trip, Destination destination) {
+        this.trip = trip;
+        this.destination = destination;
+        originalNote = trip.getNote();
+        originalRating = trip.getRating();
     }
 
     public TripInfoController(int userId, int destinationId) {
@@ -69,8 +73,14 @@ public class TripInfoController {
 
         // if userId = -1 --> update;
         // else           --> add new Trip
-        if (userId == -1) manager.update(trip);
-        else manager.add(trip);
+        if (userId == -1) {
+            tripManager.update(trip);
+            //update destination.averageRating
+            double average = averageRating(tripManager.getAllRatings(destination.getId()));
+            destination.setAverageRating(average);
+            destinationManagermanager.update(destination);
+        }
+        else tripManager.add(trip);
 
         ((Stage) saveButton.getScene().getWindow()).close();
         openHome();
@@ -78,7 +88,7 @@ public class TripInfoController {
 
     @FXML
     void initialize() {
-        // if userId = -1 --> update; else --> add new Trip
+        // if userId = -1 --> update;
         if (userId == -1) {
             note.setText(originalNote);
             ratingChoiceBox.setValue(originalRating);
@@ -91,6 +101,12 @@ public class TripInfoController {
         Parent root = FXMLLoader.load(getClass().getResource("/fxml/home.fxml"));
         stage.setScene(new Scene(root, USE_COMPUTED_SIZE, USE_COMPUTED_SIZE));
         stage.show();
+    }
+
+    private double averageRating(List<Double> ratings) {
+        double sum = 0;
+        for (Double rating: ratings) sum += rating;
+        return sum/ratings.size();
     }
 
 }

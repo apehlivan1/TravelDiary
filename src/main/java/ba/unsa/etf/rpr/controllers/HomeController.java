@@ -81,7 +81,7 @@ public class HomeController {
     void editButtonClicked(ActionEvent event) throws IOException {
         Stage stage = (Stage) editButton.getScene().getWindow();
         stage.close();
-        newStage("/fxml/trip info.fxml", new TripInfoController(chosenTrip.getId()));
+        newStage("/fxml/trip info.fxml", new TripInfoController(chosenTrip, chosenDestination));
     }
 
 
