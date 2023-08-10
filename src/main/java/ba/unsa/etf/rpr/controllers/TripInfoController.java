@@ -3,6 +3,7 @@ package ba.unsa.etf.rpr.controllers;
 import java.io.IOException;
 
 import ba.unsa.etf.rpr.business.TripManager;
+import ba.unsa.etf.rpr.domain.Destination;
 import ba.unsa.etf.rpr.domain.Trip;
 import ba.unsa.etf.rpr.exceptions.AppException;
 import javafx.event.ActionEvent;
@@ -17,7 +18,10 @@ import javafx.stage.Stage;
 
 import static javafx.scene.layout.Region.USE_COMPUTED_SIZE;
 
-public class EditController {
+public class TripInfoController {
+
+    private int userId;
+    private Destination destination;
 
     private Trip trip;
 
@@ -39,7 +43,7 @@ public class EditController {
     @FXML
     private Button saveButton;
 
-    public EditController(int tripId) {
+    public TripInfoController(int tripId) {
         try {
             trip = manager.getById(tripId);
             originalNote = trip.getNote();
@@ -47,6 +51,11 @@ public class EditController {
         } catch (AppException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    public TripInfoController(int userId, Destination destination) {
+        this.userId = userId;
+        this.destination = destination;
     }
 
     @FXML
