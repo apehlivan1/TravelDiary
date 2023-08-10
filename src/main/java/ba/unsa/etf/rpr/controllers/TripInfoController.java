@@ -3,7 +3,6 @@ package ba.unsa.etf.rpr.controllers;
 import java.io.IOException;
 
 import ba.unsa.etf.rpr.business.TripManager;
-import ba.unsa.etf.rpr.domain.Destination;
 import ba.unsa.etf.rpr.domain.Trip;
 import ba.unsa.etf.rpr.exceptions.AppException;
 import javafx.event.ActionEvent;
@@ -19,9 +18,7 @@ import javafx.stage.Stage;
 import static javafx.scene.layout.Region.USE_COMPUTED_SIZE;
 
 public class TripInfoController {
-
-    private int userId;
-    private Destination destination;
+    private int userId = -1;
 
     private Trip trip;
 
@@ -53,9 +50,9 @@ public class TripInfoController {
         }
     }
 
-    public TripInfoController(int userId, Destination destination) {
+    public TripInfoController(int userId, int destinationId) {
         this.userId = userId;
-        this.destination = destination;
+        trip = new Trip(userId, destinationId);
     }
 
     @FXML
@@ -69,15 +66,23 @@ public class TripInfoController {
         String updatedNote = note.getText();
         trip.setNote(updatedNote);
         trip.setRating(ratingChoiceBox.getValue());
-        manager.update(trip);
+
+        // if userId = -1 --> update;
+        // else           --> add new Trip
+        if (userId == -1) manager.update(trip);
+        else manager.add(trip);
+
         ((Stage) saveButton.getScene().getWindow()).close();
         openHome();
     }
 
     @FXML
     void initialize() {
-        note.setText(originalNote);
-        ratingChoiceBox.setValue(originalRating);
+        // if userId = -1 --> update; else --> add new Trip
+        if (userId == -1) {
+            note.setText(originalNote);
+            ratingChoiceBox.setValue(originalRating);
+        }
         ratingChoiceBox.getItems().addAll(1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
     }
 

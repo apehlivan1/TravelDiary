@@ -64,7 +64,7 @@ public class ExplorePageController {
     void addTripClicked(ActionEvent event) throws IOException {
         Stage stage = (Stage) addTripBtn.getScene().getWindow();
         stage.close();
-        newStage("/fxml/trip info.fxml", new TripInfoController(userId, chosenDestination));
+        newStage("/fxml/trip info.fxml", new TripInfoController(userId, chosenDestination.getId()));
     }
 
     @FXML

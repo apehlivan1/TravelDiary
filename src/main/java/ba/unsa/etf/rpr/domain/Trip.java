@@ -14,6 +14,12 @@ public class Trip implements Idable {
     private int rating;
     private String note;
 
+    public Trip(int userId, int destinationId) {
+        this.id = 0;
+        this.userId = userId;
+        this.destinationId = destinationId;
+    }
+
     public Trip(int id, int userId, int destinationId, int rating, String note) {
         this.id = id;
         this.userId = userId;
