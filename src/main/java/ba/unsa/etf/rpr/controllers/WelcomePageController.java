@@ -37,6 +37,7 @@ public class WelcomePageController {
         stage.setResizable(false);
         stage.initStyle(StageStyle.UNDECORATED);
         stage.show();
+        ((Stage) registerBtn.getScene().getWindow()).close();
     }
 
     @FXML
@@ -47,15 +48,12 @@ public class WelcomePageController {
         stage.setResizable(false);
         stage.initStyle(StageStyle.UNDECORATED);
         stage.show();
+        ((Stage) logInBtn.getScene().getWindow()).close();
     }
 
     @FXML
     void initialize() {
 
-    }
-
-    void close() {
-        ((Stage) registerBtn.getScene().getWindow()).close();
     }
 
 }

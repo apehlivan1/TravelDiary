@@ -81,9 +81,6 @@ public class RegisterController {
             stage.setScene(new Scene(root, USE_COMPUTED_SIZE, USE_COMPUTED_SIZE));
             ((Stage) registerButton.getScene().getWindow()).close();
 
-            WelcomePageController welcomePageController = new WelcomePageController();
-            welcomePageController.close();
-
             stage.show();
         }
     }
