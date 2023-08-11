@@ -2,11 +2,16 @@ package ba.unsa.etf.rpr.controllers;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+
+import ba.unsa.etf.rpr.domain.Destination;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 
 public class DetailsController {
+
+    private int userId;
+    private Destination destination;
 
     @FXML
     private ResourceBundle resources;
@@ -28,6 +33,11 @@ public class DetailsController {
 
     @FXML
     private Label ratingLabel;
+
+    public DetailsController(int userId, Destination destination) {
+        this.userId = userId;
+        this.destination = destination;
+    }
 
     @FXML
     void initialize() {

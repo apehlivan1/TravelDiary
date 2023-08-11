@@ -61,8 +61,10 @@ public class ExplorePageController {
     }
 
     @FXML
-    void viewDetailsClicked(ActionEvent event) {
-
+    void viewDetailsClicked(ActionEvent event) throws IOException {
+        Stage stage = (Stage) detailsBtn.getScene().getWindow();
+        stage.close();
+        newStage("/fxml/details.fxml", new DetailsController(userId, chosenDestination));
     }
 /*
     @FXML
