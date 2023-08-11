@@ -28,4 +28,8 @@ public class CategoryManager {
         return DaoFactory.getCategoryDao().getAll();
     }
 
+    public String getCategoryName(int id) throws AppException {
+        return DaoFactory.getCategoryDao().getCategoryName(id);
+    }
+
 }
