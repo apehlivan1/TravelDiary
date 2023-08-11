@@ -4,7 +4,9 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import ba.unsa.etf.rpr.business.CategoryManager;
 import ba.unsa.etf.rpr.domain.Destination;
+import ba.unsa.etf.rpr.exceptions.AppException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -65,12 +67,21 @@ public class DetailsController {
 
     @FXML
     void initialize() {
-        assert categoryLabel != null : "fx:id=\"categoryLabel\" was not injected: check your FXML file 'details.fxml'.";
-        assert descriptionText != null : "fx:id=\"descriptionText\" was not injected: check your FXML file 'details.fxml'.";
-        assert locationLabel != null : "fx:id=\"locationLabel\" was not injected: check your FXML file 'details.fxml'.";
-        assert nameLabel != null : "fx:id=\"nameLabel\" was not injected: check your FXML file 'details.fxml'.";
-        assert ratingLabel != null : "fx:id=\"ratingLabel\" was not injected: check your FXML file 'details.fxml'.";
+        descriptionText.setEditable(false);
+        try {
+            populateDetails();
+        } catch (AppException e) {
+            throw new RuntimeException(e);
+        }
+    }
 
+    private void populateDetails() throws AppException {
+        CategoryManager manager = new CategoryManager();
+        nameLabel.setText(destination.getName());
+        ratingLabel.setText(String.valueOf(destination.getAverageRating()));
+        locationLabel.setText(destination.getLocation());
+        descriptionText.setText(destination.getDescription());
+        categoryLabel.setText(manager.getCategoryName(destination.getCategoryId()));
     }
 
 }
