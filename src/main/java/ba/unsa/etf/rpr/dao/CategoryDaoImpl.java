@@ -46,4 +46,9 @@ public class CategoryDaoImpl extends AbstractDao<Category> implements CategoryDa
         row.put("name", object.getName());
         return row;
     }
+
+    @Override
+    public String getCategoryName(int id) throws AppException {
+        return (executeQueryUnique("SELECT name FROM categories WHERE id = ?", new Object[]{id})).getName();
+    }
 }
