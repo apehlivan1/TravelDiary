@@ -33,7 +33,7 @@ public class ExplorePageController {
     private Button addDestinationBtn;
 
     @FXML
-    private Button addTripBtn;
+    private Button detailsBtn;
 
     @FXML
     private ListView<Category> categoriesList;
@@ -61,16 +61,22 @@ public class ExplorePageController {
     }
 
     @FXML
+    void viewDetailsClicked(ActionEvent event) {
+
+    }
+/*
+    @FXML
     void addTripClicked(ActionEvent event) throws IOException {
         Stage stage = (Stage) addTripBtn.getScene().getWindow();
         stage.close();
         newStage("/fxml/trip info.fxml", new TripInfoController(userId, chosenDestination.getId()));
     }
+*/
 
     @FXML
     void initialize() {
         try {
-            addTripBtn.setVisible(false);
+            detailsBtn.setVisible(false);
             refreshCategories();
             Category category = categoriesList.getSelectionModel().getSelectedItem();
             List<Destination> resultList = destinationManager.searchByCategory(category.getId());
@@ -78,7 +84,7 @@ public class ExplorePageController {
 
             destinationsList.getSelectionModel().selectedItemProperty().addListener((observableValue, destination, t1) -> {
                 chosenDestination = destinationsList.getSelectionModel().getSelectedItem();
-                addTripBtn.setVisible(true);
+                detailsBtn.setVisible(true);
             });
 
         } catch (AppException e) {
