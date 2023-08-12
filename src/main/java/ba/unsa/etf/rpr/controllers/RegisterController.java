@@ -13,6 +13,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 import java.io.IOException;
 
@@ -54,9 +55,15 @@ public class RegisterController {
     private TextField usernameTextField;
 
     @FXML
-    void cancelClicked(ActionEvent event) {
+    void cancelClicked(ActionEvent event) throws IOException {
         Stage stage = (Stage) cancelButton.getScene().getWindow();
         stage.close();
+
+        stage = new Stage();
+        Parent root = FXMLLoader.load(getClass().getResource("/fxml/welcome page.fxml"));
+        stage.setScene(new Scene(root, USE_COMPUTED_SIZE, USE_COMPUTED_SIZE));
+        stage.initStyle(StageStyle.UNDECORATED);
+        stage.show();
     }
 
     @FXML

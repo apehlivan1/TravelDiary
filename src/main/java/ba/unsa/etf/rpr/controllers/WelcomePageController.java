@@ -35,7 +35,7 @@ public class WelcomePageController {
         Parent root = FXMLLoader.load(getClass().getResource("/fxml/register.fxml"));
         stage.setScene(new Scene(root, USE_COMPUTED_SIZE, USE_COMPUTED_SIZE));
         stage.setResizable(false);
-        stage.initStyle(StageStyle.UNDECORATED);
+        //stage.initStyle(StageStyle.UNDECORATED);
         stage.show();
         ((Stage) registerBtn.getScene().getWindow()).close();
     }
@@ -46,7 +46,7 @@ public class WelcomePageController {
         Parent root = FXMLLoader.load(getClass().getResource("/fxml/login.fxml"));
         stage.setScene(new Scene(root, USE_COMPUTED_SIZE, USE_COMPUTED_SIZE));
         stage.setResizable(false);
-        stage.initStyle(StageStyle.UNDECORATED);
+        //stage.initStyle(StageStyle.UNDECORATED);
         stage.show();
         ((Stage) logInBtn.getScene().getWindow()).close();
     }
