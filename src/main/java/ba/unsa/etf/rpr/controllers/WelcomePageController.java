@@ -31,29 +31,28 @@ public class WelcomePageController {
 
     @FXML
     void btnRegisterClicked(ActionEvent event) throws IOException {
-        Stage stage = new Stage();
-        Parent root = FXMLLoader.load(getClass().getResource("/fxml/register.fxml"));
-        stage.setScene(new Scene(root, USE_COMPUTED_SIZE, USE_COMPUTED_SIZE));
-        stage.setResizable(false);
-        //stage.initStyle(StageStyle.UNDECORATED);
-        stage.show();
+        newStage("/fxml/register.fxml");
         ((Stage) registerBtn.getScene().getWindow()).close();
     }
 
     @FXML
     void btnLogInClicked(ActionEvent event) throws IOException {
-        Stage stage = new Stage();
-        Parent root = FXMLLoader.load(getClass().getResource("/fxml/login.fxml"));
-        stage.setScene(new Scene(root, USE_COMPUTED_SIZE, USE_COMPUTED_SIZE));
-        stage.setResizable(false);
-        //stage.initStyle(StageStyle.UNDECORATED);
-        stage.show();
+        newStage("/fxml/login.fxml");
         ((Stage) logInBtn.getScene().getWindow()).close();
     }
 
     @FXML
     void initialize() {
 
+    }
+
+    private void newStage(String resource) throws IOException {
+        Stage stage = new Stage();
+        Parent root = FXMLLoader.load(getClass().getResource(resource));
+        stage.setScene(new Scene(root, USE_COMPUTED_SIZE, USE_COMPUTED_SIZE));
+        stage.setResizable(false);
+        //stage.initStyle(StageStyle.UNDECORATED);
+        stage.show();
     }
 
 }
