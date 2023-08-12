@@ -81,12 +81,12 @@
                   <Font name="Bookman Old Style Italic" size="13.0" />
                </font>
             </Label>
-            <TextField fx:id="usernameTextField" onAction="#usernameOnAction" promptText="Username" GridPane.columnIndex="2" GridPane.columnSpan="2" GridPane.rowIndex="2" GridPane.valignment="CENTER">
+            <TextField fx:id="usernameTextField" promptText="Username" GridPane.columnIndex="2" GridPane.columnSpan="2" GridPane.rowIndex="2" GridPane.valignment="CENTER">
                <font>
                   <Font name="Bookman Old Style Italic" size="11.0" />
                </font>
             </TextField>
-            <PasswordField fx:id="passwordPasswordField" onAction="#passwordOnAction" promptText="Password" GridPane.columnIndex="2" GridPane.columnSpan="2" GridPane.rowIndex="3">
+            <PasswordField fx:id="passwordPasswordField" promptText="Password" GridPane.columnIndex="2" GridPane.columnSpan="2" GridPane.rowIndex="3">
                <font>
                   <Font name="Bookman Old Style Italic" size="11.0" />
                </font>
@@ -102,16 +102,6 @@
                </font>
             </Button>
             <Label fx:id="redMessageLabel" alignment="CENTER" contentDisplay="CENTER" maxWidth="1.7976931348623157E308" prefHeight="18.0" prefWidth="89.0" textFill="RED" GridPane.columnIndex="1" GridPane.columnSpan="3" GridPane.rowIndex="1" GridPane.valignment="BOTTOM">
-               <font>
-                  <Font name="Bookman Old Style" size="12.0" />
-               </font>
-            </Label>
-            <Label fx:id="greenMessageLabel" alignment="CENTER" contentDisplay="CENTER" maxWidth="1.7976931348623157E308" prefHeight="18.0" prefWidth="89.0" textFill="#1dc707" GridPane.columnIndex="1" GridPane.columnSpan="3" GridPane.rowIndex="1" GridPane.valignment="BOTTOM">
-               <font>
-                  <Font name="Bookman Old Style" size="12.0" />
-               </font>
-            </Label>
-            <Label fx:id="blackMessageLabel" alignment="CENTER" contentDisplay="CENTER" maxWidth="1.7976931348623157E308" prefHeight="18.0" prefWidth="89.0" GridPane.columnIndex="1" GridPane.columnSpan="3" GridPane.rowIndex="1" GridPane.valignment="BOTTOM">
                <font>
                   <Font name="Bookman Old Style" size="12.0" />
                </font>

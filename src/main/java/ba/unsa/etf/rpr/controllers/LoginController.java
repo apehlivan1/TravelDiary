@@ -36,18 +36,11 @@ public class LoginController {
     @FXML
     private Label redMessageLabel;
 
-    @FXML
-    private Label greenMessageLabel;
-
-    @FXML
-    private Label blackMessageLabel;
-
-    UserManager userManager = new UserManager();
+    private UserManager userManager = new UserManager();
 
     @FXML
     void cancelClicked(ActionEvent event) throws IOException {
-        Stage stage = (Stage) cancelButton.getScene().getWindow();
-        stage.close();
+        ((Stage) cancelButton.getScene().getWindow()).close();
         newStage("/fxml/welcome page.fxml", null);
     }
 
@@ -56,32 +49,17 @@ public class LoginController {
         if (usernameTextField.getText().isBlank()|| passwordPasswordField.getText().isBlank()) {
             redMessageLabel.setText("Please enter username and password!");
         }
-        String labelText = userManager.validateLoginInfo(usernameTextField.getText(), passwordPasswordField.getText());
-        if (!labelText.equals("Login successful"))
-            redMessageLabel.setText(labelText);
         else {
-            //try using stage.setUserData(user);
-            User user = userManager.searchByUsername(usernameTextField.getText());
-            HomeController homeController = new HomeController(user.getId());
-            newStage("/fxml/home.fxml", homeController);
-
-            ((Stage) loginButton.getScene().getWindow()).close();
+            String labelText = userManager.validateLoginInfo(usernameTextField.getText(), passwordPasswordField.getText());
+            if (!labelText.equals("Login successful"))
+                redMessageLabel.setText(labelText);
+            else {
+                User user = userManager.searchByUsername(usernameTextField.getText());
+                HomeController homeController = new HomeController(user.getId());
+                newStage("/fxml/home.fxml", homeController);
+                ((Stage) loginButton.getScene().getWindow()).close();
+            }
         }
-    }
-
-    @FXML
-    void passwordOnAction(ActionEvent event) {
-        //blackMessageLabel.setText("Password must be 8-15 characters long!");
-    }
-
-    @FXML
-    void usernameOnAction(ActionEvent event) {
-
-    }
-
-    @FXML
-    void initialize() {
-
     }
 
     private void newStage(String resource, Object controller) throws IOException {

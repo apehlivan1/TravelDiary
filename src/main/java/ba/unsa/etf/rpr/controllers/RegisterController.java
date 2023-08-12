@@ -68,7 +68,6 @@ public class RegisterController {
                 || phoneField.getText().isBlank() || emailField.getText().isBlank()) {
             redMessageLabel.setText("All fields are required!");
         }
-        //refactor login page -> remove unnecessary onAction
         else {
             User user = new User(0, usernameTextField.getText(), passwordPasswordField.getText(),
                     firstNameField.getText(), lastNameField.getText(), emailField.getText(), phoneField.getText());
