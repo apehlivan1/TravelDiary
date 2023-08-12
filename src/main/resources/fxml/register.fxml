@@ -125,16 +125,6 @@
                         <Font name="Bookman Old Style" size="12.0" />
                     </font>
                 </Label>
-                <Label fx:id="greenMessageLabel" alignment="CENTER" contentDisplay="CENTER" maxWidth="1.7976931348623157E308" prefHeight="18.0" prefWidth="89.0" textFill="#1dc707" GridPane.columnIndex="2" GridPane.columnSpan="3" GridPane.rowIndex="1" GridPane.valignment="CENTER">
-                    <font>
-                        <Font name="Bookman Old Style" size="12.0" />
-                    </font>
-                </Label>
-                <Label fx:id="blackMessageLabel" alignment="CENTER" contentDisplay="CENTER" maxWidth="1.7976931348623157E308" prefHeight="18.0" prefWidth="89.0" GridPane.columnIndex="2" GridPane.columnSpan="3" GridPane.rowIndex="1" GridPane.valignment="CENTER">
-                    <font>
-                        <Font name="Bookman Old Style" size="12.0" />
-                    </font>
-                </Label>
             <Label alignment="CENTER" layoutX="86.0" layoutY="179.0" maxWidth="1.7976931348623157E308" text="First name:" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="1" GridPane.valignment="BOTTOM">
                <font>
                   <Font name="Bookman Old Style Italic" size="13.0" />

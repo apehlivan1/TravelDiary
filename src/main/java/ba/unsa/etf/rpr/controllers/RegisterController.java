@@ -22,9 +22,6 @@ import static javafx.scene.layout.Region.USE_COMPUTED_SIZE;
 public class RegisterController {
 
     @FXML
-    private Label blackMessageLabel;
-
-    @FXML
     private Button cancelButton;
 
     @FXML
@@ -32,9 +29,6 @@ public class RegisterController {
 
     @FXML
     private TextField firstNameField;
-
-    @FXML
-    private Label greenMessageLabel;
 
     @FXML
     private TextField lastNameField;
@@ -56,8 +50,7 @@ public class RegisterController {
 
     @FXML
     void cancelClicked(ActionEvent event) throws IOException {
-        Stage stage = (Stage) cancelButton.getScene().getWindow();
-        stage.close();
+        ((Stage) cancelButton.getScene().getWindow()).close();
         newStage("/fxml/welcome page.fxml", null);
     }
 
@@ -73,8 +66,7 @@ public class RegisterController {
                     firstNameField.getText(), lastNameField.getText(), emailField.getText(), phoneField.getText());
             UserManager userManager = new UserManager();
             user = userManager.add(user);
-            HomeController homeController = new HomeController(user.getId());
-            newStage("/fxml/home.fxml", homeController);
+            newStage("/fxml/home.fxml", new HomeController(user.getId()));
 
             ((Stage) registerButton.getScene().getWindow()).close();
         }
@@ -91,8 +83,6 @@ public class RegisterController {
         stage.setScene(new Scene(root, USE_COMPUTED_SIZE, USE_COMPUTED_SIZE));
         stage.show();
     }
-
-
 }
 
 
