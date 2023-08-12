@@ -72,9 +72,14 @@ public class HomeController {
     }
 
     @FXML
-    void searchClicked(ActionEvent event) throws AppException {
-        List<Destination> destinations = destinationManager.search(searchTextField.getText());
-        destinationsList.getItems().addAll(destinations);
+    void searchClicked(ActionEvent event) {
+        try {
+            List<Destination> destinations = destinationManager.search(searchTextField.getText());
+            destinationsList.getItems().addAll(destinations);
+        } catch (AppException e) {
+            new Alert(Alert.AlertType.NONE, e.getMessage(), ButtonType.OK).show();
+        }
+
     }
 
     @FXML

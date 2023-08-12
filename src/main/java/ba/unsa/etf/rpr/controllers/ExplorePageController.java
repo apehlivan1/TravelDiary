@@ -12,7 +12,9 @@ package ba.unsa.etf.rpr.controllers;
         import javafx.fxml.FXMLLoader;
         import javafx.scene.Parent;
         import javafx.scene.Scene;
+        import javafx.scene.control.Alert;
         import javafx.scene.control.Button;
+        import javafx.scene.control.ButtonType;
         import javafx.scene.control.ListView;
         import javafx.stage.Stage;
 
@@ -73,21 +75,26 @@ public class ExplorePageController {
             detailsBtn.setVisible(false);
             refreshCategories();
             Category category = categoriesList.getSelectionModel().getSelectedItem();
-            List<Destination> resultList = destinationManager.searchByCategory(category.getId());
-            destinationsList.setItems(FXCollections.observableList(resultList));
+            if (category != null) {
+                List<Destination> resultList = destinationManager.searchByCategory(category.getId());
+                destinationsList.setItems(FXCollections.observableList(resultList));
+            }
 
             destinationsList.getSelectionModel().selectedItemProperty().addListener((observableValue, destination, t1) -> {
                 chosenDestination = destinationsList.getSelectionModel().getSelectedItem();
                 detailsBtn.setVisible(true);
             });
-
         } catch (AppException e) {
-            throw new RuntimeException(e);
+            new Alert(Alert.AlertType.NONE, e.getMessage(), ButtonType.OK).show();
         }
     }
 
-    private void refreshCategories() throws AppException {
-        categoriesList.setItems(FXCollections.observableList(categoryManager.getAll()));
+    private void refreshCategories() {
+        try {
+            categoriesList.setItems(FXCollections.observableList(categoryManager.getAll()));
+        } catch (AppException e) {
+            new Alert(Alert.AlertType.NONE, e.getMessage(), ButtonType.OK).show();
+        }
     }
 
     private void newStage(String resource, Object controller) throws IOException {

@@ -20,7 +20,6 @@ import static javafx.scene.layout.Region.USE_COMPUTED_SIZE;
 
 public class AddCategoryController {
 
-
     @FXML
     private Button addButton;
 

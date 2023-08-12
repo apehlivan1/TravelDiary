@@ -13,9 +13,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.TextArea;
+import javafx.scene.control.*;
 import javafx.stage.Stage;
 
 import static javafx.scene.layout.Region.USE_COMPUTED_SIZE;
@@ -66,24 +64,26 @@ public class TripInfoController {
     }
 
     @FXML
-    void saveClicked(ActionEvent event) throws AppException, IOException {
+    void saveClicked(ActionEvent event) throws IOException {
         String updatedNote = note.getText();
         trip.setNote(updatedNote);
         trip.setRating(ratingChoiceBox.getValue());
 
-        // if userId = -1 --> update;
-        // else           --> add new Trip
-        if (userId == -1) {
-            tripManager.update(trip);
-            //update destination.averageRating
-            double average = averageRating(tripManager.getAllRatings(destination.getId()));
-            destination.setAverageRating(average);
-            destinationManagermanager.update(destination);
+        try {
+            // if userId = -1 --> update;
+            // else           --> add new Trip
+            if (userId == -1) {
+                tripManager.update(trip);
+                //update destination.averageRating
+                double average = averageRating(tripManager.getAllRatings(destination.getId()));
+                destination.setAverageRating(average);
+                destinationManagermanager.update(destination);
+            } else tripManager.add(trip);
+            ((Stage) saveButton.getScene().getWindow()).close();
+            openHome();
+        } catch (AppException e) {
+            new Alert(Alert.AlertType.NONE, e.getMessage(), ButtonType.OK).show();
         }
-        else tripManager.add(trip);
-
-        ((Stage) saveButton.getScene().getWindow()).close();
-        openHome();
     }
 
     @FXML

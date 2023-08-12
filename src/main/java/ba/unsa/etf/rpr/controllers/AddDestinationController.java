@@ -15,9 +15,7 @@ package ba.unsa.etf.rpr.controllers;
         import javafx.fxml.FXMLLoader;
         import javafx.scene.Parent;
         import javafx.scene.Scene;
-        import javafx.scene.control.Button;
-        import javafx.scene.control.ComboBox;
-        import javafx.scene.control.TextField;
+        import javafx.scene.control.*;
         import javafx.stage.Stage;
 
         import static javafx.scene.layout.Region.USE_COMPUTED_SIZE;
@@ -56,16 +54,20 @@ public class AddDestinationController {
     }
 
     @FXML
-    void saveClicked(ActionEvent event) throws AppException, IOException {
-        DestinationManager manager = new DestinationManager();
-        Destination destination = new Destination(
-                0, nameTextField.getText(), locationTextField.getText(),
-                descriptionTextField.getText(), categoryChoice.getValue().getId(), Integer.parseInt(ratingTextField.getText())
-        );
-        destination = manager.add(destination);
-        Stage stage = (Stage) saveButton.getScene().getWindow();
-        stage.close();
-        newStage("/fxml/explore page.fxml");
+    void saveClicked(ActionEvent event) throws IOException {
+        try {
+            DestinationManager manager = new DestinationManager();
+            Destination destination = new Destination(
+                    0, nameTextField.getText(), locationTextField.getText(),
+                    descriptionTextField.getText(), categoryChoice.getValue().getId(), Integer.parseInt(ratingTextField.getText())
+            );
+            destination = manager.add(destination);
+            Stage stage = (Stage) saveButton.getScene().getWindow();
+            stage.close();
+            newStage("/fxml/explore page.fxml");
+        } catch (AppException e) {
+            new Alert(Alert.AlertType.NONE, e.getMessage(), ButtonType.OK).show();
+        }
     }
 
     @FXML
@@ -80,7 +82,7 @@ public class AddDestinationController {
         try {
             categoryChoice.setItems(FXCollections.observableList(categoryManager.getAll()));
         } catch (AppException e) {
-            throw new RuntimeException(e);
+            new Alert(Alert.AlertType.NONE, e.getMessage(), ButtonType.OK).show();
         }
     }
 

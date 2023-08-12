@@ -12,9 +12,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextArea;
+import javafx.scene.control.*;
 import javafx.stage.Stage;
 
 import static javafx.scene.layout.Region.USE_COMPUTED_SIZE;
@@ -71,7 +69,7 @@ public class DetailsController {
         try {
             populateDetails();
         } catch (AppException e) {
-            throw new RuntimeException(e);
+            new Alert(Alert.AlertType.NONE, e.getMessage(), ButtonType.OK).show();
         }
     }
 
