@@ -25,7 +25,7 @@ public class HomeController {
     private TripManager tripManager = new TripManager();
     private Destination chosenDestination;
     private DestinationManager destinationManager = new DestinationManager();
-    @FXML
+
     private int userId;
 
     @FXML
@@ -49,7 +49,7 @@ public class HomeController {
     @FXML
     private TextField searchTextField;
 
-    public HomeController(int userId) {
+    public void setUserId(int userId) {
         this.userId = userId;
     }
 
@@ -136,4 +136,5 @@ public class HomeController {
         stage.setScene(new Scene(root, USE_COMPUTED_SIZE, USE_COMPUTED_SIZE));
         stage.show();
     }
+
 }

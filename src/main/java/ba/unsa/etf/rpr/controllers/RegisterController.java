@@ -21,6 +21,8 @@ import static javafx.scene.layout.Region.USE_COMPUTED_SIZE;
 
 public class RegisterController {
 
+    private User user;
+
     @FXML
     private Button cancelButton;
 
@@ -51,7 +53,7 @@ public class RegisterController {
     @FXML
     void cancelClicked(ActionEvent event) throws IOException {
         ((Stage) cancelButton.getScene().getWindow()).close();
-        newStage("/fxml/welcome page.fxml", null);
+        newStage("/fxml/welcome page.fxml", false);
     }
 
     @FXML
@@ -62,24 +64,26 @@ public class RegisterController {
             redMessageLabel.setText("All fields are required!");
         }
         else {
-            User user = new User(0, usernameTextField.getText(), passwordPasswordField.getText(),
+             user = new User(0, usernameTextField.getText(), passwordPasswordField.getText(),
                     firstNameField.getText(), lastNameField.getText(), emailField.getText(), phoneField.getText());
-            UserManager userManager = new UserManager();
-            user = userManager.add(user);
-            newStage("/fxml/home.fxml", new HomeController(user.getId()));
+             UserManager userManager = new UserManager();
+             user = userManager.add(user);
+             newStage("/fxml/home.fxml", true);
 
-            ((Stage) registerButton.getScene().getWindow()).close();
+             ((Stage) registerButton.getScene().getWindow()).close();
         }
     }
 
-    private void newStage(String resource, Object controller) throws IOException {
+    private void newStage(String resource, Boolean passInfo) throws IOException {
         Stage stage = new Stage();
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(resource));
-        if (controller != null)
-            fxmlLoader.setController(controller);
+        FXMLLoader loader = new FXMLLoader(getClass().getResource(resource));
+        Parent root = loader.load();
+        if (passInfo) {
+            HomeController controller = loader.getController();
+            controller.setUserId(user.getId());
+        }
         else
             stage.initStyle(StageStyle.UNDECORATED);
-        Parent root = fxmlLoader.load();
         stage.setScene(new Scene(root, USE_COMPUTED_SIZE, USE_COMPUTED_SIZE));
         stage.show();
     }

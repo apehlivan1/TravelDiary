@@ -26,6 +26,8 @@ import static javafx.scene.layout.Region.USE_COMPUTED_SIZE;
  */
 public class LoginController {
 
+    private User user;
+
     @FXML
     private Button cancelButton;
 
@@ -51,7 +53,7 @@ public class LoginController {
     @FXML
     void cancelClicked(ActionEvent event) throws IOException {
         ((Stage) cancelButton.getScene().getWindow()).close();
-        newStage("/fxml/welcome page.fxml", null);
+        newStage("/fxml/welcome page.fxml", false);
     }
 
     /**
@@ -70,9 +72,8 @@ public class LoginController {
             if (!labelText.equals("Login successful"))
                 redMessageLabel.setText(labelText);
             else {
-                User user = userManager.searchByUsername(usernameTextField.getText());
-                HomeController homeController = new HomeController(user.getId());
-                newStage("/fxml/home.fxml", homeController);
+                user = userManager.searchByUsername(usernameTextField.getText());
+                newStage("/fxml/home.fxml", true);
                 ((Stage) loginButton.getScene().getWindow()).close();
             }
         }
@@ -82,17 +83,19 @@ public class LoginController {
      * Creates and displays a new window.
      *
      * @param resource The path to the FXML resource file that defines the scene layout.
-     * @param controller An optional controller object to associate with the FXML scene.
+     * @param passInfo The value 'true' indicates that the 'userId' must be passed to the new window controller.
      * @throws IOException If an I/O error occurs while loading the FXML resource.
      */
-    private void newStage(String resource, Object controller) throws IOException {
+    private void newStage(String resource, Boolean passInfo) throws IOException {
         Stage stage = new Stage();
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(resource));
-        if (controller != null)
-            fxmlLoader.setController(controller);
+        FXMLLoader loader = new FXMLLoader(getClass().getResource(resource));
+        Parent root = loader.load();
+        if (passInfo) {
+            HomeController controller = loader.getController();
+            controller.setUserId(user.getId());
+        }
         else
             stage.initStyle(StageStyle.UNDECORATED);
-        Parent root = fxmlLoader.load();
         stage.setScene(new Scene(root, USE_COMPUTED_SIZE, USE_COMPUTED_SIZE));
         stage.show();
     }
