@@ -48,12 +48,7 @@ public class LoginController {
     void cancelClicked(ActionEvent event) throws IOException {
         Stage stage = (Stage) cancelButton.getScene().getWindow();
         stage.close();
-
-        stage = new Stage();
-        Parent root = FXMLLoader.load(getClass().getResource("/fxml/welcome page.fxml"));
-        stage.setScene(new Scene(root, USE_COMPUTED_SIZE, USE_COMPUTED_SIZE));
-        stage.initStyle(StageStyle.UNDECORATED);
-        stage.show();
+        newStage("/fxml/welcome page.fxml", null);
     }
 
     @FXML
@@ -68,15 +63,9 @@ public class LoginController {
             //try using stage.setUserData(user);
             User user = userManager.searchByUsername(usernameTextField.getText());
             HomeController homeController = new HomeController(user.getId());
+            newStage("/fxml/home.fxml", homeController);
 
-            Stage stage = new Stage();
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/home.fxml"));
-            fxmlLoader.setController(homeController);
-            Parent root = fxmlLoader.load();
-            stage.setScene(new Scene(root, USE_COMPUTED_SIZE, USE_COMPUTED_SIZE));
             ((Stage) loginButton.getScene().getWindow()).close();
-
-            stage.show();
         }
     }
 
@@ -93,6 +82,18 @@ public class LoginController {
     @FXML
     void initialize() {
 
+    }
+
+    private void newStage(String resource, Object controller) throws IOException {
+        Stage stage = new Stage();
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(resource));
+        if (controller != null)
+            fxmlLoader.setController(controller);
+        else
+            stage.initStyle(StageStyle.UNDECORATED);
+        Parent root = fxmlLoader.load();
+        stage.setScene(new Scene(root, USE_COMPUTED_SIZE, USE_COMPUTED_SIZE));
+        stage.show();
     }
 
 }
