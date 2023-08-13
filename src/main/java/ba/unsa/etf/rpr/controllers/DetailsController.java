@@ -46,8 +46,12 @@ public class DetailsController {
     @FXML
     private Label ratingLabel;
 
-    public DetailsController(int userId, Destination destination) {
+
+    public void setUserId(int userId) {
         this.userId = userId;
+    }
+
+    public void setDestination(Destination destination) {
         this.destination = destination;
     }
 
@@ -55,10 +59,14 @@ public class DetailsController {
     void addTripClicked(ActionEvent event) throws IOException {
         Stage stage = (Stage) addTripBtn.getScene().getWindow();
         stage.close();
+
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/trip info.fxml"));
+        Parent root = loader.load();
+        TripInfoController controller = loader.getController();
+        controller.setUserId(userId);
+        controller.setDestination(destination);
+
         stage = new Stage();
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/trip info.fxml"));
-        fxmlLoader.setController(new TripInfoController(userId, destination.getId()));
-        Parent root = fxmlLoader.load();
         stage.setScene(new Scene(root, USE_COMPUTED_SIZE, USE_COMPUTED_SIZE));
         stage.show();
     }

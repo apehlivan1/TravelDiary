@@ -19,6 +19,7 @@ import javafx.stage.Stage;
 import static javafx.scene.layout.Region.USE_COMPUTED_SIZE;
 
 public class TripInfoController {
+
     private int userId = -1;
 
     private Trip trip;
@@ -45,16 +46,16 @@ public class TripInfoController {
     @FXML
     private Button saveButton;
 
-    public TripInfoController(Trip trip, Destination destination) {
-        this.trip = trip;
-        this.destination = destination;
-        originalNote = trip.getNote();
-        originalRating = trip.getRating();
+    public void setUserId(int userId) {
+        this.userId = userId;
     }
 
-    public TripInfoController(int userId, int destinationId) {
-        this.userId = userId;
-        trip = new Trip(userId, destinationId);
+    public void setTrip(Trip trip) {
+        this.trip = trip;
+    }
+
+    public void setDestination(Destination destination) {
+        this.destination = destination;
     }
 
     @FXML
@@ -65,6 +66,7 @@ public class TripInfoController {
 
     @FXML
     void saveClicked(ActionEvent event) throws IOException {
+        if (userId != -1) trip = new Trip(userId, destination.getId());
         String updatedNote = note.getText();
         trip.setNote(updatedNote);
         trip.setRating(ratingChoiceBox.getValue());
@@ -90,6 +92,8 @@ public class TripInfoController {
     void initialize() {
         // if userId = -1 --> update;
         if (userId == -1) {
+            originalNote = trip.getNote();
+            originalRating = trip.getRating();
             note.setText(originalNote);
             ratingChoiceBox.setValue(originalRating);
         }

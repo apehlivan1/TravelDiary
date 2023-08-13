@@ -22,6 +22,8 @@ package ba.unsa.etf.rpr.controllers;
 
 public class AddDestinationController {
 
+    private int userId;
+
     @FXML
     private Button cancelButton;
 
@@ -48,9 +50,12 @@ public class AddDestinationController {
 
     CategoryManager categoryManager = new CategoryManager();
 
+    public void setUserId(int userId) {
+        this.userId = userId;
+    }
     @FXML
     void newCategoryClicked(ActionEvent event) throws IOException {
-        newStage("/fxml/add category.fxml");
+        newStage(null, "/fxml/add category.fxml");
     }
 
     @FXML
@@ -64,7 +69,11 @@ public class AddDestinationController {
             destination = manager.add(destination);
             Stage stage = (Stage) saveButton.getScene().getWindow();
             stage.close();
-            newStage("/fxml/explore page.fxml");
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/explore page.fxml"));
+            Parent root = loader.load();
+            ExplorePageController controller = loader.getController();
+            controller.setUserId(userId);
+            newStage(root,null);
         } catch (AppException e) {
             new Alert(Alert.AlertType.NONE, e.getMessage(), ButtonType.OK).show();
         }
@@ -74,7 +83,11 @@ public class AddDestinationController {
     void cancelClicked(ActionEvent event) throws IOException {
         Stage stage = (Stage) cancelButton.getScene().getWindow();
         stage.close();
-        newStage("/fxml/explore page.fxml");
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/explore page.fxml"));
+        Parent root = loader.load();
+        ExplorePageController controller = loader.getController();
+        controller.setUserId(userId);
+        newStage(root,null);
     }
 
     @FXML
@@ -86,9 +99,10 @@ public class AddDestinationController {
         }
     }
 
-    private void newStage(String resource) throws IOException {
+    private void newStage(Parent root, String resource) throws IOException {
+        if (resource != null)
+            root = FXMLLoader.load(getClass().getResource(resource));
         Stage stage = new Stage();
-        Parent root = FXMLLoader.load(getClass().getResource(resource));
         stage.setScene(new Scene(root, USE_COMPUTED_SIZE, USE_COMPUTED_SIZE));
         stage.show();
     }

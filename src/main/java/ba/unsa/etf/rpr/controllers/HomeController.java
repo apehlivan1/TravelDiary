@@ -68,7 +68,11 @@ public class HomeController {
     void exploreBtnClicked(ActionEvent event) throws IOException {
         Stage stage = (Stage) exploreBtn.getScene().getWindow();
         stage.close();
-        newStage("/fxml/explore page.fxml", new ExplorePageController(userId));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/explore page.fxml"));
+        Parent root = loader.load();
+        ExplorePageController controller = loader.getController();
+        controller.setUserId(userId);
+        newStage(root,null);
     }
 
     @FXML
@@ -86,7 +90,13 @@ public class HomeController {
     void editButtonClicked(ActionEvent event) throws IOException {
         Stage stage = (Stage) editButton.getScene().getWindow();
         stage.close();
-        newStage("/fxml/trip info.fxml", new TripInfoController(chosenTrip, chosenDestination));
+
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/trip info.fxml"));
+        Parent root = loader.load();
+        TripInfoController controller = loader.getController();
+        controller.setTrip(chosenTrip);
+        controller.setDestination(chosenDestination);
+        newStage(root, null);
     }
 
 
@@ -128,11 +138,10 @@ public class HomeController {
         chosenTrip = null;
     }
 
-    private void newStage(String resource, Object controller) throws IOException {
+    private void newStage(Parent root, String resource) throws IOException {
+        if (resource != null)
+            root = FXMLLoader.load(getClass().getResource(resource));
         Stage stage = new Stage();
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(resource));
-        if (controller != null) fxmlLoader.setController(controller);
-        Parent root = fxmlLoader.load();
         stage.setScene(new Scene(root, USE_COMPUTED_SIZE, USE_COMPUTED_SIZE));
         stage.show();
     }

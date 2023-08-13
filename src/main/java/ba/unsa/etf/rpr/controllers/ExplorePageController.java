@@ -26,6 +26,7 @@ package ba.unsa.etf.rpr.controllers;
 public class ExplorePageController {
 
     private int userId;
+
     private Destination chosenDestination;
 
     @FXML
@@ -46,27 +47,32 @@ public class ExplorePageController {
     private CategoryManager categoryManager = new CategoryManager();
     private DestinationManager destinationManager = new DestinationManager();
 
-    public ExplorePageController(int userId) {
+    public void setUserId(int userId) {
         this.userId = userId;
     }
 
     @FXML
     void addCategoryClicked(ActionEvent event) throws IOException {
-        newStage("/fxml/add category.fxml",null);
+        newStage(null, "/fxml/add category.fxml");
     }
 
     @FXML
     void addDestinationClicked(ActionEvent event) throws IOException {
         Stage stage = (Stage) addDestinationBtn.getScene().getWindow();
         stage.close();
-        newStage("/fxml/add destination.fxml", null);
+        newStage(null, "/fxml/add destination.fxml");
     }
 
     @FXML
     void viewDetailsClicked(ActionEvent event) throws IOException {
         Stage stage = (Stage) detailsBtn.getScene().getWindow();
         stage.close();
-        newStage("/fxml/details.fxml", new DetailsController(userId, chosenDestination));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/details.fxml"));
+        Parent root = loader.load();
+        DetailsController controller = loader.getController();
+        controller.setUserId(userId);
+        controller.setDestination(chosenDestination);
+        newStage(root,null);
     }
 
     @FXML
@@ -97,12 +103,10 @@ public class ExplorePageController {
         }
     }
 
-    private void newStage(String resource, Object controller) throws IOException {
+    private void newStage(Parent root, String resource) throws IOException {
+        if (resource != null)
+            root = FXMLLoader.load(getClass().getResource(resource));
         Stage stage = new Stage();
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(resource));
-        if (controller != null)
-            fxmlLoader.setController(controller);
-        Parent root = fxmlLoader.load();
         stage.setScene(new Scene(root, USE_COMPUTED_SIZE, USE_COMPUTED_SIZE));
         stage.show();
     }
