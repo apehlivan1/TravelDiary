@@ -53,7 +53,7 @@ public class LoginController {
     @FXML
     void cancelClicked(ActionEvent event) throws IOException {
         ((Stage) cancelButton.getScene().getWindow()).close();
-        newStage("/fxml/welcome page.fxml", false);
+        newStage("/fxml/welcome page.fxml");
     }
 
     /**
@@ -73,7 +73,7 @@ public class LoginController {
                 redMessageLabel.setText(labelText);
             else {
                 user = userManager.searchByUsername(usernameTextField.getText());
-                newStage("/fxml/home.fxml", true);
+                newStage("/fxml/home.fxml");
                 ((Stage) loginButton.getScene().getWindow()).close();
             }
         }
@@ -83,19 +83,18 @@ public class LoginController {
      * Creates and displays a new window.
      *
      * @param resource The path to the FXML resource file that defines the scene layout.
-     * @param passInfo The value 'true' indicates that the 'userId' must be passed to the new window controller.
      * @throws IOException If an I/O error occurs while loading the FXML resource.
      */
-    private void newStage(String resource, Boolean passInfo) throws IOException {
+    private void newStage(String resource) throws IOException {
         Stage stage = new Stage();
         FXMLLoader loader = new FXMLLoader(getClass().getResource(resource));
         Parent root = loader.load();
-        if (passInfo) {
+        if (loader.getController() instanceof WelcomePageController)
+            stage.initStyle(StageStyle.UNDECORATED);
+        else {
             HomeController controller = loader.getController();
             controller.setUserId(user.getId());
         }
-        else
-            stage.initStyle(StageStyle.UNDECORATED);
         stage.setScene(new Scene(root, USE_COMPUTED_SIZE, USE_COMPUTED_SIZE));
         stage.show();
     }
