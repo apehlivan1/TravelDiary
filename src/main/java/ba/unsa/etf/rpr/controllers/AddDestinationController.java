@@ -20,6 +20,10 @@ package ba.unsa.etf.rpr.controllers;
 
         import static javafx.scene.layout.Region.USE_COMPUTED_SIZE;
 
+/**
+ * JavaFX controller for adding destinations
+ * @author Almedina Pehlivan
+ */
 public class AddDestinationController {
 
     private int userId;
@@ -58,6 +62,11 @@ public class AddDestinationController {
         newStage(null, "/fxml/add category.fxml");
     }
 
+    /**
+     * Save button event handler
+     * @param event
+     * @throws IOException
+     */
     @FXML
     void saveClicked(ActionEvent event) throws IOException {
         try {
@@ -79,6 +88,11 @@ public class AddDestinationController {
         }
     }
 
+    /**
+     * Cancel button event handler
+     * @param event
+     * @throws IOException
+     */
     @FXML
     void cancelClicked(ActionEvent event) throws IOException {
         Stage stage = (Stage) cancelButton.getScene().getWindow();
@@ -99,6 +113,13 @@ public class AddDestinationController {
         }
     }
 
+    /**
+     * @param root The root content (Parent) to be displayed in the new stage.
+     *             If this param is null, passing data to another controller is not necessary
+     * @param resource The path to the FXML resource file that defines the scene layout.
+     *                 If this param is null, it implies that the root content is preloaded and data is provided to a controller.
+     * @throws IOException If an I/O error occurs while loading the resource
+     */
     private void newStage(Parent root, String resource) throws IOException {
         if (resource != null)
             root = FXMLLoader.load(getClass().getResource(resource));
