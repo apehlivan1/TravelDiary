@@ -58,12 +58,18 @@ public class TripInfoController {
         this.destination = destination;
     }
 
+    /**
+     * Cancel button event handler
+     */
     @FXML
     void cancelClicked(ActionEvent event) throws IOException {
         ((Stage) cancelButton.getScene().getWindow()).close();
         openHome();
     }
 
+    /**
+     * Save button event handler
+     */
     @FXML
     void saveClicked(ActionEvent event) throws IOException {
         if (userId != -1) trip = new Trip(userId, destination.getId());
@@ -100,6 +106,10 @@ public class TripInfoController {
         ratingChoiceBox.getItems().addAll(1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
     }
 
+    /**
+     * Returns to "Home Page"
+     * @throws IOException
+     */
     private void openHome() throws IOException {
         Stage stage = new Stage();
         Parent root = FXMLLoader.load(getClass().getResource("/fxml/home.fxml"));
@@ -107,6 +117,10 @@ public class TripInfoController {
         stage.show();
     }
 
+    /**
+     * Calculates the average rating from a list of ratings.
+     * @return average rating
+     */
     private double averageRating(List<Double> ratings) {
         double sum = 0;
         for (Double rating: ratings) sum += rating;
