@@ -8,6 +8,7 @@ import ba.unsa.etf.rpr.business.TripManager;
 import ba.unsa.etf.rpr.domain.Destination;
 import ba.unsa.etf.rpr.domain.Trip;
 import ba.unsa.etf.rpr.exceptions.AppException;
+import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -18,6 +19,9 @@ import javafx.stage.Stage;
 
 import static javafx.scene.layout.Region.USE_COMPUTED_SIZE;
 
+/**
+ * Controller class for adding destinations to saved trips and updating saved notes.
+ */
 public class TripInfoController {
 
     private int userId = -1;
@@ -26,13 +30,9 @@ public class TripInfoController {
 
     private Destination destination;
 
-    private TripManager tripManager = new TripManager();
+    private final TripManager tripManager = new TripManager();
 
-    private DestinationManager destinationManagermanager = new DestinationManager();
-
-    private String originalNote;
-
-    private int originalRating;
+    private final DestinationManager destinationManager = new DestinationManager();
 
     @FXML
     private ChoiceBox<Integer> ratingChoiceBox;
@@ -83,9 +83,8 @@ public class TripInfoController {
             if (userId == -1) {
                 tripManager.update(trip);
                 //update destination.averageRating
-                double average = averageRating(tripManager.getAllRatings(destination.getId()));
-                destination.setAverageRating(average);
-                destinationManagermanager.update(destination);
+                destination.setAverageRating(averageRating());
+                destinationManager.update(destination);
             } else tripManager.add(trip);
             ((Stage) saveButton.getScene().getWindow()).close();
             openHome();
@@ -98,17 +97,16 @@ public class TripInfoController {
     void initialize() {
         // if userId = -1 --> update;
         if (userId == -1) {
-            originalNote = trip.getNote();
-            originalRating = trip.getRating();
+            String originalNote = trip.getNote();
+            int originalRating = trip.getRating();
             note.setText(originalNote);
             ratingChoiceBox.setValue(originalRating);
         }
-        ratingChoiceBox.getItems().addAll(1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
+        ratingChoiceBox.setItems(FXCollections.observableArrayList(1,2,3,4,5,6,7,8,9,10));
     }
 
     /**
      * Returns to "Home Page"
-     * @throws IOException
      */
     private void openHome() throws IOException {
         Stage stage = new Stage();
@@ -121,7 +119,8 @@ public class TripInfoController {
      * Calculates the average rating from a list of ratings.
      * @return average rating
      */
-    private double averageRating(List<Double> ratings) {
+    private double averageRating() throws AppException {
+        List<Double> ratings = tripManager.getAllRatings(destination.getId());
         double sum = 0;
         for (Double rating: ratings) sum += rating;
         return sum/ratings.size();
