@@ -18,6 +18,10 @@ import java.io.IOException;
 
 import static javafx.scene.layout.Region.USE_COMPUTED_SIZE;
 
+/**
+ * JavaFX controller for adding categories
+ * @author Almedina Pehlivan
+ */
 public class AddCategoryController {
 
     @FXML
@@ -29,6 +33,10 @@ public class AddCategoryController {
     @FXML
     private TextField categoryNameTextField;
 
+    /**
+     * Add button event handler
+     * @param event
+     */
     @FXML
     void addClicked(ActionEvent event) {
         try {
