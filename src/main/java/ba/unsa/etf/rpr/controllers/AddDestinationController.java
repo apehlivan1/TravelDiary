@@ -1,24 +1,22 @@
 package ba.unsa.etf.rpr.controllers;
 
-        import java.io.IOException;
-        import java.net.URL;
-        import java.util.ResourceBundle;
+import ba.unsa.etf.rpr.business.CategoryManager;
+import ba.unsa.etf.rpr.business.DestinationManager;
+import ba.unsa.etf.rpr.domain.Category;
+import ba.unsa.etf.rpr.domain.Destination;
+import ba.unsa.etf.rpr.exceptions.AppException;
+import javafx.collections.FXCollections;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.*;
+import javafx.stage.Stage;
 
-        import ba.unsa.etf.rpr.business.CategoryManager;
-        import ba.unsa.etf.rpr.business.DestinationManager;
-        import ba.unsa.etf.rpr.domain.Category;
-        import ba.unsa.etf.rpr.domain.Destination;
-        import ba.unsa.etf.rpr.exceptions.AppException;
-        import javafx.collections.FXCollections;
-        import javafx.event.ActionEvent;
-        import javafx.fxml.FXML;
-        import javafx.fxml.FXMLLoader;
-        import javafx.scene.Parent;
-        import javafx.scene.Scene;
-        import javafx.scene.control.*;
-        import javafx.stage.Stage;
+import java.io.IOException;
 
-        import static javafx.scene.layout.Region.USE_COMPUTED_SIZE;
+import static javafx.scene.layout.Region.USE_COMPUTED_SIZE;
 
 /**
  * JavaFX controller for adding destinations
@@ -32,7 +30,7 @@ public class AddDestinationController {
     private Button cancelButton;
 
     @FXML
-    private ComboBox<Category> categoryChoice; //try with <String>
+    private ComboBox<Category> categoryChoice;
 
     @FXML
     private TextField descriptionTextField;
@@ -52,11 +50,15 @@ public class AddDestinationController {
     @FXML
     private Button saveButton;
 
-    CategoryManager categoryManager = new CategoryManager();
+    private final CategoryManager categoryManager = new CategoryManager();
 
     public void setUserId(int userId) {
         this.userId = userId;
     }
+
+    /**
+     * "Add new category" button event handler
+     */
     @FXML
     void newCategoryClicked(ActionEvent event) throws IOException {
         newStage(null, "/fxml/add category.fxml");
@@ -64,8 +66,6 @@ public class AddDestinationController {
 
     /**
      * Save button event handler
-     * @param event
-     * @throws IOException
      */
     @FXML
     void saveClicked(ActionEvent event) throws IOException {
@@ -75,14 +75,9 @@ public class AddDestinationController {
                     0, nameTextField.getText(), locationTextField.getText(),
                     descriptionTextField.getText(), categoryChoice.getValue().getId(), Integer.parseInt(ratingTextField.getText())
             );
-            destination = manager.add(destination);
-            Stage stage = (Stage) saveButton.getScene().getWindow();
-            stage.close();
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/explore page.fxml"));
-            Parent root = loader.load();
-            ExplorePageController controller = loader.getController();
-            controller.setUserId(userId);
-            newStage(root,null);
+            manager.add(destination);
+            ((Stage) saveButton.getScene().getWindow()).close();
+            openExplorePage();
         } catch (AppException e) {
             new Alert(Alert.AlertType.NONE, e.getMessage(), ButtonType.OK).show();
         }
@@ -90,18 +85,11 @@ public class AddDestinationController {
 
     /**
      * Cancel button event handler
-     * @param event
-     * @throws IOException
      */
     @FXML
     void cancelClicked(ActionEvent event) throws IOException {
-        Stage stage = (Stage) cancelButton.getScene().getWindow();
-        stage.close();
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/explore page.fxml"));
-        Parent root = loader.load();
-        ExplorePageController controller = loader.getController();
-        controller.setUserId(userId);
-        newStage(root,null);
+        ((Stage) cancelButton.getScene().getWindow()) .close();
+        openExplorePage();
     }
 
     @FXML
@@ -111,6 +99,17 @@ public class AddDestinationController {
         } catch (AppException e) {
             new Alert(Alert.AlertType.NONE, e.getMessage(), ButtonType.OK).show();
         }
+    }
+
+    /**
+     * Opens "Explore Page"
+     */
+    private void openExplorePage() throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/explore page.fxml"));
+        Parent root = loader.load();
+        ExplorePageController controller = loader.getController();
+        controller.setUserId(userId);
+        newStage(root,null);
     }
 
     /**
@@ -127,5 +126,4 @@ public class AddDestinationController {
         stage.setScene(new Scene(root, USE_COMPUTED_SIZE, USE_COMPUTED_SIZE));
         stage.show();
     }
-
 }

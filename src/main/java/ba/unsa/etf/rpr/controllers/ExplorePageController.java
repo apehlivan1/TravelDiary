@@ -55,7 +55,11 @@ public class ExplorePageController {
     @FXML
     void addDestinationClicked(ActionEvent event) throws IOException {
         ((Stage) addDestinationBtn.getScene().getWindow()).close();
-        newStage(null, "/fxml/add destination.fxml");
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/add destination.fxml"));
+        Parent root = loader.load();
+        AddDestinationController controller = loader.getController();
+        controller.setUserId(userId);
+        newStage(root, null);
     }
 
     /**
