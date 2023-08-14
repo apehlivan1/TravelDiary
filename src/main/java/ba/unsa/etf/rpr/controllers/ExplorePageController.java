@@ -31,9 +31,6 @@ public class ExplorePageController {
     private Destination chosenDestination;
 
     @FXML
-    private Button addCategoryBtn;
-
-    @FXML
     private Button addDestinationBtn;
 
     @FXML
@@ -45,41 +42,28 @@ public class ExplorePageController {
     @FXML
     private ListView<Destination> destinationsList;
 
-    private CategoryManager categoryManager = new CategoryManager();
-    private DestinationManager destinationManager = new DestinationManager();
+    private final CategoryManager categoryManager = new CategoryManager();
+    private final DestinationManager destinationManager = new DestinationManager();
 
     public void setUserId(int userId) {
         this.userId = userId;
     }
 
     /**
-     * Opens a new window for adding a category.
-     * @throws IOException
-     */
-    @FXML
-    void addCategoryClicked(ActionEvent event) throws IOException {
-        newStage(null, "/fxml/add category.fxml");
-    }
-
-    /**
      * Opens a new window for adding a destination.
-     * @throws IOException
      */
     @FXML
     void addDestinationClicked(ActionEvent event) throws IOException {
-        Stage stage = (Stage) addDestinationBtn.getScene().getWindow();
-        stage.close();
+        ((Stage) addDestinationBtn.getScene().getWindow()).close();
         newStage(null, "/fxml/add destination.fxml");
     }
 
     /**
      * For viewing detailed information about the chosen destination
-     * @throws IOException
      */
     @FXML
     void viewDetailsClicked(ActionEvent event) throws IOException {
-        Stage stage = (Stage) detailsBtn.getScene().getWindow();
-        stage.close();
+        ((Stage) detailsBtn.getScene().getWindow()).close();
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/details.fxml"));
         Parent root = loader.load();
         DetailsController controller = loader.getController();
