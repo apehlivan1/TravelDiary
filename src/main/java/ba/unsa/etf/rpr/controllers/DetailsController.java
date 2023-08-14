@@ -1,9 +1,5 @@
 package ba.unsa.etf.rpr.controllers;
 
-import java.io.IOException;
-import java.net.URL;
-import java.util.ResourceBundle;
-
 import ba.unsa.etf.rpr.business.CategoryManager;
 import ba.unsa.etf.rpr.domain.Destination;
 import ba.unsa.etf.rpr.exceptions.AppException;
@@ -15,18 +11,19 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
 
+import java.io.IOException;
+
 import static javafx.scene.layout.Region.USE_COMPUTED_SIZE;
 
+/**
+ * Controller class for displaying details about a chosen destination.
+ *
+ * @author Almedina Pehlivan
+ */
 public class DetailsController {
 
     private int userId;
     private Destination destination;
-
-    @FXML
-    private ResourceBundle resources;
-
-    @FXML
-    private URL location;
 
     @FXML
     private Button addTripBtn;
@@ -55,6 +52,9 @@ public class DetailsController {
         this.destination = destination;
     }
 
+    /**
+     * Initiates the process of adding the selected destination to the travel history
+     */
     @FXML
     void addTripClicked(ActionEvent event) throws IOException {
         Stage stage = (Stage) addTripBtn.getScene().getWindow();
@@ -81,6 +81,9 @@ public class DetailsController {
         }
     }
 
+    /**
+     * Populates the UI components with details of the chosen destination.
+     */
     private void populateDetails() throws AppException {
         CategoryManager manager = new CategoryManager();
         nameLabel.setText(destination.getName());
