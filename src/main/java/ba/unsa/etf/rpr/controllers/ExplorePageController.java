@@ -1,32 +1,33 @@
 package ba.unsa.etf.rpr.controllers;
 
+import ba.unsa.etf.rpr.business.CategoryManager;
+import ba.unsa.etf.rpr.business.DestinationManager;
+import ba.unsa.etf.rpr.domain.Category;
+import ba.unsa.etf.rpr.domain.Destination;
+import ba.unsa.etf.rpr.exceptions.AppException;
+import javafx.collections.FXCollections;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
+import javafx.scene.control.ListView;
+import javafx.stage.Stage;
 
-        import ba.unsa.etf.rpr.business.CategoryManager;
-        import ba.unsa.etf.rpr.business.DestinationManager;
-        import ba.unsa.etf.rpr.domain.Category;
-        import ba.unsa.etf.rpr.domain.Destination;
-        import ba.unsa.etf.rpr.exceptions.AppException;
-        import javafx.collections.FXCollections;
-        import javafx.event.ActionEvent;
-        import javafx.fxml.FXML;
-        import javafx.fxml.FXMLLoader;
-        import javafx.scene.Parent;
-        import javafx.scene.Scene;
-        import javafx.scene.control.Alert;
-        import javafx.scene.control.Button;
-        import javafx.scene.control.ButtonType;
-        import javafx.scene.control.ListView;
-        import javafx.stage.Stage;
+import java.io.IOException;
+import java.util.List;
 
-        import java.io.IOException;
-        import java.util.List;
+import static javafx.scene.layout.Region.USE_COMPUTED_SIZE;
 
-        import static javafx.scene.layout.Region.USE_COMPUTED_SIZE;
-
+/**
+ * JavaFX controller for 'Explore Page'.
+ */
 public class ExplorePageController {
 
     private int userId;
-
     private Destination chosenDestination;
 
     @FXML
@@ -51,11 +52,19 @@ public class ExplorePageController {
         this.userId = userId;
     }
 
+    /**
+     * Opens a new window for adding a category.
+     * @throws IOException
+     */
     @FXML
     void addCategoryClicked(ActionEvent event) throws IOException {
         newStage(null, "/fxml/add category.fxml");
     }
 
+    /**
+     * Opens a new window for adding a destination.
+     * @throws IOException
+     */
     @FXML
     void addDestinationClicked(ActionEvent event) throws IOException {
         Stage stage = (Stage) addDestinationBtn.getScene().getWindow();
@@ -63,6 +72,10 @@ public class ExplorePageController {
         newStage(null, "/fxml/add destination.fxml");
     }
 
+    /**
+     * For viewing detailed information about the chosen destination
+     * @throws IOException
+     */
     @FXML
     void viewDetailsClicked(ActionEvent event) throws IOException {
         Stage stage = (Stage) detailsBtn.getScene().getWindow();
@@ -95,6 +108,9 @@ public class ExplorePageController {
         }
     }
 
+    /**
+     * Refreshes the categories list.
+     */
     private void refreshCategories() {
         try {
             categoriesList.setItems(FXCollections.observableList(categoryManager.getAll()));
@@ -103,6 +119,13 @@ public class ExplorePageController {
         }
     }
 
+    /**
+     * @param root The root content (Parent) to be displayed in the new stage.
+     *             If this param is null, passing data to another controller is not necessary
+     * @param resource The path to the FXML resource file that defines the scene layout.
+     *                 If this param is null, it implies that the root content is preloaded and data is provided to a controller.
+     * @throws IOException If an I/O error occurs while loading the resource
+     */
     private void newStage(Parent root, String resource) throws IOException {
         if (resource != null)
             root = FXMLLoader.load(getClass().getResource(resource));
