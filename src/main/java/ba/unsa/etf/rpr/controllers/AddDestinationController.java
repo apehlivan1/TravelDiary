@@ -33,6 +33,9 @@ public class AddDestinationController {
     private ComboBox<Category> categoryChoice;
 
     @FXML
+    private ComboBox<Integer> ratingChoice;
+
+    @FXML
     private TextField descriptionTextField;
 
     @FXML
@@ -43,9 +46,6 @@ public class AddDestinationController {
 
     @FXML
     private Button newCategoryBtn;
-
-    @FXML
-    private TextField ratingTextField;
 
     @FXML
     private Button saveButton;
@@ -73,8 +73,7 @@ public class AddDestinationController {
             DestinationManager manager = new DestinationManager();
             Destination destination = new Destination(
                     0, nameTextField.getText(), locationTextField.getText(),
-                    descriptionTextField.getText(), categoryChoice.getValue().getId(), Integer.parseInt(ratingTextField.getText())
-            );
+                    descriptionTextField.getText(), categoryChoice.getValue().getId(), ratingChoice.getValue());
             manager.add(destination);
             ((Stage) saveButton.getScene().getWindow()).close();
             openExplorePage();
@@ -96,6 +95,7 @@ public class AddDestinationController {
     void initialize() {
         try {
             categoryChoice.setItems(FXCollections.observableList(categoryManager.getAll()));
+            ratingChoice.setItems(FXCollections.observableArrayList(1,2,3,4,5,6,7,8,9,10));
         } catch (AppException e) {
             new Alert(Alert.AlertType.NONE, e.getMessage(), ButtonType.OK).show();
         }

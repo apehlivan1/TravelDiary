@@ -61,7 +61,6 @@
             <Insets top="-11.0" />
          </GridPane.margin>
       </TextField>
-      <TextField fx:id="ratingTextField" GridPane.columnIndex="2" GridPane.rowIndex="2" />
       <Button fx:id="saveButton" mnemonicParsing="false" onAction="#saveClicked" text="Save" GridPane.columnIndex="1" GridPane.rowIndex="3">
          <GridPane.margin>
             <Insets top="5.0" />
@@ -87,5 +86,6 @@
             <Insets top="-45.0" />
          </GridPane.margin>
       </Label>
+      <ComboBox fx:id="ratingChoice" prefHeight="26.0" prefWidth="344.0" GridPane.columnIndex="2" GridPane.rowIndex="2" />
    </children>
 </GridPane>
