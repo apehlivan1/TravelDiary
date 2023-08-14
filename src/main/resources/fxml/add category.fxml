@@ -7,7 +7,6 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.text.Font?>
 
-
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="301.0" prefWidth="404.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ba.unsa.etf.rpr.controllers.AddCategoryController">
    <top>
       <Label text="Suggest new category" BorderPane.alignment="CENTER">
@@ -33,17 +32,10 @@
          </BorderPane.margin>
       </Label>
    </left>
-   <bottom>
-      <Button fx:id="addDestinationBtn" mnemonicParsing="false" onAction="#addDestinationClicked" text="Recommend new destination" BorderPane.alignment="BOTTOM_RIGHT">
-         <BorderPane.margin>
-            <Insets bottom="20.0" right="40.0" />
-         </BorderPane.margin>
-      </Button>
-   </bottom>
    <right>
       <Button fx:id="addButton" mnemonicParsing="false" onAction="#addClicked" prefHeight="26.0" prefWidth="54.0" text="Add" BorderPane.alignment="CENTER_RIGHT">
          <BorderPane.margin>
-            <Insets right="40.0" top="40.0" />
+            <Insets bottom="40.0" right="40.0" top="40.0" />
          </BorderPane.margin>
       </Button>
    </right>
