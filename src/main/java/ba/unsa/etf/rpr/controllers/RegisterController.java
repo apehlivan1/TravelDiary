@@ -1,5 +1,6 @@
 package ba.unsa.etf.rpr.controllers;
 
+import ba.unsa.etf.rpr.AppFX;
 import ba.unsa.etf.rpr.business.UserManager;
 import ba.unsa.etf.rpr.domain.User;
 import ba.unsa.etf.rpr.exceptions.AppException;
@@ -105,6 +106,7 @@ public class RegisterController {
         else {
             HomeController controller = loader.getController();
             controller.setUserId(user.getId());
+            AppFX.titleAndIcon(stage);
         }
         stage.setScene(new Scene(root, USE_COMPUTED_SIZE, USE_COMPUTED_SIZE));
         stage.show();

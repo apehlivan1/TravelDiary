@@ -1,5 +1,6 @@
 package ba.unsa.etf.rpr.controllers;
 
+import ba.unsa.etf.rpr.AppFX;
 import ba.unsa.etf.rpr.business.CategoryManager;
 import ba.unsa.etf.rpr.domain.Destination;
 import ba.unsa.etf.rpr.exceptions.AppException;
@@ -63,6 +64,8 @@ public class DetailsController {
         controller.setUserId(userId);
         Stage stage = new Stage();
         stage.setScene(new Scene(root, USE_COMPUTED_SIZE, USE_COMPUTED_SIZE));
+        stage.setResizable(false);
+        AppFX.titleAndIcon(stage);
         stage.show();
     }
 
@@ -79,6 +82,8 @@ public class DetailsController {
         Parent root = loader.load();
         stage = new Stage();
         stage.setScene(new Scene(root, USE_COMPUTED_SIZE, USE_COMPUTED_SIZE));
+        stage.setResizable(false);
+        AppFX.titleAndIcon(stage);
         stage.show();
     }
 

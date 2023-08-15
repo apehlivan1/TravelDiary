@@ -1,5 +1,6 @@
 package ba.unsa.etf.rpr.controllers;
 
+import ba.unsa.etf.rpr.AppFX;
 import ba.unsa.etf.rpr.business.CategoryManager;
 import ba.unsa.etf.rpr.business.DestinationManager;
 import ba.unsa.etf.rpr.domain.Category;
@@ -122,6 +123,8 @@ public class ExplorePageController {
             root = FXMLLoader.load(getClass().getResource(resource));
         Stage stage = new Stage();
         stage.setScene(new Scene(root, USE_COMPUTED_SIZE, USE_COMPUTED_SIZE));
+        stage.setResizable(false);
+        AppFX.titleAndIcon(stage);
         stage.show();
     }
 

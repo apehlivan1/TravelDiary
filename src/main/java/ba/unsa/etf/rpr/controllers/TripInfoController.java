@@ -3,6 +3,7 @@ package ba.unsa.etf.rpr.controllers;
 import java.io.IOException;
 import java.util.List;
 
+import ba.unsa.etf.rpr.AppFX;
 import ba.unsa.etf.rpr.business.DestinationManager;
 import ba.unsa.etf.rpr.business.TripManager;
 import ba.unsa.etf.rpr.domain.Destination;
@@ -70,6 +71,8 @@ public class TripInfoController {
             Parent root = loader.load();
             Stage stage = new Stage();
             stage.setScene(new Scene(root, USE_COMPUTED_SIZE, USE_COMPUTED_SIZE));
+            stage.setResizable(false);
+            AppFX.titleAndIcon(stage);
             stage.show();
         }
         else
@@ -122,6 +125,8 @@ public class TripInfoController {
         Parent root = FXMLLoader.load(getClass().getResource("/fxml/home.fxml"));
         Stage stage = new Stage();
         stage.setScene(new Scene(root, USE_COMPUTED_SIZE, USE_COMPUTED_SIZE));
+        stage.setResizable(false);
+        AppFX.titleAndIcon(stage);
         stage.show();
     }
 
