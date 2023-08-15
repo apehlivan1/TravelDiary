@@ -43,12 +43,8 @@ public class DetailsController {
     @FXML
     private Label ratingLabel;
 
-
-    public void setUserId(int userId) {
+    public DetailsController(int userId, Destination destination) {
         this.userId = userId;
-    }
-
-    public void setDestination(Destination destination) {
         this.destination = destination;
     }
 

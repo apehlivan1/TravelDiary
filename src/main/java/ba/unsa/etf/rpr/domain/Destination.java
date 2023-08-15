@@ -11,7 +11,7 @@ public class Destination implements Idable {
     private String name;
     private String location;
     private String description;
-    private int categoryId; //private Category category;
+    private int categoryId;
     private double averageRating;
 
     public Destination(int id, String name, String location, String description, int categoryId, double averageRating) {
@@ -76,9 +76,6 @@ public class Destination implements Idable {
 
     @Override
     public String toString() {
-        return "Destination{" +
-                '\'' + name + '\'' +
-                " (location: '" + location + '\'' +
-                ") }";
+        return name;
     }
 }

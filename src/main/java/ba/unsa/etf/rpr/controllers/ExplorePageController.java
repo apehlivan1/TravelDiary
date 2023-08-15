@@ -69,10 +69,8 @@ public class ExplorePageController {
     void viewDetailsClicked(ActionEvent event) throws IOException {
         ((Stage) detailsBtn.getScene().getWindow()).close();
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/details.fxml"));
+        loader.setController(new DetailsController(userId, chosenDestination));
         Parent root = loader.load();
-        DetailsController controller = loader.getController();
-        controller.setUserId(userId);
-        controller.setDestination(chosenDestination);
         newStage(root,null);
     }
 
@@ -82,6 +80,7 @@ public class ExplorePageController {
         refreshCategories();
 
         categoriesList.getSelectionModel().selectedItemProperty().addListener((obs, cat, t1) -> {
+            detailsBtn.setVisible(false);
             Category chosenCategory = categoriesList.getSelectionModel().getSelectedItem();
             if (chosenCategory != null) {
                 List<Destination> resultList = null;
