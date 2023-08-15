@@ -8,7 +8,7 @@ import java.util.List;
 
 public class CategoryManager {
 
-    public void validateCategoryName(String name) throws AppException {
+    private void validateCategoryName(String name) throws AppException {
         if (name == null || name.length() > 45 || name.length() < 3) {
             throw new AppException("Category name must be between 3 and 45 characters.");
         }

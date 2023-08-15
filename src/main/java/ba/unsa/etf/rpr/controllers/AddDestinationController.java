@@ -16,7 +16,6 @@ import javafx.scene.control.*;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.util.stream.Stream;
 
 import static javafx.scene.layout.Region.USE_COMPUTED_SIZE;
 
@@ -74,43 +73,25 @@ public class AddDestinationController {
      */
     @FXML
     void saveClicked(ActionEvent event) throws IOException {
-        if (validateUserInput()) {
-            errorText.setText("");
-            try {
-                DestinationManager manager = new DestinationManager();
-                Destination destination = new Destination(
-                        0, nameTextField.getText(), locationTextField.getText(),
-                        descriptionTextField.getText(), categoryChoice.getValue().getId(), ratingChoice.getValue());
+        try {
+            DestinationManager manager = new DestinationManager();
+            int categoryId = 0;
+            if (categoryChoice.getValue() != null) categoryId = categoryChoice.getValue().getId();
+            int rating = 0;
+            if (ratingChoice.getValue() != null) rating = ratingChoice.getValue();
+            Destination destination = new Destination(
+                    0, nameTextField.getText(), locationTextField.getText(),
+                    descriptionTextField.getText(), categoryId, rating);
+            String errorMessage = manager.validateUserInput(destination);
+            errorText.setText(errorMessage);
+            if (errorMessage.equals("")) {
                 manager.add(destination);
                 ((Stage) saveButton.getScene().getWindow()).close();
                 openExplorePage();
-            } catch (AppException e) {
-                new Alert(Alert.AlertType.NONE, e.getMessage(), ButtonType.OK).show();
             }
+        } catch (AppException e) {
+            new Alert(Alert.AlertType.NONE, e.getMessage(), ButtonType.OK).show();
         }
-    }
-
-    private Boolean validateUserInput() {
-        boolean allFieldsHaveValues = Stream.of(
-                nameTextField.getText(),
-                locationTextField.getText(),
-                descriptionTextField.getText(),
-                categoryChoice.getValue(),
-                ratingChoice.getValue()
-        ).noneMatch(value -> value == null || value.toString().trim().isEmpty());
-        if (!allFieldsHaveValues) {
-            errorText.setText("Please enter all fields");
-            return false;
-        }
-        if (nameTextField.getText().length() > 45 || nameTextField.getText().length() < 3) {
-            errorText.setText("Name must be between 3 and 45 characters.");
-            return false;
-        }
-        if (locationTextField.getText().length() > 45 || locationTextField.getText().length() < 3) {
-            errorText.setText("Location must be between 3 and 45 characters.");
-            return false;
-        }
-        return true;
     }
 
     /**

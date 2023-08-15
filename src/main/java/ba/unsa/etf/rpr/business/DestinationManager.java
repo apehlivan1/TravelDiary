@@ -5,8 +5,28 @@ import ba.unsa.etf.rpr.domain.Destination;
 import ba.unsa.etf.rpr.exceptions.AppException;
 
 import java.util.List;
+import java.util.stream.Stream;
 
 public class DestinationManager {
+
+    public String validateUserInput(Destination destination) {
+        boolean allFieldsHaveValues = Stream.of(
+                destination.getName(),
+                destination.getLocation(),
+                destination.getDescription(),
+                destination.getCategoryId(),
+                destination.getAverageRating()
+        ).noneMatch(value -> value == null || value.toString().trim().isEmpty());
+        if (!allFieldsHaveValues || destination.getCategoryId() == 0 || destination.getAverageRating() == 0)
+             return "Please enter all fields";
+
+        if (destination.getName().length() > 45 || destination.getName().length() < 3)
+            return "Name must be between 3 and 45 characters.";
+
+        if (destination.getLocation().length() > 45 || destination.getLocation().length() < 3)
+            return "Location must be between 3 and 45 characters.";
+        return "";
+    }
 
     public Destination add(Destination destination) throws AppException {
         return DaoFactory.getDestinationDao().add(destination);
