@@ -80,6 +80,9 @@
          <font>
             <Font size="15.0" />
          </font>
+         <GridPane.margin>
+            <Insets bottom="10.0" />
+         </GridPane.margin>
       </Label>
       <Label text="There is no your preferred category?" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.rowIndex="3">
          <GridPane.margin>
@@ -87,5 +90,10 @@
          </GridPane.margin>
       </Label>
       <ComboBox fx:id="ratingChoice" prefHeight="26.0" prefWidth="344.0" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+      <Label fx:id="errorText" textFill="#e10909" GridPane.columnSpan="4" GridPane.halignment="CENTER">
+         <GridPane.margin>
+            <Insets top="30.0" />
+         </GridPane.margin>
+      </Label>
    </children>
 </GridPane>

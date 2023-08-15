@@ -15,6 +15,7 @@ import javafx.scene.control.*;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.stream.Stream;
 
 import static javafx.scene.layout.Region.USE_COMPUTED_SIZE;
 
@@ -34,6 +35,9 @@ public class AddDestinationController {
 
     @FXML
     private ComboBox<Integer> ratingChoice;
+
+    @FXML
+    private Label errorText;
 
     @FXML
     private TextField descriptionTextField;
@@ -69,17 +73,43 @@ public class AddDestinationController {
      */
     @FXML
     void saveClicked(ActionEvent event) throws IOException {
-        try {
-            DestinationManager manager = new DestinationManager();
-            Destination destination = new Destination(
-                    0, nameTextField.getText(), locationTextField.getText(),
-                    descriptionTextField.getText(), categoryChoice.getValue().getId(), ratingChoice.getValue());
-            manager.add(destination);
-            ((Stage) saveButton.getScene().getWindow()).close();
-            openExplorePage();
-        } catch (AppException e) {
-            new Alert(Alert.AlertType.NONE, e.getMessage(), ButtonType.OK).show();
+        if (validateUserInput()) {
+            errorText.setText("");
+            try {
+                DestinationManager manager = new DestinationManager();
+                Destination destination = new Destination(
+                        0, nameTextField.getText(), locationTextField.getText(),
+                        descriptionTextField.getText(), categoryChoice.getValue().getId(), ratingChoice.getValue());
+                manager.add(destination);
+                ((Stage) saveButton.getScene().getWindow()).close();
+                openExplorePage();
+            } catch (AppException e) {
+                new Alert(Alert.AlertType.NONE, e.getMessage(), ButtonType.OK).show();
+            }
         }
+    }
+
+    private Boolean validateUserInput() {
+        boolean allFieldsHaveValues = Stream.of(
+                nameTextField.getText(),
+                locationTextField.getText(),
+                descriptionTextField.getText(),
+                categoryChoice.getValue(),
+                ratingChoice.getValue()
+        ).noneMatch(value -> value == null || value.toString().trim().isEmpty());
+        if (!allFieldsHaveValues) {
+            errorText.setText("Please enter all fields");
+            return false;
+        }
+        if (nameTextField.getText().length() > 45 || nameTextField.getText().length() < 3) {
+            errorText.setText("Name must be between 3 and 45 characters.");
+            return false;
+        }
+        if (locationTextField.getText().length() > 45 || locationTextField.getText().length() < 3) {
+            errorText.setText("Location must be between 3 and 45 characters.");
+            return false;
+        }
+        return true;
     }
 
     /**
@@ -93,6 +123,7 @@ public class AddDestinationController {
 
     @FXML
     void initialize() {
+        errorText.setText("");
         try {
             categoryChoice.setItems(FXCollections.observableList(categoryManager.getAll()));
             ratingChoice.setItems(FXCollections.observableArrayList(1,2,3,4,5,6,7,8,9,10));
@@ -126,4 +157,6 @@ public class AddDestinationController {
         stage.setScene(new Scene(root, USE_COMPUTED_SIZE, USE_COMPUTED_SIZE));
         stage.show();
     }
+
+
 }
