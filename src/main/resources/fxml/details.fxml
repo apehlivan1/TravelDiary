@@ -32,16 +32,16 @@
         </Label>
         <Label text="Short description:" GridPane.columnIndex="1" GridPane.rowIndex="2" GridPane.valignment="TOP">
             <GridPane.margin>
-                <Insets top="-10.0" />
+                <Insets top="-5.0" />
             </GridPane.margin>
         </Label>
         <Label text="Rating:" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="CENTER">
          <GridPane.margin>
             <Insets left="20.0" />
          </GridPane.margin></Label>
-        <Label text="Category:" GridPane.halignment="RIGHT" GridPane.valignment="CENTER">
+        <Label text="Category:" GridPane.halignment="RIGHT" GridPane.valignment="TOP">
             <GridPane.margin>
-                <Insets bottom="20.0" right="20.0" />
+                <Insets right="20.0" top="10.0" />
             </GridPane.margin>
         </Label>
       <Label fx:id="nameLabel" GridPane.columnSpan="4" GridPane.halignment="CENTER" GridPane.valignment="BOTTOM">
@@ -56,25 +56,16 @@
          <GridPane.margin>
             <Insets bottom="20.0" />
          </GridPane.margin>
-         <font>
-            <Font size="14.0" />
-         </font>
       </Label>
       <Label fx:id="ratingLabel" GridPane.columnIndex="1" GridPane.rowIndex="4">
          <GridPane.margin>
             <Insets />
          </GridPane.margin>
-         <font>
-            <Font size="14.0" />
-         </font>
       </Label>
-      <Label fx:id="categoryLabel" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.halignment="LEFT" GridPane.valignment="CENTER">
+      <Label fx:id="categoryLabel" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.halignment="LEFT" GridPane.valignment="TOP">
          <GridPane.margin>
-            <Insets bottom="20.0" />
+            <Insets top="10.0" />
          </GridPane.margin>
-         <font>
-            <Font size="14.0" />
-         </font>
       </Label>
       <Line startX="-600.0" GridPane.columnSpan="4" GridPane.valignment="BOTTOM">
          <GridPane.margin>

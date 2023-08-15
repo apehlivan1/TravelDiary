@@ -107,14 +107,10 @@ public class HomeController {
      */
     @FXML
     void editButtonClicked(ActionEvent event) throws IOException {
-        Stage stage = (Stage) editButton.getScene().getWindow();
-        stage.close();
-
+        ((Stage) editButton.getScene().getWindow()).close();
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/trip info.fxml"));
+        loader.setController(new TripInfoController(chosenTrip, chosenDestination));
         Parent root = loader.load();
-        TripInfoController controller = loader.getController();
-        controller.setTrip(chosenTrip);
-        controller.setDestination(chosenDestination);
         newStage(root, null);
     }
 

@@ -75,11 +75,8 @@ public class DetailsController {
         stage.close();
 
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/trip info.fxml"));
+        loader.setController(new TripInfoController(userId, destination));
         Parent root = loader.load();
-        TripInfoController controller = loader.getController();
-        controller.setUserId(userId);
-        controller.setDestination(destination);
-
         stage = new Stage();
         stage.setScene(new Scene(root, USE_COMPUTED_SIZE, USE_COMPUTED_SIZE));
         stage.show();

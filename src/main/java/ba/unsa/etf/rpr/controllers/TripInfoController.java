@@ -46,25 +46,34 @@ public class TripInfoController {
     @FXML
     private Button saveButton;
 
-    public void setUserId(int userId) {
-        this.userId = userId;
-    }
-
-    public void setTrip(Trip trip) {
+    public TripInfoController(Trip trip, Destination destination) {
         this.trip = trip;
+        this.destination = destination;
+        //if userId = -1 --> update;
     }
 
-    public void setDestination(Destination destination) {
+    public TripInfoController(int userId, Destination destination) {
+        this.userId = userId;
         this.destination = destination;
     }
 
     /**
      * Cancel button event handler
+     * Returns to "Home page" or "Destination details" depending on previous page
      */
     @FXML
     void cancelClicked(ActionEvent event) throws IOException {
         ((Stage) cancelButton.getScene().getWindow()).close();
-        openHome();
+        if (userId != -1) {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/details.fxml"));
+            loader.setController(new DetailsController(userId, destination));
+            Parent root = loader.load();
+            Stage stage = new Stage();
+            stage.setScene(new Scene(root, USE_COMPUTED_SIZE, USE_COMPUTED_SIZE));
+            stage.show();
+        }
+        else
+            openHome();
     }
 
     /**
@@ -86,6 +95,7 @@ public class TripInfoController {
                 destination.setAverageRating(averageRating());
                 destinationManager.update(destination);
             } else tripManager.add(trip);
+
             ((Stage) saveButton.getScene().getWindow()).close();
             openHome();
         } catch (AppException e) {
@@ -106,11 +116,11 @@ public class TripInfoController {
     }
 
     /**
-     * Returns to "Home Page"
+     * Returns to "Home page"
      */
-    private void openHome() throws IOException {
-        Stage stage = new Stage();
+    private void openHome () throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("/fxml/home.fxml"));
+        Stage stage = new Stage();
         stage.setScene(new Scene(root, USE_COMPUTED_SIZE, USE_COMPUTED_SIZE));
         stage.show();
     }
