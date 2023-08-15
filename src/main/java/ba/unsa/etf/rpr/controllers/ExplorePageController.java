@@ -78,22 +78,26 @@ public class ExplorePageController {
 
     @FXML
     void initialize() {
-        try {
-            detailsBtn.setVisible(false);
-            refreshCategories();
-            Category category = categoriesList.getSelectionModel().getSelectedItem();
-            if (category != null) {
-                List<Destination> resultList = destinationManager.searchByCategory(category.getId());
+        detailsBtn.setVisible(false);
+        refreshCategories();
+
+        categoriesList.getSelectionModel().selectedItemProperty().addListener((obs, cat, t1) -> {
+            Category chosenCategory = categoriesList.getSelectionModel().getSelectedItem();
+            if (chosenCategory != null) {
+                List<Destination> resultList = null;
+                try {
+                    resultList = destinationManager.searchByCategory(chosenCategory.getId());
+                } catch (AppException e) {
+                    new Alert(Alert.AlertType.NONE, e.getMessage(), ButtonType.OK).show();
+                }
                 destinationsList.setItems(FXCollections.observableList(resultList));
             }
+        });
 
-            destinationsList.getSelectionModel().selectedItemProperty().addListener((observableValue, destination, t1) -> {
-                chosenDestination = destinationsList.getSelectionModel().getSelectedItem();
-                detailsBtn.setVisible(true);
-            });
-        } catch (AppException e) {
-            new Alert(Alert.AlertType.NONE, e.getMessage(), ButtonType.OK).show();
-        }
+        destinationsList.getSelectionModel().selectedItemProperty().addListener((observableValue, destination, t1) -> {
+            chosenDestination = destinationsList.getSelectionModel().getSelectedItem();
+            detailsBtn.setVisible(true);
+        });
     }
 
     /**

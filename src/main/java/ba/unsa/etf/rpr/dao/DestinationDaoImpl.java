@@ -64,7 +64,7 @@ public class DestinationDaoImpl extends AbstractDao<Destination> implements Dest
 
     @Override
     public List<Destination> searchByCategory(int id) throws AppException {
-        return executeQuery("SELECT * FROM destinations WHERE categoryId = ", new Object[]{id});
+        return executeQuery("SELECT * FROM destinations WHERE categoryId = ?", new Object[]{id});
     }
 
 }
