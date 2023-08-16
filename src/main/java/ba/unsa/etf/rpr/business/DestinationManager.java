@@ -42,21 +42,21 @@ public class DestinationManager {
     }
 
     /**
-     * Adding new destination to database
+     * Adding a new destination to the database
      */
     public Destination add(Destination destination) throws AppException {
         return DaoFactory.getDestinationDao().add(destination);
     }
 
     /**
-     * Updating a destination in database
+     * Updating a destination in the database
      */
     public Destination update(Destination destination) throws AppException {
         return DaoFactory.getDestinationDao().update(destination);
     }
 
     /**
-     * Looking for a destination with provided id
+     * Looking for a destination with the provided id
      */
     public Destination getById(int id) throws AppException {
         return DaoFactory.getDestinationDao().getById(id);
@@ -70,7 +70,7 @@ public class DestinationManager {
     }
 
     /**
-     * Getting all destinations from database
+     * Getting all destinations from the database
      */
     public List<Destination> getAll() throws AppException {
         return DaoFactory.getDestinationDao().getAll();
