@@ -7,8 +7,21 @@ import ba.unsa.etf.rpr.exceptions.AppException;
 import java.util.List;
 import java.util.stream.Stream;
 
+/**
+ * Business Logic Layer for management of Destinations
+ *
+ * @author Almedina Pehlivan
+ */
 public class DestinationManager {
 
+    /**
+     * Validates the user input for a given destination.
+     *
+     * It ensures that all required fields are non-null and non-empty, and that the
+     * specified length constraints for name and location are met.
+     * @param destination The destination object to be validated.
+     * @return An error message indicating the validation failure, or an empty string if validation passes.
+     */
     public String validateUserInput(Destination destination) {
         boolean allFieldsHaveValues = Stream.of(
                 destination.getName(),
@@ -28,18 +41,30 @@ public class DestinationManager {
         return "";
     }
 
+    /**
+     * Adding new destination to database
+     */
     public Destination add(Destination destination) throws AppException {
         return DaoFactory.getDestinationDao().add(destination);
     }
 
+    /**
+     * Updating a destination in database
+     */
     public Destination update(Destination destination) throws AppException {
         return DaoFactory.getDestinationDao().update(destination);
     }
 
+    /**
+     * Looking for a destination with provided id
+     */
     public Destination getById(int id) throws AppException {
         return DaoFactory.getDestinationDao().getById(id);
     }
 
+    /**
+     * Deleting a destination with provided id
+     */
     public void delete(int id) throws AppException {
         DaoFactory.getDestinationDao().delete(id);
     }
@@ -48,10 +73,18 @@ public class DestinationManager {
         return DaoFactory.getDestinationDao().getAll();
     }
 
+    /**
+     * Getting all destinations from database
+     */
     public List<Destination> search(String text) throws AppException {
         return DaoFactory.getDestinationDao().search(text);
     }
 
+    /**
+     * @param id category id
+     * @return all destinations that belong to specific category
+     * @throws AppException
+     */
     public List<Destination> searchByCategory(int id) throws AppException {
         return DaoFactory.getDestinationDao().searchByCategory(id);
     }
