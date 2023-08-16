@@ -4,24 +4,31 @@ import ba.unsa.etf.rpr.business.CategoryManager;
 import ba.unsa.etf.rpr.business.DestinationManager;
 import ba.unsa.etf.rpr.domain.Category;
 import ba.unsa.etf.rpr.domain.Destination;
-import ba.unsa.etf.rpr.exceptions.AppException;
 import org.apache.commons.cli.*;
 
 import java.io.PrintWriter;
 import java.util.List;
 
 /**
- * Hello world!
+ * CLI (Command Line Interface) implementation
  *
+ * @author Almedina Pehlivan
  */
 public class App 
 {
+
+    /**
+     * Defining final variables to describe all code having options
+     */
     private static final Option addDestination = new Option("d", "add-destination",  false, "Adding new destination to the database");
     private static final Option addCategory = new Option("c", "add-category", false, "Adding new category to the database");
     private static final Option getDestinations = new Option("getD", "view-destinations",  false, "Printing all quotes from the database");
     private static final Option getCategories = new Option("getC", "view-categories", false, "Printing all categories from the database");
     private static final Option categoryDefinition = new Option(null, "category",false, "Defining category for next added quote");
 
+    /**
+     * @param options
+     */
     public static void printFormattedOptions(Options options) {
         HelpFormatter helpFormatter = new HelpFormatter();
         PrintWriter printWriter = new PrintWriter(System.out);
@@ -42,11 +49,11 @@ public class App
 
     public static Category searchThroughCategories(List<Category> listOfCategories, String categoryName) {
         Category category;
-        category = listOfCategories.stream().filter(cat -> cat.getName().toLowerCase().equals(categoryName.toLowerCase())).findAny().get();
+        category = listOfCategories.stream().filter(cat -> cat.getName().equalsIgnoreCase(categoryName)).findAny().get();
         return category;
     }
 
-    public static void main( String[] args ) throws ParseException, AppException {
+    public static void main(String[] args) throws Exception {
         Options options = addOptions();
 
         CommandLineParser commandLineParser = new DefaultParser();
@@ -69,7 +76,7 @@ public class App
             String name = cl.getArgList().get(0);
             String location = cl.getArgList().get(1);
             String description = cl.getArgList().get(2);
-            Double rating = Double.valueOf(cl.getArgList().get(3));
+            double rating = Double.parseDouble(cl.getArgList().get(3));
             Destination destination = new Destination(0, name, location, description, category.getId(), rating);
             destinationManager.add(destination);
             System.out.println("You successfully added quote to database!");
