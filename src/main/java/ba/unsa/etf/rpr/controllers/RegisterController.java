@@ -75,9 +75,9 @@ public class RegisterController {
      */
     @FXML
     void registerClicked(ActionEvent event) throws AppException, IOException {
-        if (usernameTextField.getText().isBlank() || passwordPasswordField.getText().isBlank()
-                || firstNameField.getText().isBlank() || lastNameField.getText().isBlank()
-                || phoneField.getText().isBlank() || emailField.getText().isBlank()) {
+        if (usernameTextField.getText().trim().isEmpty() || passwordPasswordField.getText().trim().isEmpty()
+                || firstNameField.getText().trim().isEmpty() || lastNameField.getText().trim().isEmpty()
+                || phoneField.getText().trim().isEmpty() || emailField.getText().trim().isEmpty()) {
             redMessageLabel.setText("All fields are required!");
         }
         else {

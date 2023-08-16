@@ -65,7 +65,7 @@ public class LoginController {
      */
     @FXML
     void loginClicked(ActionEvent event) throws IOException, AppException {
-        if (usernameTextField.getText().isBlank()|| passwordPasswordField.getText().isBlank()) {
+        if (usernameTextField.getText().trim().isEmpty() || passwordPasswordField.getText().trim().isEmpty()) {
             redMessageLabel.setText("Please enter username and password!");
         }
         else {
