@@ -106,7 +106,7 @@ public class DetailsController {
         ratingLabel.setText(String.valueOf(destination.getAverageRating()));
         locationLabel.setText(destination.getLocation());
         descriptionText.setText(destination.getDescription());
-        categoryLabel.setText(manager.getCategoryName(destination.getCategoryId()));
+        categoryLabel.setText(manager.getById(destination.getCategoryId()).getName());
     }
 
 }

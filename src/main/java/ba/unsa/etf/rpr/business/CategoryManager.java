@@ -13,6 +13,11 @@ import java.util.List;
  */
 public class CategoryManager {
 
+    /**
+     * Ensures that the specified length constraints for name are met
+     * @param name
+     * @throws AppException
+     */
     private void validateCategoryName(String name) throws AppException {
         if (name == null || name.length() > 45 || name.length() < 3) {
             throw new AppException("Category name must be between 3 and 45 characters.");
@@ -63,15 +68,6 @@ public class CategoryManager {
      */
     public List<Category> getAll() throws AppException {
         return DaoFactory.getCategoryDao().getAll();
-    }
-
-
-    /**
-     * Looking for a category with provided id
-     * @return name of the category
-     */
-    public String getCategoryName(int id) throws AppException {
-        return DaoFactory.getCategoryDao().getCategoryName(id);
     }
 
 }

@@ -47,8 +47,4 @@ public class CategoryDaoImpl extends AbstractDao<Category> implements CategoryDa
         return row;
     }
 
-    @Override
-    public String getCategoryName(int id) throws AppException {
-        return (executeQueryUnique("SELECT * FROM categories WHERE id = ?", new Object[]{id})).getName();
-    }
 }
