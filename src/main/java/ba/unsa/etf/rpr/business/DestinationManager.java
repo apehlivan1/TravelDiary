@@ -69,12 +69,15 @@ public class DestinationManager {
         DaoFactory.getDestinationDao().delete(id);
     }
 
+    /**
+     * Getting all destinations from database
+     */
     public List<Destination> getAll() throws AppException {
         return DaoFactory.getDestinationDao().getAll();
     }
 
     /**
-     * Getting all destinations from database
+     * Searching for a destination with text in its name
      */
     public List<Destination> search(String text) throws AppException {
         return DaoFactory.getDestinationDao().search(text);
