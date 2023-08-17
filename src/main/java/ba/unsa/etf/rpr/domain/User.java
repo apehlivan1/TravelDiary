@@ -15,6 +15,12 @@ public class User implements Idable {
     private String email;
     private String phoneNumber;
 
+    public User() {}
+
+    public User (String username) {
+        this.username = username;
+    }
+
     public User(int id, String username, String password, String firstName, String lastName, String email, String phoneNumber) {
         this.id = id;
         this.username = username;
