@@ -23,8 +23,8 @@ import static javafx.scene.layout.Region.USE_COMPUTED_SIZE;
  */
 public class DetailsController {
 
-    private int userId;
-    private Destination destination;
+    private final int userId;
+    private final Destination destination;
 
     @FXML
     private Button addTripBtn;
@@ -62,11 +62,7 @@ public class DetailsController {
         Parent root = loader.load();
         ExplorePageController controller = loader.getController();
         controller.setUserId(userId);
-        Stage stage = new Stage();
-        stage.setScene(new Scene(root, USE_COMPUTED_SIZE, USE_COMPUTED_SIZE));
-        stage.setResizable(false);
-        AppFX.titleAndIcon(stage);
-        stage.show();
+        newStage(root, null, null);
     }
 
     /**
@@ -74,17 +70,8 @@ public class DetailsController {
      */
     @FXML
     void addTripClicked(ActionEvent event) throws IOException {
-        Stage stage = (Stage) addTripBtn.getScene().getWindow();
-        stage.close();
-
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/trip info.fxml"));
-        loader.setController(new TripInfoController(userId, destination));
-        Parent root = loader.load();
-        stage = new Stage();
-        stage.setScene(new Scene(root, USE_COMPUTED_SIZE, USE_COMPUTED_SIZE));
-        stage.setResizable(false);
-        AppFX.titleAndIcon(stage);
-        stage.show();
+        ((Stage) addTripBtn.getScene().getWindow()).close();
+        newStage(null, "/fxml/trip info.fxml", new TripInfoController(userId, destination));
     }
 
     @FXML
@@ -107,6 +94,20 @@ public class DetailsController {
         locationLabel.setText(destination.getLocation());
         descriptionText.setText(destination.getDescription());
         categoryLabel.setText(manager.getById(destination.getCategoryId()).getName());
+    }
+
+    private void newStage(Parent root, String resource, Object controller) throws IOException {
+        if (resource != null) {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource(resource));
+            if (controller != null)
+                loader.setController(controller);
+            root = loader.load();
+        }
+        Stage stage = new Stage();
+        stage.setScene(new Scene(root, USE_COMPUTED_SIZE, USE_COMPUTED_SIZE));
+        stage.setResizable(false);
+        AppFX.titleAndIcon(stage);
+        stage.show();
     }
 
 }
