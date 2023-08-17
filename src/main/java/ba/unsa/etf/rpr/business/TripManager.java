@@ -31,7 +31,11 @@ public class TripManager {
      * Looking for a trip with the provided id
      */
     public Trip getById(int id) throws AppException {
-        return DaoFactory.getTripDao().getById(id);
+        try {
+            return DaoFactory.getTripDao().getById(id);
+        } catch (AppException e) {
+            throw new AppException("ID does not exist in the database.");
+        }
     }
 
     /**
@@ -52,7 +56,11 @@ public class TripManager {
      * Searching for trips linked to a user
      */
     public List<Trip> searchByUser(int userId) throws AppException {
-        return DaoFactory.getTripDao().searchByUser(userId);
+        try {
+            return DaoFactory.getTripDao().searchByUser(userId);
+        } catch (NullPointerException e) {
+            throw new NullPointerException("User with this id does not have any saved trips!");
+        }
     }
 
     /**

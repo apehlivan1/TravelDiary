@@ -28,7 +28,6 @@ public class DestinationManagerTest {
     public void initialize() {
         destinationManager = Mockito.mock(DestinationManager.class);
         destination = new Destination(113, "Destination", "", "Description", 1, 5);
-
         destinationDao = Mockito.mock(DestinationDaoImpl.class);
         destinations = new ArrayList<>();
         destinations.addAll(Arrays.asList(new Destination("Dest1"), new Destination("Dest2")));
@@ -60,6 +59,15 @@ public class DestinationManagerTest {
         destinationManager.update(newDestination);
         Assertions.assertTrue(true);
         Mockito.verify(destinationManager).add(newDestination);
+    }
+
+    @Test
+    void addAndDelete() throws AppException {
+        Destination newDestination = new Destination(0,"New destination", "Location", "Description", 1, 10);
+        destinationManager.add(newDestination);
+        destinationManager.delete(newDestination.getId());
+        Assertions.assertTrue(true);
+        Mockito.verify(destinationManager).delete(newDestination.getId());
     }
 
     @Test
