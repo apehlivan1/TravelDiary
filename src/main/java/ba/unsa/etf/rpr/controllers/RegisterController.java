@@ -81,8 +81,9 @@ public class RegisterController {
             redMessageLabel.setText("All fields are required!");
         }
         else {
-             user = new User(0, usernameTextField.getText(), passwordPasswordField.getText(),
-                    firstNameField.getText(), lastNameField.getText(), emailField.getText(), phoneField.getText());
+             user = new User.Builder(0, usernameTextField.getText(), passwordPasswordField.getText()).
+                     firstName(firstNameField.getText()).lastName(lastNameField.getText()).
+                     email(emailField.getText()).phoneNumber(phoneField.getText()).build();
              UserManager userManager = new UserManager();
              user = userManager.add(user);
              newStage("/fxml/home.fxml");

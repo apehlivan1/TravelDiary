@@ -27,14 +27,12 @@ public class UserManagerTest {
     @BeforeEach
     public void intialize() {
         userManager = Mockito.mock(UserManager.class);
-        user = new User();
-        user.setId(113);
-        user.setUsername("korisnik");
-        user.setPassword("korisnik");
-
+        user = new User.Builder(113, "korisnik", "korisnik").build();
         userDaoMock = Mockito.mock(UserDaoImpl.class);
         users = new ArrayList<>();
-        users.addAll(Arrays.asList(new User("korisnik1"), new User("korisnik2"), new User("korisnik3")));
+        users.addAll(Arrays.asList(new User.Builder(1,"korisnik1","korisnik1").build(),
+                new User.Builder(2, "korisnik2", "korisnik2").build(),
+                new User.Builder(3,"korisnik3", "korisnik3").build()));
     }
 
     @Test
@@ -81,9 +79,8 @@ public class UserManagerTest {
 
     @Test
     void addNewUser() throws AppException {
-        User newUser = new User("Nova kategorija");
+        User newUser = new User.Builder(1, "new", "new").build();
         userManager.add(newUser);
-
         Assertions.assertTrue(true);
         Mockito.verify(userManager).add(newUser);
     }

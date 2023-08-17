@@ -31,14 +31,14 @@ public class UserDaoImpl extends AbstractDao<User> implements UserDao {
     @Override
     public User row2object(ResultSet rs) throws AppException {
         try {
-            User user = new User(
+            User user = new User.Builder(
                 rs.getInt("id"),
                 rs.getString("username"),
-                rs.getString("password"),
-                rs.getString("firstName"),
-                rs.getString("lastName"),
-                rs.getString("email"),
-                rs.getString("phoneNumber"));
+                rs.getString("password")).
+                firstName(rs.getString("firstName")).
+                lastName(rs.getString("lastName")).
+                email(rs.getString("email")).
+                phoneNumber(rs.getString("phoneNumber")).build();
             return user;
         } catch (SQLException e) {
             throw new AppException(e.getMessage(), e);
