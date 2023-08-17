@@ -64,5 +64,10 @@
             <Insets bottom="20.0" />
          </GridPane.margin>
       </Button>
+      <Button fx:id="backButton" mnemonicParsing="false" onAction="#goBack" text="&lt;" GridPane.valignment="TOP">
+         <GridPane.margin>
+            <Insets left="20.0" top="20.0" />
+         </GridPane.margin>
+      </Button>
    </children>
 </GridPane>

@@ -35,6 +35,9 @@ public class ExplorePageController {
     private Button addDestinationBtn;
 
     @FXML
+    private Button backButton;
+
+    @FXML
     private Button detailsBtn;
 
     @FXML
@@ -60,7 +63,13 @@ public class ExplorePageController {
         Parent root = loader.load();
         AddDestinationController controller = loader.getController();
         controller.setUserId(userId);
-        newStage(root, null);
+        newStage(root, null, null);
+    }
+
+    @FXML
+    void goBack(ActionEvent event) throws IOException {
+        ((Stage) backButton.getScene().getWindow()).close();
+        newStage(null, "/fxml/home.fxml", new HomeController(userId));
     }
 
     /**
@@ -72,7 +81,7 @@ public class ExplorePageController {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/details.fxml"));
         loader.setController(new DetailsController(userId, chosenDestination));
         Parent root = loader.load();
-        newStage(root,null);
+        newStage(root,null, null);
     }
 
     @FXML
@@ -118,9 +127,13 @@ public class ExplorePageController {
      *                 If this param is null, it implies that the root content is preloaded and data is provided to a controller.
      * @throws IOException If an I/O error occurs while loading the resource
      */
-    private void newStage(Parent root, String resource) throws IOException {
-        if (resource != null)
-            root = FXMLLoader.load(getClass().getResource(resource));
+    private void newStage(Parent root, String resource, Object controller) throws IOException {
+        if (resource != null) {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource(resource));
+            if (controller != null)
+                loader.setController(controller);
+            root = loader.load();
+        }
         Stage stage = new Stage();
         stage.setScene(new Scene(root, USE_COMPUTED_SIZE, USE_COMPUTED_SIZE));
         stage.setResizable(false);
