@@ -43,7 +43,7 @@ public class UserManagerTest {
         try {
             Mockito.doCallRealMethod().when(userManager).validateName(correctUsername);
         } catch (AppException e) {
-            //Test will fall if method validateCategoryName(name) throws an exception for correct parameter
+            //Test will fall if method validateName(name) throws an exception for correct parameter
             e.printStackTrace();
             Assertions.assertTrue(false);
         }
@@ -61,9 +61,6 @@ public class UserManagerTest {
         Assertions.assertEquals("Name must be between 3 and 45 chars", exception2.getMessage());
     }
 
-    /**
-     * Adding category that already exists
-     */
     @Test
     void add() throws AppException {
         MockedStatic<DaoFactory> daoFactoryMockedStatic = Mockito.mockStatic(DaoFactory.class);
@@ -84,10 +81,10 @@ public class UserManagerTest {
 
     @Test
     void addNewUser() throws AppException {
-        User newCategory = new User("Nova kategorija");
-        userManager.add(newCategory);
+        User newUser = new User("Nova kategorija");
+        userManager.add(newUser);
 
         Assertions.assertTrue(true);
-        Mockito.verify(userManager).add(newCategory);
+        Mockito.verify(userManager).add(newUser);
     }
 }

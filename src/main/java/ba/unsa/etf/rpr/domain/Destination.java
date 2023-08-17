@@ -1,5 +1,6 @@
 package ba.unsa.etf.rpr.domain;
 
+
 /**
  * Collection of travel destinations and travel ideas.
  *
@@ -13,6 +14,10 @@ public class Destination implements Idable {
     private String description;
     private int categoryId;
     private double averageRating;
+
+    public Destination(String name) {
+        this.name = name;
+    }
 
     public Destination(int id, String name, String location, String description, int categoryId, double averageRating) {
         this.id = id;

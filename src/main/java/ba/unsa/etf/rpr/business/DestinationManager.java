@@ -69,7 +69,11 @@ public class DestinationManager {
      * Looking for a destination with the provided id
      */
     public Destination getById(int id) throws AppException {
-        return DaoFactory.getDestinationDao().getById(id);
+        try {
+            return DaoFactory.getDestinationDao().getById(id);
+        } catch (AppException e) {
+            throw new AppException("ID does not exist in the database.");
+        }
     }
 
     /**
