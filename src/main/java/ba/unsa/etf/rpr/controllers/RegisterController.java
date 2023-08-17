@@ -101,14 +101,13 @@ public class RegisterController {
     private void newStage(String resource) throws IOException {
         Stage stage = new Stage();
         FXMLLoader loader = new FXMLLoader(getClass().getResource(resource));
-        Parent root = loader.load();
         if (loader.getController() instanceof WelcomePageController)
             stage.initStyle(StageStyle.UNDECORATED);
         else {
-            HomeController controller = loader.getController();
-            controller.setUserId(user.getId());
+            loader.setController(new HomeController(user.getId()));
             AppFX.titleAndIcon(stage);
         }
+        Parent root = loader.load();
         stage.setScene(new Scene(root, USE_COMPUTED_SIZE, USE_COMPUTED_SIZE));
         stage.show();
     }

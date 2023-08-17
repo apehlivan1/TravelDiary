@@ -25,14 +25,11 @@ import static javafx.scene.layout.Region.USE_COMPUTED_SIZE;
  */
 public class TripInfoController {
 
-    private int userId = -1;
-
+    private Boolean isUpdate;
+    private int userId;
     private Trip trip;
-
     private Destination destination;
-
     private final TripManager tripManager = new TripManager();
-
     private final DestinationManager destinationManager = new DestinationManager();
 
     @FXML
@@ -47,15 +44,18 @@ public class TripInfoController {
     @FXML
     private Button saveButton;
 
-    public TripInfoController(Trip trip, Destination destination) {
-        this.trip = trip;
+    public TripInfoController(int userId, Trip trip, Destination destination) {
+        this.userId = userId;
         this.destination = destination;
-        //if userId = -1 --> update;
+        this.trip = trip;
+        isUpdate = true;
     }
 
     public TripInfoController(int userId, Destination destination) {
         this.userId = userId;
         this.destination = destination;
+        trip = new Trip(userId, destination.getId());
+        isUpdate = false;
     }
 
     /**
@@ -65,18 +65,10 @@ public class TripInfoController {
     @FXML
     void cancelClicked(ActionEvent event) throws IOException {
         ((Stage) cancelButton.getScene().getWindow()).close();
-        if (userId != -1) {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/details.fxml"));
-            loader.setController(new DetailsController(userId, destination));
-            Parent root = loader.load();
-            Stage stage = new Stage();
-            stage.setScene(new Scene(root, USE_COMPUTED_SIZE, USE_COMPUTED_SIZE));
-            stage.setResizable(false);
-            AppFX.titleAndIcon(stage);
-            stage.show();
-        }
+        if (!isUpdate)
+            newStage("/fxml/details.fxml", new DetailsController(userId, destination));
         else
-            openHome();
+            newStage("/fxml/home.fxml", new HomeController(userId));
     }
 
     /**
@@ -84,15 +76,11 @@ public class TripInfoController {
      */
     @FXML
     void saveClicked(ActionEvent event) throws IOException {
-        if (userId != -1) trip = new Trip(userId, destination.getId());
         String updatedNote = note.getText();
         trip.setNote(updatedNote);
         trip.setRating(ratingChoiceBox.getValue());
-
         try {
-            // if userId = -1 --> update;
-            // else           --> add new Trip
-            if (userId == -1) {
+            if (isUpdate) {
                 tripManager.update(trip);
                 //update destination.averageRating
                 destination.setAverageRating(averageRating());
@@ -100,7 +88,7 @@ public class TripInfoController {
             } else tripManager.add(trip);
 
             ((Stage) saveButton.getScene().getWindow()).close();
-            openHome();
+            newStage("/fxml/home.fxml", new HomeController(userId));
         } catch (AppException e) {
             new Alert(Alert.AlertType.NONE, e.getMessage(), ButtonType.OK).show();
         }
@@ -108,8 +96,7 @@ public class TripInfoController {
 
     @FXML
     void initialize() {
-        // if userId = -1 --> update;
-        if (userId == -1) {
+        if (isUpdate) {
             String originalNote = trip.getNote();
             int originalRating = trip.getRating();
             note.setText(originalNote);
@@ -119,10 +106,12 @@ public class TripInfoController {
     }
 
     /**
-     * Returns to "Home page"
+     * Opens new window
      */
-    private void openHome () throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("/fxml/home.fxml"));
+    private void newStage(String resource, Object controller) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource(resource));
+        loader.setController(controller);
+        Parent root = loader.load();
         Stage stage = new Stage();
         stage.setScene(new Scene(root, USE_COMPUTED_SIZE, USE_COMPUTED_SIZE));
         stage.setResizable(false);
